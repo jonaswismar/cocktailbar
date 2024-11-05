@@ -1,4 +1,12 @@
  <?php
+if(!isset($_SESSION)) 
+	{
+		session_start(); 
+	}
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+	header("location: login.php");
+	exit;
+}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
 
@@ -25,7 +33,21 @@
 			mysqli_commit($link);
 			mysqli_close($link);
 		}
-		header("location: ingredient.php?ingredientid=" . $ingredientid);
+		else if(isset($_GET['favorite']))
+		{
+			$favorite =  $_GET['favorite'];
+			$stmt_create_order = mysqli_prepare($link, $sql_create_ingredientfavorite);
+			if($favorite == 0)
+			{
+				$stmt_create_order = mysqli_prepare($link, $sql_delete_ingredientfavorite);
+			}
+			mysqli_stmt_bind_param($stmt_create_order, "ii", $_SESSION["id"], $ingredientid);
+			mysqli_stmt_execute($stmt_create_order);
+			mysqli_stmt_close($stmt_create_order);
+			mysqli_commit($link);
+			mysqli_close($link);
+		}
+		header("location: ingredient_view.php?ingredientid=" . $ingredientid);
 		exit;
 	}
 	if(isset($_POST['ingredientname']))
@@ -55,7 +77,7 @@
 			mysqli_commit($link);
 			mysqli_close($link);
 		}
-		header("location: ingredient.php?ingredientid=" . $ingredientid);
+		header("location: ingredient_view.php?ingredientid=" . $ingredientid);
 		exit;
 	}
 ?>

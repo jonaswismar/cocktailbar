@@ -17,4 +17,10 @@ AND
 AND
     orders.status = 0;
 ";
+
+$sql_delete_cocktailorder = "DELETE FROM
+    orders
+WHERE
+    cocktail = ?
+";
 ?>

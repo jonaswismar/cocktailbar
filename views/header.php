@@ -1,9 +1,8 @@
 <?php
 if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-
+	{
+		session_start(); 
+	}
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	header("location: login.php");
 	exit;
@@ -34,12 +33,64 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 		<link rel="stylesheet" href="../assets/css/fontawesome-sharp-thin.css">
 		<link rel="stylesheet" href="../assets/css/iconpicker.css" />
 		<link rel="stylesheet" href="../assets/css/navbars-offcanvas.css" />
-		<link rel="stylesheet" href="../assets/css/rating.css" />
 		<link rel="stylesheet" href="../assets/css/tom-select.bootstrap5.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-
-
-
+		<style>
+			div.cocktailrating-wrapper-my i {
+				cursor: pointer;
+			}
+			@media (min-width: 1600px) {
+				.text-size-h5 {
+					font-size: 2rem;
+				}
+				.text-size-h6 {
+					font-size: 3rem;
+				}
+				.text-size-h6-2x {
+					font-size: 5rem;
+				}
+				div.cocktailrating-wrapper-all, div.ingredientrating-wrapper-all {
+					font-size: 3rem;
+				}
+				div.cocktailrating-wrapper-my, div.ingredientrating-wrapper-my {
+					font-size: 3rem;
+				}
+			}
+			@media (min-width: 960px) and (max-width: 1600px) {
+				.text-size-h5 {
+					font-size: 1.2rem;
+				}
+				.text-size-h6 {
+					font-size: 1.8rem;
+				}
+				.text-size-h6-2x {
+					font-size: 2.8rem;
+				}
+				div.cocktailrating-wrapper-all, div.ingredientrating-wrapper-all {
+					font-size: 2rem;
+				}
+				div.cocktailrating-wrapper-my, div.ingredientrating-wrapper-my {
+					font-size: 2rem;
+				}
+			}
+			@media (max-width: 960px) {
+				.text-size-h5 {
+					font-size: 0.8em;
+				}
+				.text-size-h6 {
+					font-size: 1em;
+				}
+				.text-size-h6-2x {
+					font-size: 2em;
+				}
+				div.cocktailrating-wrapper-all, div.ingredientrating-wrapper-all {
+					font-size: 1.5rem;
+				}
+				div.cocktailrating-wrapper-my, div.ingredientrating-wrapper-my {
+					font-size: 1.5rem;
+				}
+			}
+		</style>
 		<style>
 			body {
 				font-family: Roboto;
@@ -197,10 +248,10 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my"><i class="fa-regular fa-lemon fa-fw"></i> Zutaten</a>
+										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my"><i class="fa-regular fa-lemon fa-fw"></i> Zutaten</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my"><i class="fa-solid fa-martini-glass-citrus fa-fw"></i> Cocktails</a>
+										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my"><i class="fa-solid fa-martini-glass-citrus fa-fw"></i> Cocktails</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link<?php if($current_file_name == "specials.php"||$current_file_name == "special.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=rand"><i class="bi bi-dice-<?php echo rand(1, 6)?> fa-fw"></i> Specials</a>

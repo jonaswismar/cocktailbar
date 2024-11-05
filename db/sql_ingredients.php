@@ -13,6 +13,23 @@ WHERE
     ID = ?;
 ";
 
+$sql_fav_ingredients = "SELECT 
+    i.ID AS ingredient_ID, 
+    i.ingredientname, 
+    i.description, 
+    i.image, 
+    i.available, 
+    i.shoppable, 
+    i.type 
+FROM 
+    ingredients i 
+INNER JOIN 
+    ingredientfavorites f ON i.ID = f.ingredient
+WHERE 
+    f.user = ?
+ORDER BY 
+    i.ingredientname ASC;
+";
 $sql_my_ingredients = "WITH ingredient_counts AS (
     SELECT 
         ID,
@@ -25,7 +42,7 @@ $sql_my_ingredients = "WITH ingredient_counts AS (
         ID
 )
 SELECT 
-    i.ID AS ingredients_ID, 
+    i.ID AS ingredient_ID, 
     i.ingredientname, 
     i.description, 
     i.image, 
@@ -51,7 +68,7 @@ ORDER BY
 ";
 
 $sql_all_ingredients = "SELECT 
-    ID AS ingredients_ID, 
+    ID AS ingredient_ID, 
     ingredientname, 
     description, 
     image, 
@@ -83,7 +100,7 @@ WHERE
 ";
 
 $sql_ingredient = "SELECT 
-    ID AS ingredients_ID, 
+    ID AS ingredient_ID, 
     ingredientname, 
     description, 
     image, 
@@ -186,5 +203,11 @@ WHERE
 ORDER BY 
     cil.order ASC, 
     cil.ID ASC;
+";
+
+$sql_delete_all_ingredient = "DELETE FROM
+    ingredients
+WHERE
+    ID = ?;
 ";
 ?>

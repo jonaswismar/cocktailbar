@@ -32,4 +32,16 @@ WHERE
 AND
     cocktail = ?
 ";
+
+$sql_count_all_cocktailfavorite = "SELECT * FROM
+    cocktailfavorites
+WHERE
+    cocktail = ?;
+";
+
+$sql_delete_all_cocktailfavorite = "DELETE FROM
+    cocktailfavorites
+WHERE
+    cocktail = ?;
+";
 ?>

@@ -70,6 +70,74 @@ ORDER BY
     available DESC, 
     shoppable DESC, 
     c.cocktailname ASC;";
+	
+$sql_my_cocktails_random = "WITH ingredient_counts AS (
+    SELECT 
+        cocktailingredientlist.cocktail AS cocktail_id,
+        COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN ingredients.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
+    FROM 
+        cocktailingredientlist
+    INNER JOIN 
+        ingredients 
+    ON 
+        cocktailingredientlist.ingredient = ingredients.ID
+    GROUP BY 
+        cocktailingredientlist.cocktail
+)
+SELECT 
+    c.ID, 
+    c.cocktailname, 
+    c.description, 
+    c.glass, 
+    c.instruction, 
+    c.image, 
+    c.strength, 
+    IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available
+FROM 
+    cocktails c
+LEFT JOIN 
+    ingredient_counts ic 
+ON 
+    c.ID = ic.cocktail_id
+ORDER BY 
+    available DESC, 
+	RAND()
+LIMIT 1;";
+
+$sql_my_cocktails_day = "WITH ingredient_counts AS (
+    SELECT 
+        cocktailingredientlist.cocktail AS cocktail_id,
+        COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN ingredients.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
+    FROM 
+        cocktailingredientlist
+    INNER JOIN 
+        ingredients 
+    ON 
+        cocktailingredientlist.ingredient = ingredients.ID
+    GROUP BY 
+        cocktailingredientlist.cocktail
+)
+SELECT 
+    c.ID, 
+    c.cocktailname, 
+    c.description, 
+    c.glass, 
+    c.instruction, 
+    c.image, 
+    c.strength, 
+    IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available
+FROM 
+    cocktails c
+LEFT JOIN 
+    ingredient_counts ic 
+ON 
+    c.ID = ic.cocktail_id
+ORDER BY 
+    available DESC, 
+	RAND(CURDATE())
+LIMIT 1;";
 
 $sql_fav_cocktails = "SELECT 
     c.ID, 
@@ -117,5 +185,11 @@ FROM
     cocktails 
 WHERE 
     cocktails.ID = ?;
+";
+
+$sql_delete_cocktail = "DELETE FROM
+    cocktails
+WHERE
+    ID = ?
 ";
 ?>

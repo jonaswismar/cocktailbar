@@ -1,4 +1,12 @@
  <?php
+if(!isset($_SESSION)) 
+	{
+		session_start(); 
+	}
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+	header("location: login.php");
+	exit;
+}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
 	
@@ -63,7 +71,7 @@
 			}
 		}
 		mysqli_close($link);
-		header("location: cocktail.php?cocktailid=" . $cocktailid);
+		header("location: cocktail_view.php?cocktailid=" . $cocktailid);
 	}
 	if(isset($_GET['cocktailid'])&&isset($_GET['ordered']))
 	{
@@ -75,18 +83,22 @@
 		mysqli_stmt_close($stmt_create_order);
 		mysqli_commit($link);
 		mysqli_close($link);
-		header("location: cocktail.php?cocktailid=" . $cocktailid);
+		header("location: cocktail_view.php?cocktailid=" . $cocktailid);
 	}
 	if(isset($_GET['cocktailid'])&&isset($_GET['favorite']))
 	{
 		$cocktailid =  $_GET['cocktailid'];
 		$favorite =  $_GET['favorite'];
 		$stmt_create_order = mysqli_prepare($link, $sql_create_cocktailfavorite);
+		if($favorite == 0)
+		{
+			$stmt_create_order = mysqli_prepare($link, $sql_delete_cocktailfavorite);
+		}
 		mysqli_stmt_bind_param($stmt_create_order, "ii", $_SESSION["id"], $cocktailid);
 		mysqli_stmt_execute($stmt_create_order);
 		mysqli_stmt_close($stmt_create_order);
 		mysqli_commit($link);
 		mysqli_close($link);
-		header("location: cocktail.php?cocktailid=" . $cocktailid);
+		header("location: cocktail_view.php?cocktailid=" . $cocktailid);
 	}
 ?>
