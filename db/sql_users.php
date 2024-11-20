@@ -6,22 +6,22 @@ $sql_users_single = "SELECT
     role,
     image
 FROM 
-    users 
+    user 
 WHERE 
     username = ?;
 ";
 $sql_users_singleid = "SELECT 
     id 
 FROM 
-    users 
+    user 
 WHERE 
     username = ?;
 ";
 
-$sql_users_create = "INSERT INTO users (username, password) VALUES (?, ?);
+$sql_users_create = "INSERT INTO user (username, password) VALUES (?, ?);
 ";
 
-$sql_users_changepassword = "UPDATE users 
+$sql_users_changepassword = "UPDATE user 
 SET password = ? 
 WHERE id = ?;
 ";

@@ -1,4 +1,11 @@
 <?php include("header.php") ?>
+			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
+			<div class="scrolling-wrapper-flexbox">
+				<a href="categorys.php" class="btn btn-primary text-uppercase active" aria-current="page">
+					<i class="fa fa-fw fa-solid fa-filter-list"></i> Kategorien
+				</a>
+			</div>
+		</nav>
 			<div class="d-flex align-items-center justify-content-center">
 				<div class="list-group flex-fill">
 					<?php 
@@ -13,6 +20,7 @@
 							<div class="d-flex gap-2 w-100 justify-content-between">
 								<h6 class="mb-0"><?php echo $categorys_all_rows['categoryname'];?></h6>
 							</div>
+							<span class="badge bg-primary rounded-pill"><?php echo $categorys_all_rows['total_cocktails'];?></span>
 						</a>
 					<?php
 						}

@@ -16,9 +16,9 @@
 	{
 		$ingredientid = $_GET['ingredientid'];
 	}
-?>
-			<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;">
-				<div class="container-fluid justify-content-start">
+?>		
+			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
+		<div class="scrolling-wrapper-flexbox">
 					<a href="ingredients.php?view=my" class="btn btn-primary text-uppercase<?php if($view == "my"){echo ' active" aria-current="page';}?>">
 						<i class="fa-solid fa-lemon fa-fw"></i>Meine Zutaten
 					</a>
@@ -27,6 +27,9 @@
 					</a>
 					<a href="ingredients.php?view=fav" class="btn btn-primary text-uppercase<?php if($view == "fav"){echo ' active" aria-current="page';}?>">
 						<i class="fa-solid fa-heart fa-fw"></i>Favoriten
+					</a>
+					<a href="ingredients.php?view=shop" class="btn btn-primary text-uppercase<?php if($view == "shop"){echo ' active" aria-current="page';}?>">
+						<i class="fa-solid fa-cart-shopping fa-fw"></i>Einkaufsliste
 					</a>
 				</div>
 			</nav>
@@ -44,6 +47,10 @@
 				{
 					$stmt_sql_ingredients = mysqli_prepare($link, $sql_fav_ingredients);
 					mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $_SESSION["id"]);
+				}
+				else if($view == "shop")
+				{
+					$stmt_sql_ingredients = mysqli_prepare($link, $sql_shop_ingredients);
 				}
 				else
 				{

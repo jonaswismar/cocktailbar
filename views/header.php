@@ -22,7 +22,7 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 		<meta name="author" content="Jonas Wismar">
 		<link rel="icon" type="image/x-icon" href="../favicon.ico">
 		<link rel="icon" type="image/png" href="../favicon.png">
-		<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../assets/css/bootstrap.css">
 		<link rel="stylesheet" href="../assets/css/bootstrap-icons.min.css">
 		<link rel="stylesheet" href="../assets/css/css@3.css">
 		<link rel="stylesheet" href="../assets/css/fontawesome.css">
@@ -35,6 +35,16 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 		<link rel="stylesheet" href="../assets/css/navbars-offcanvas.css" />
 		<link rel="stylesheet" href="../assets/css/tom-select.bootstrap5.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		
+		<style>
+.navbutton {
+	padding-top: 0.25rem;
+  padding-left: 0.75rem;
+  font-size: 1.25rem;
+  border-color: rgba(0, 0, 0, 0.15);
+  border-radius: 0.375rem;
+}
+</style>
 		<style>
 			div.cocktailrating-wrapper-my i {
 				cursor: pointer;
@@ -90,6 +100,16 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 					font-size: 1.5rem;
 				}
 			}
+			.scrolling-wrapper-flexbox {
+				-webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .btn {
+    flex: 0 0 auto;
+  }
+}
 		</style>
 		<style>
 			body {
@@ -160,16 +180,16 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 				-webkit-overflow-scrolling: touch;
 			}
 			.btn-bd-primary {
-				--bd-violet-bg: #712cf9;
-				--bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+				--bd-blue-bg: #712cf9;
+				--bd-blue-rgb: 112.520718, 44.062154, 249.437846;
 				--bs-btn-font-weight: 600;
 				--bs-btn-color: var(--bs-white);
-				--bs-btn-bg: var(--bd-violet-bg);
-				--bs-btn-border-color: var(--bd-violet-bg);
+				--bs-btn-bg: var(--bd-blue-bg);
+				--bs-btn-border-color: var(--bd-blue-bg);
 				--bs-btn-hover-color: var(--bs-white);
 				--bs-btn-hover-bg: #6528e0;
 				--bs-btn-hover-border-color: #6528e0;
-				--bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+				--bs-btn-focus-shadow-rgb: var(--bd-blue-rgb);
 				--bs-btn-active-color: var(--bs-btn-hover-color);
 				--bs-btn-active-bg: #5a23c8;
 				--bs-btn-active-border-color: #5a23c8;
@@ -198,74 +218,81 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 				<path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
 			</symbol>
 		</svg>
-		<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-			<button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-				<svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-				<span class="visually-hidden" id="bd-theme-text">Wechsle Design</span>
-			</button>
-			<ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-				<li>
-					<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-						<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>Hell
-						<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-					</button>
-				</li>
-				<li>
-					<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-						<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>Dunkel
-						<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-					</button>
-				</li>
-				<li>
-					<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-						<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>Auto
-						<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-					</button>
-				</li>
-			</ul>
-		</div>
-		<main>
+				<header>
 			<div class="fixed-top">
-				<nav class="navbar navbar-dark bg-primary" aria-label="Offcanvas navbar large">
+				<nav class="navbar navbar-dark bg-primary bg-gradient" aria-label="Offcanvas navbar large">
 					<div class="container-fluid">
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<a href="javascript:history.go(-1)" class="btn btn-primary" role="button"><i class="bi bi-arrow-left"></i></a>
+						
+						
+						
+						<div class="btn-group ms-auto">
+  <a href="javascript:history.go(-1)" type="button" class="btn btn-primary dropdown-toggle navbutton" role="button">
+  <i class="fa fa-fw fa-regular fa-filter"></i> Kein Filter
+  </a>
+</div>
+						
+						
+						
+						
+						
+						
+						
+						
+						<div class="btn-group ms-auto">
+  <a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button">
+  <i class="fa fa-fw fa-regular fa-left-long"></i>
+  </a>
+</div><div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-fw fa-regular fa-ellipsis-stroke-vertical"></i>
+  </button>
+  <div class="dropdown-menu dropdown-menu-end">
+    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Zutat</a>
+    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Neuer Cocktail</a>
+    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-filter-list"></i> Neue Kategorie</a>
+    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Neuer Zutatentyp</a>
+    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Geschmacksrichtung</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
 						<div class="offcanvas offcanvas-start text-bg-dark bg-primary" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
 							<div class="offcanvas-header">
-								<h5 class="offcanvas-title" id="offcanvasNavbar2Label"><i class="bi bi-list"></i> Menü</h5>
+								<h5 class="offcanvas-title" id="offcanvasNavbar2Label"><i class="fa-duotone fa-solid fa-bars"></i> Menü</h5>
 								<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 							</div>
 							<div class="offcanvas-body">
 								<ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
 									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person fa-fw"></i> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-regular fa-user"></i><!--<i class="fa-regular fa-user-chef"></i><i class="fa-regular fa-user-tie"></i>--> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item<?php if($current_file_name == "preferences.php"){echo ' active" aria-current="page';} ?>" href="preferences.php"><i class="bi bi-person-gear fa-fw"></i> Einstellungen</a></li>
-											<li><a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="password.php"><i class="bi bi-person-lock fa-fw"></i> Passwort ändern</a></li>
-											<li><a class="dropdown-item" href="logout.php"><i class="bi bi-door-closed fa-fw"></i> Abmelden</a></li>
+											<li><a class="dropdown-item<?php if($current_file_name == "preferences.php"){echo ' active" aria-current="page';} ?>" href="preferences.php"><i class="fa fa-fw fa-regular fa-user-gear"></i></i> Einstellungen</a></li>
+											<li><a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="password.php"><i class="fa fa-fw fa-regular fa-user-lock"></i> Passwort ändern</a></li>
+											<li><a class="dropdown-item" href="logout.php"><i class="fa fa-fw fa-regular fa-person-to-door"></i> Abmelden</a></li>
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my"><i class="fa-regular fa-lemon fa-fw"></i> Zutaten</a>
+										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my"><i class="fa fa-fw fa-regular fa-lemon"></i> Zutaten</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my"><i class="fa-solid fa-martini-glass-citrus fa-fw"></i> Cocktails</a>
+										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my"><i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Cocktails</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "specials.php"||$current_file_name == "special.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=rand"><i class="bi bi-dice-<?php echo rand(1, 6)?> fa-fw"></i> Specials</a>
+										<a class="nav-link<?php if($current_file_name == "specials.php"||$current_file_name == "special.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=rand"><i class="fa fa-fw fa-regular fa-dice-<?php $dice=array("one","two","three","four","five", "six"); echo $dice[rand(0,5)]; ?>"></i> Specials</a>
 									</li>
 									<li class="nav-item dropdown" style="<?php if($_SESSION["role"] != 1){echo ' hidden';}?>">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-light fa-hammer fa-fw"></i> Admin</a>
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"||$current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"||$current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo 'true';}else{echo 'false';} ?>"><i class="fa fa-fw fa-regular fa-hammer"></i> Admin</a>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"){echo ' active" aria-current="page';} ?>" href="categorys.php"><i class="bi bi-tags fa-fw"></i> Kategorien</a></li>
-											<li><a class="dropdown-item<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"){echo ' active" aria-current="page';} ?>" href="ingredienttypes.php"><i class="bi bi-tag fa-fw"></i> Zutatentypen</a></li>
-											<li><a class="dropdown-item<?php if($current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo ' active" aria-current="page';} ?>" href="tastes.php"><i class="bi bi-tags fa-fw"></i> Geschmacksrichtungen</a></li>
+											<li><a class="dropdown-item<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"){echo ' active" aria-current="page';} ?>" href="categorys.php"><i class="fa fa-fw fa-regular fa-filter-list"></i> Kategorien</a></li>
+											<li><a class="dropdown-item<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"){echo ' active" aria-current="page';} ?>" href="ingredienttypes.php"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Zutatentypen</a></li>
+											<li><a class="dropdown-item<?php if($current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo ' active" aria-current="page';} ?>" href="tastes.php"><i class="fa fa-fw fa-regular fa-lemon"></i> Geschmacksrichtungen</a></li>
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="about.php"><i class="bi bi-question-circle fa-fw"></i> Über</a>
+										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="about.php"><i class="fa fa-fw fa-regular fa-circle-question"></i> Über</a>
 									</li>
 								</ul>
 								<form class="d-flex mt-3 mt-lg-0" role="search">
@@ -277,3 +304,5 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 					</div>
 				</nav>
 			</div>
+				</header>
+		<main>

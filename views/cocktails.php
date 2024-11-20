@@ -19,7 +19,7 @@
 ?>
 
 			<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;">
-				<div class="container-fluid justify-content-start">
+				<div class="scrolling-wrapper-flexbox">
 					<a href="cocktails.php?view=my" class="btn btn-primary text-uppercase<?php if($view == "my"){echo ' active" aria-current="page';}?>">
 						<i class="fa-solid fa-fw fa-martini-glass-citrus"></i>Meine Cocktails
 					</a>

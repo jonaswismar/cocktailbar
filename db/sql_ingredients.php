@@ -2,13 +2,13 @@
 $sql_ingredientcount_usedin = "SELECT 
     COUNT(DISTINCT cocktail) AS total 
 FROM 
-    cocktailingredientlist 
+    cocktailingredient 
 WHERE 
     ingredient = ?;
 ";
 
 $sql_delete_ingredient = "DELETE FROM
-    ingredients
+    ingredient
 WHERE
     ID = ?;
 ";
@@ -22,11 +22,26 @@ $sql_fav_ingredients = "SELECT
     i.shoppable, 
     i.type 
 FROM 
-    ingredients i 
+    ingredient i 
 INNER JOIN 
-    ingredientfavorites f ON i.ID = f.ingredient
+    ingredientfavorite f ON i.ID = f.ingredient
 WHERE 
     f.user = ?
+ORDER BY 
+    i.ingredientname ASC;
+";
+$sql_shop_ingredients = "SELECT 
+    i.ID AS ingredient_ID, 
+    i.ingredientname, 
+    i.description, 
+    i.image, 
+    i.available, 
+    i.shoppable, 
+    i.type 
+FROM 
+    ingredient i 
+WHERE 
+    i.shoppable > 0
 ORDER BY 
     i.ingredientname ASC;
 ";
@@ -37,7 +52,7 @@ $sql_my_ingredients = "WITH ingredient_counts AS (
         COUNT(CASE WHEN available = 1 OR shoppable = 1 THEN 1 END) AS shoppable_count,
         COUNT(*) AS total_count
     FROM 
-        ingredients
+        ingredient
     GROUP BY 
         ID
 )
@@ -58,7 +73,7 @@ SELECT
         ELSE '0'
     END AS shoppable_sort
 FROM 
-    ingredients i
+    ingredient i
 INNER JOIN 
     ingredient_counts ic ON i.ID = ic.ID
 ORDER BY 
@@ -76,18 +91,18 @@ $sql_all_ingredients = "SELECT
     shoppable, 
     type 
 FROM 
-    ingredients 
+    ingredient 
 ORDER BY 
     ingredientname ASC;
 ";
 
 $sql_create_ingredient = "INSERT INTO
-    ingredients (ingredientname, description, image, available, shoppable, type) 
+    ingredient (ingredientname, description, image, available, shoppable, type) 
 VALUES
     (?, ?, ?, ?, ?, ?);
 ";
 
-$sql_update_ingredient = "UPDATE ingredients 
+$sql_update_ingredient = "UPDATE ingredient 
 SET 
     ingredientname = ?, 
     description = ?, 
@@ -108,19 +123,19 @@ $sql_ingredient = "SELECT
     shoppable, 
     type 
 FROM 
-    ingredients 
+    ingredient 
 WHERE 
     ID = ?;
 ";
 
-$sql_update_ingredient_available = "UPDATE ingredients 
+$sql_update_ingredient_available = "UPDATE ingredient 
 SET 
     available = ?
 WHERE 
     ID = ?;
 ";
 
-$sql_update_ingredient_shoppable = "UPDATE ingredients 
+$sql_update_ingredient_shoppable = "UPDATE ingredient 
 SET 
     shoppable = ?
 WHERE 
@@ -132,9 +147,9 @@ $sql_ingredient_usedin_old = "SELECT
     c.cocktailname,
     cil.cocktail
 FROM 
-    cocktails c
+    cocktail c
 INNER JOIN 
-    cocktailingredientlist cil ON c.ID = cil.cocktail
+    cocktailingredient cil ON c.ID = cil.cocktail
 WHERE 
     cil.ingredient = ?
 GROUP BY 
@@ -145,39 +160,39 @@ ORDER BY
 
 $sql_ingredient_usedin = "WITH ingredient_counts AS (
     SELECT 
-        cocktailingredientlist.cocktail AS cocktail_id,
+        cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
         SUM(CASE WHEN ingredients.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
         SUM(CASE WHEN ingredients.available = 1 OR ingredients.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
     FROM 
-        cocktailingredientlist
+        cocktailingredient
     INNER JOIN 
-        ingredients 
+        ingredient 
     ON 
-        cocktailingredientlist.ingredient = ingredients.ID
+        cocktailingredient.ingredient = ingredients.ID
     GROUP BY 
-        cocktailingredientlist.cocktail
+        cocktailingredient.cocktail
 )
 SELECT 
-    cocktails.*, 
+    cocktail.*, 
     IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available,
     IF(ic.shoppable_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS shoppable
 FROM 
-    cocktails
+    cocktail
 LEFT JOIN 
     ingredient_counts ic 
 ON 
-    cocktails.ID = ic.cocktail_id
+    cocktail.ID = ic.cocktail_id
 WHERE 
-    cocktails.ID IN (
+    cocktail.ID IN (
         SELECT DISTINCT cocktailingredientlist.cocktail
-        FROM cocktailingredientlist
-        WHERE cocktailingredientlist.ingredient = ?
+        FROM cocktailingredient
+        WHERE cocktailingredient.ingredient = ?
     )
 ORDER BY 
     available DESC, 
     shoppable DESC, 
-    cocktails.cocktailname ASC;
+    cocktail.cocktailname ASC;
 ";
 
 $sql_ingredients_from_cocktail = "SELECT 
@@ -195,9 +210,9 @@ $sql_ingredients_from_cocktail = "SELECT
     i.shoppable, 
     i.ID AS ingredient_ID
 FROM 
-    cocktailingredientlist cil
+    cocktailingredient cil
 INNER JOIN 
-    ingredients i ON cil.ingredient = i.ID
+    ingredient i ON cil.ingredient = i.ID
 WHERE 
     cil.cocktail = ?
 ORDER BY 
@@ -206,7 +221,7 @@ ORDER BY
 ";
 
 $sql_delete_all_ingredient = "DELETE FROM
-    ingredients
+    ingredient
 WHERE
     ID = ?;
 ";

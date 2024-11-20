@@ -6,3 +6,21 @@ body {
 .navbar {
 	margin: 0px;
 }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+main {
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+  margin-top: 41px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  line-height: 15px;
+}

@@ -6,7 +6,7 @@ $sql_categories_from_cocktail = "SELECT
     cat.color, 
     cat.ID AS category_ID 
 FROM 
-    cocktailcategorylist ccl
+    cocktailcategory ccl
 INNER JOIN 
     categorys cat ON cat.ID = ccl.category
 WHERE 
@@ -16,14 +16,22 @@ ORDER BY
 ";
 
 $sql_categorys = "SELECT 
-    ID, 
-    categoryname, 
-    description, 
-    image 
+    ca.ID, 
+    ca.categoryname, 
+    ca.description, 
+    ca.image, 
+    COUNT(ccl.ID) AS total_cocktails
 FROM 
-    categorys 
+    category ca
+LEFT JOIN 
+    cocktailcategory ccl ON ccl.category = ca.ID
+GROUP BY 
+    ca.ID, 
+    ca.categoryname, 
+    ca.description, 
+    ca.image
 ORDER BY 
-    categoryname ASC;
+    ca.categoryname ASC;
 ";
 
 $sql_category = "SELECT 
@@ -32,13 +40,13 @@ $sql_category = "SELECT
     description, 
     image 
 FROM 
-    categorys 
+    category 
 WHERE 
     ID = ?;
 ";
 
 $sql_update_category = "UPDATE 
-    categorys
+    category
 SET
     categoryname = ?,
     description = ?,
@@ -48,13 +56,13 @@ WHERE
 ";
 
 $sql_create_category = "INSERT INTO
-    categorys (categoryname, description, image)
+    category (categoryname, description, image)
 VALUES
     (?, ?, ?);
 ";
 
 $sql_delete_category = "DELETE FROM
-    categorys
+    category
 WHERE
     ID = ?;
 ";
@@ -62,7 +70,7 @@ WHERE
 $sql_category_count = "SELECT 
     COUNT(*) AS total 
 FROM 
-    cocktailcategorylist 
+    cocktailcategory 
 WHERE 
     category = ?;
 ";

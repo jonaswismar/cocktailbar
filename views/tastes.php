@@ -1,5 +1,12 @@
 <?php include("header.php") ?>
-			<div class="d-flex align-items-center justify-content-center">
+			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
+			<div class="scrolling-wrapper-flexbox">
+				<a href="tastes.php" class="btn btn-primary text-uppercase active" aria-current="page">
+					<i class="fa fa-fw fa-solid fa-lemon"></i> Geschmacksrichtungen
+				</a>
+			</div>
+		</nav>
+	<div class="d-flex align-items-center justify-content-center">
 				<div class="list-group flex-fill">
 					<?php 
 						$stmt_sql_tastes = mysqli_prepare($link, $sql_tastes);

@@ -1,4 +1,7 @@
 		</main>
+<footer class="footer navbar navbar-dark fixed-bottom bg-primary bg-gradient text-white">
+	<p></p>
+</footer>
 		<script src="../assets/js/auto-resize-textarea.js"></script>
 		<script src="../assets/js/bootstrap.bundle.min.js"></script>
 		<script src="../assets/js/bootstrap-auto-dark-mode.js"></script>
@@ -17,7 +20,55 @@
 			});
 		</script>
 		<script>
-			new TomSelect('#input-tags-ingredienttype',{
+			new TomSelect('#input-tags-ingredienttaste-view',{
+				plugins: ['clear_button','remove_button','input_autogrow'],
+				persist: false,
+				create: false,
+				maxItems: 3,
+				render: {
+					option: function (data, escape) {
+						return `<div><i class="fa-fw ${data.src}"></i>${data.text}</div>`;
+					},
+					item: function (item, escape) {
+						return `<div><i class="fa-fw ${item.src}"></i>${item.text}</div>`;
+					}
+				}
+			});
+		</script>
+		<script>
+			new TomSelect('#input-tags-ingredienttaste-edit',{
+				plugins: ['clear_button','remove_button','input_autogrow'],
+				persist: false,
+				create: false,
+				maxItems: 3,
+				render: {
+					option: function (data, escape) {
+						return `<div><i class="fa-fw ${data.src}"></i>${data.text}</div>`;
+					},
+					item: function (item, escape) {
+						return `<div><i class="fa-fw ${item.src}"></i>${item.text}</div>`;
+					}
+				}
+			});
+		</script>
+		<script>
+			new TomSelect('#input-tags-ingredienttype-view',{
+				plugins: ['clear_button','remove_button','input_autogrow'],
+				persist: false,
+				create: false,
+				maxItems: 3,
+				render: {
+					option: function (data, escape) {
+						return `<div><i class="fa-fw ${data.src}"></i>${data.text}</div>`;
+					},
+					item: function (item, escape) {
+						return `<div><i class="fa-fw ${item.src}"></i>${item.text}</div>`;
+					}
+				}
+			});
+		</script>
+		<script>
+			new TomSelect('#input-tags-ingredienttype-edit',{
 				plugins: ['clear_button','remove_button','input_autogrow'],
 				persist: false,
 				create: false,

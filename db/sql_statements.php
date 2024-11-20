@@ -1,4 +1,5 @@
 <?php
+require_once "sql_bar.php";
 require_once "sql_categorys.php";
 require_once "sql_cocktailcategorylist.php";
 require_once "sql_cocktailfavorites.php";

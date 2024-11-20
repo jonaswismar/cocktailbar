@@ -88,18 +88,185 @@
 			?>
 				<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
 					<div class="container-fluid justify-content-start">
-						<a href="ingredient_edit.php?ingredientid=0" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#newDialog">
 							<i class="fa-duotone fa-solid fa-file fa-fw"></i>
-						</a>
-						<a href="ingredient_edit.php?ingredientid=<?php echo $id;?>" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">
+						</button>
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#editDialog">
 							<i class="fa-duotone fa-solid fa-pencil fa-fw"></i>
-						</a>
-						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#deleteQuestion">
+						</button>
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#deleteDialog">
 							<i class="fa-duotone fa-solid fa-trash fa-fw"></i>
 						</button>
 					</div>
 				</nav>
-				<div class="modal fade" id="deleteQuestion">
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<div class="modal fade" id="newDialog">
+					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
+						<div class="modal-content">
+						<form id="ingredient_edit" action="/ingredient_save.php">
+						<fieldset>
+							<div class="modal-header">
+								<h4 class="modal-title"><strong>Neue Zutat anlegen</strong></h4>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<div class="modal-body">
+							<input name="ingredientid" class="form-control" type="hidden" value="0" readonly>
+							<div class="d-flex p-3 justify-content-around flex-wrap">
+									<input name="ingredientname" class="form-control form-control-lg" type="text" placeholder="Name der Zutat">
+				</div>
+							<div class="d-flex p-3 justify-content-around flex-wrap">
+								<select id="input-tags-ingredienttype-edit" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-100">
+							<?php 
+								$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_ingredienttypes);
+								mysqli_stmt_execute($stmt_sql_ingredienttypes);
+								$ingredienttypes_all_res=mysqli_stmt_get_result($stmt_sql_ingredienttypes);
+								while($ingredienttypes_all_rows= mysqli_fetch_array($ingredienttypes_all_res, MYSQLI_ASSOC))
+								{
+									$typeid = $ingredienttypes_all_rows['ID'];
+									$typename = $ingredienttypes_all_rows['typename'];
+									$typeimage = $ingredienttypes_all_rows['image'];
+									
+							?>
+								<option value="<?php echo $typeid;?>" data-src="<?php echo $typeimage;?>"><?php echo $typename;?></option>
+							<?php 
+				}
+				mysqli_stmt_close($stmt_sql_ingredienttypes);
+				?>
+				</select>
+				</div>
+						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
+							<select id="input-tags-ingredienttaste-edit" name="ingredienttaste[]" autocomplete="off" multiple class="form-control w-100">
+							<?php 
+							$stmt_sql_tastes = mysqli_prepare($link, $sql_tastes);
+							mysqli_stmt_execute($stmt_sql_tastes);
+							$tastes_all_res=mysqli_stmt_get_result($stmt_sql_tastes);
+							while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))
+							{
+								$tasteid = $tastes_all_rows['ID'];
+								$tastename = $tastes_all_rows['taste'];
+								$tasteimage = $tastes_all_rows['image'];
+								
+								?>
+									<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteimage;?>"><?php echo $tastename;?></option>
+								<?php
+								
+							 
+							}
+							mysqli_stmt_close($stmt_sql_tastes);
+							?>
+							</select>
+						</div>
+				<div class="d-flex p-3 justify-content-around flex-wrap">
+				<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung der Zutat" rows="25"></textarea>
+							</div>
+							</div>
+							<div class="modal-footer">
+								<input class="btn btn-primary" type="submit" name="save" value="Speichern">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+							</div>
+						</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<div class="modal fade" id="editDialog">
+					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
+						<div class="modal-content">
+						<form id="ingredient_edit" action="/ingredient_save.php">
+						<fieldset>
+							<div class="modal-header">
+								<h4 class="modal-title"><strong><?php echo $ingredientname;?></strong> bearbeiten</h4>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<div class="modal-body">
+							<input name="ingredientid" class="form-control" type="hidden" value="<?php echo $id;?>" readonly>
+							<div class="d-flex p-3 justify-content-around flex-wrap">
+									<input name="ingredientname" class="form-control form-control-lg" type="text" placeholder="Name der Zutat" value="<?php echo $ingredientname;?>">
+				</div>
+							<div class="d-flex p-3 justify-content-around flex-wrap">
+								<select id="input-tags-ingredienttype-edit" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-100">
+							<?php 
+								$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_ingredienttypes);
+								mysqli_stmt_execute($stmt_sql_ingredienttypes);
+								$ingredienttypes_all_res=mysqli_stmt_get_result($stmt_sql_ingredienttypes);
+								while($ingredienttypes_all_rows= mysqli_fetch_array($ingredienttypes_all_res, MYSQLI_ASSOC))
+								{
+									$typeid = $ingredienttypes_all_rows['ID'];
+									$typename = $ingredienttypes_all_rows['typename'];
+									$typeimage = $ingredienttypes_all_rows['image'];
+									
+							?>
+								<option value="<?php echo $typeid;?>" data-src="<?php echo $typeimage;?>"<?php if($typeid == $type){echo ' selected';}?>><?php echo $typename;?></option>
+							<?php 
+				}
+				mysqli_stmt_close($stmt_sql_ingredienttypes);
+				?>
+				</select>
+				</div>
+						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
+							<select id="input-tags-ingredienttaste-edit" name="ingredienttaste[]" autocomplete="off" multiple class="form-control w-100">
+							<?php 
+							$stmt_sql_tastes = mysqli_prepare($link, $sql_tastes);
+							mysqli_stmt_execute($stmt_sql_tastes);
+							$tastes_all_res=mysqli_stmt_get_result($stmt_sql_tastes);
+							while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))
+							{
+								$tasteid = $tastes_all_rows['ID'];
+								$tastename = $tastes_all_rows['taste'];
+								$tasteimage = $tastes_all_rows['image'];
+								
+								$stmt_sql_ingredienttastelist = mysqli_prepare($link, $sql_ingredienttastelist);
+								mysqli_stmt_bind_param($stmt_sql_ingredienttastelist, "ii", $id, $tasteid);
+								mysqli_stmt_execute($stmt_sql_ingredienttastelist);
+								$ingredienttastelist_all_res=mysqli_stmt_get_result($stmt_sql_ingredienttastelist);
+								$ingredienttastes = 0;
+								while($ingredienttastelist_all_rows= mysqli_fetch_array($ingredienttastelist_all_res, MYSQLI_ASSOC))
+								{
+									$ingredienttastes = 1;
+								}
+								mysqli_stmt_close($stmt_sql_ingredienttastelist);
+								?>
+									<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteimage;?>"<?php if($ingredienttastes == 1){echo ' selected';}?>><?php echo $tastename;?></option>
+								<?php
+								
+							 
+							}
+							mysqli_stmt_close($stmt_sql_tastes);
+							?>
+							</select>
+						</div>
+				<div class="d-flex p-3 justify-content-around flex-wrap">
+				<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung der Zutat" rows="25"><?php echo $description;?></textarea>
+							</div>
+							</div>
+							<div class="modal-footer">
+								<input class="btn btn-primary" type="submit" name="save" value="Speichern">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+							</div>
+						</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" id="deleteDialog">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -223,7 +390,7 @@
 							</picture>
 						</div>
 						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-							<select id="input-tags-ingredienttype" name="ingredienttype" multiple autocomplete="off" class="form-control w-25" disabled>
+							<select id="input-tags-ingredienttype-view" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-50" disabled>
 							<?php 
 								$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_ingredienttypes);
 								mysqli_stmt_execute($stmt_sql_ingredienttypes);
@@ -241,6 +408,38 @@
 				mysqli_stmt_close($stmt_sql_ingredienttypes);
 				?>
 				</select>
+						</div>
+						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
+							<select id="input-tags-ingredienttaste-view" name="ingredienttaste[]" autocomplete="off" multiple class="form-control w-50" disabled>
+							<?php 
+							$stmt_sql_tastes = mysqli_prepare($link, $sql_tastes);
+							mysqli_stmt_execute($stmt_sql_tastes);
+							$tastes_all_res=mysqli_stmt_get_result($stmt_sql_tastes);
+							while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))
+							{
+								$tasteid = $tastes_all_rows['ID'];
+								$tastename = $tastes_all_rows['taste'];
+								$tasteimage = $tastes_all_rows['image'];
+								
+								$stmt_sql_ingredienttastelist = mysqli_prepare($link, $sql_ingredienttastelist);
+								mysqli_stmt_bind_param($stmt_sql_ingredienttastelist, "ii", $id, $tasteid);
+								mysqli_stmt_execute($stmt_sql_ingredienttastelist);
+								$ingredienttastelist_all_res=mysqli_stmt_get_result($stmt_sql_ingredienttastelist);
+								$ingredienttastes = 0;
+								while($ingredienttastelist_all_rows= mysqli_fetch_array($ingredienttastelist_all_res, MYSQLI_ASSOC))
+								{
+									$ingredienttastes = 1;
+								}
+								mysqli_stmt_close($stmt_sql_ingredienttastelist);
+								?>
+									<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteimage;?>"<?php if($ingredienttastes == 1){echo ' selected';}?>><?php echo $tastename;?></option>
+								<?php
+								
+							 
+							}
+							mysqli_stmt_close($stmt_sql_tastes);
+							?>
+							</select>
 						</div>
 						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
 							<?php 
@@ -301,7 +500,7 @@
 								?>
 							</div>
 						</div><div class="d-flex p-3 justify-content-around flex-wrap">
-							<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung der Kategorie" rows="25" readonly><?php echo $description;?></textarea>
+							<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung der Zutat" rows="25" readonly><?php echo $description;?></textarea>
 						</div>
 					</fieldset>
 				</form>
