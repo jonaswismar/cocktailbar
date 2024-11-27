@@ -367,7 +367,7 @@
 				<div class="list-group">
 					<?php 
 	$stmt_sql_ingredients = mysqli_prepare($link, $sql_ingredients_from_cocktail);
-	mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $id);
+	mysqli_stmt_bind_param($stmt_sql_ingredients, "ii", $_SESSION["bar"], $id);
 	mysqli_stmt_execute($stmt_sql_ingredients);
 	$sub_ingredients_show_quantity=true;
 	$sub_ingredients_show_count=false;

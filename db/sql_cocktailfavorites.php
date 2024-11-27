@@ -1,32 +1,32 @@
 <?php
-$sql_cocktailfavorites = "SELECT 
-    cocktailfavorites.id, 
-    cocktailfavorites.cocktail 
+$sql_cocktailfavorite = "SELECT 
+    cocktailfavorite.id, 
+    cocktailfavorite.cocktail 
 FROM 
-    cocktailfavorites 
+    cocktailfavorite 
 WHERE 
-    cocktailfavorites.user = ?;
+    cocktailfavorite.user = ?;
 ";
 
 $sql_favorite_cocktail = "SELECT 
-    cocktailfavorites.id, 
-    cocktailfavorites.cocktail, 
-    cocktailfavorites.user 
+    cocktailfavorite.id, 
+    cocktailfavorite.cocktail, 
+    cocktailfavorite.user 
 FROM 
-    cocktailfavorites 
+    cocktailfavorite 
 WHERE 
-    cocktailfavorites.user = ?
+    cocktailfavorite.user = ?
 AND
-    cocktailfavorites.cocktail = ?;
+    cocktailfavorite.cocktail = ?;
 ";
 
 $sql_create_cocktailfavorite = "INSERT INTO
-    cocktailfavorites (user, cocktail)
+    cocktailfavorite (user, cocktail)
 VALUES
     (?, ?);";
 
 $sql_delete_cocktailfavorite = "DELETE FROM
-    cocktailfavorites
+    cocktailfavorite
 WHERE
     user = ?
 AND
@@ -34,13 +34,13 @@ AND
 ";
 
 $sql_count_all_cocktailfavorite = "SELECT * FROM
-    cocktailfavorites
+    cocktailfavorite
 WHERE
     cocktail = ?;
 ";
 
 $sql_delete_all_cocktailfavorite = "DELETE FROM
-    cocktailfavorites
+    cocktailfavorite
 WHERE
     cocktail = ?;
 ";

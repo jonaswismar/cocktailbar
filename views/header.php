@@ -245,7 +245,7 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
   <a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button">
   <i class="fa fa-fw fa-regular fa-left-long"></i>
   </a>
-</div><div class="btn-group">
+</div><div class="btn-group<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
   <button type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-fw fa-regular fa-ellipsis-stroke-vertical"></i>
   </button>
@@ -267,7 +267,7 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 							<div class="offcanvas-body">
 								<ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
 									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-regular fa-user"></i><!--<i class="fa-regular fa-user-chef"></i><i class="fa-regular fa-user-tie"></i>--> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw <?php echo $_SESSION["image"];?>"></i> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
 										<ul class="dropdown-menu">
 											<li><a class="dropdown-item<?php if($current_file_name == "preferences.php"){echo ' active" aria-current="page';} ?>" href="preferences.php"><i class="fa fa-fw fa-regular fa-user-gear"></i></i> Einstellungen</a></li>
 											<li><a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="password.php"><i class="fa fa-fw fa-regular fa-user-lock"></i> Passwort ändern</a></li>
@@ -283,12 +283,14 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 									<li class="nav-item">
 										<a class="nav-link<?php if($current_file_name == "specials.php"||$current_file_name == "special.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=rand"><i class="fa fa-fw fa-regular fa-dice-<?php $dice=array("one","two","three","four","five", "six"); echo $dice[rand(0,5)]; ?>"></i> Specials</a>
 									</li>
-									<li class="nav-item dropdown" style="<?php if($_SESSION["role"] != 1){echo ' hidden';}?>">
+									
+									<li class="nav-item dropdown<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
 										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"||$current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"||$current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo 'true';}else{echo 'false';} ?>"><i class="fa fa-fw fa-regular fa-hammer"></i> Admin</a>
 										<ul class="dropdown-menu">
 											<li><a class="dropdown-item<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"){echo ' active" aria-current="page';} ?>" href="categorys.php"><i class="fa fa-fw fa-regular fa-filter-list"></i> Kategorien</a></li>
 											<li><a class="dropdown-item<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"){echo ' active" aria-current="page';} ?>" href="ingredienttypes.php"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Zutatentypen</a></li>
 											<li><a class="dropdown-item<?php if($current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo ' active" aria-current="page';} ?>" href="tastes.php"><i class="fa fa-fw fa-regular fa-lemon"></i> Geschmacksrichtungen</a></li>
+											<li><a class="dropdown-item<?php if($current_file_name == "debug.php"){echo ' active" aria-current="page';} ?>" href="debug.php"><i class="fa fa-fw fa-regular fa-bug"></i> Debugging</a></li>
 										</ul>
 									</li>
 									<li class="nav-item">

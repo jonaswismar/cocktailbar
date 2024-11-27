@@ -1,28 +1,18 @@
 <?php
-$sql_users_single = "SELECT 
+$sql_roles_single = "SELECT 
     id, 
-    username, 
-    password,
-    role,
+    rolename, 
     image
 FROM 
-    users 
+    role 
 WHERE 
-    username = ?;
+    id = ?;
 ";
-$sql_users_singleid = "SELECT 
-    id 
+$sql_roles_image = "SELECT 
+    image
 FROM 
-    users 
+    role 
 WHERE 
-    username = ?;
-";
-
-$sql_users_create = "INSERT INTO users (username, password) VALUES (?, ?);
-";
-
-$sql_users_changepassword = "UPDATE users 
-SET password = ? 
-WHERE id = ?;
+    id = ?;
 ";
 ?>

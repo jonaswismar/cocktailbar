@@ -3,7 +3,7 @@ $sql_cocktailratings_all = "SELECT
     cocktail, 
     AVG(rating) AS rating
 FROM 
-    cocktailratings 
+    cocktailrating 
 WHERE 
     cocktail = ?
 AND
@@ -15,7 +15,7 @@ $sql_cocktailrating_my = "SELECT
     cocktail, 
     AVG(rating) AS rating
 FROM 
-    cocktailratings 
+    cocktailrating 
 WHERE 
     cocktail = ? AND
     user = ?
@@ -25,7 +25,7 @@ GROUP BY
 ";
 
 $sql_create_cocktailrating = "INSERT INTO
-    cocktailratings (cocktail, user, rating, active)
+    cocktailrating (cocktail, user, rating, active)
 VALUES
     (?, ?, ?, 1)
 ON DUPLICATE KEY UPDATE
@@ -36,20 +36,20 @@ ON DUPLICATE KEY UPDATE
 ";
 
 $sql_delete_cocktailrating = "DELETE FROM
-    cocktailratings
+    cocktailrating
 WHERE
     cocktail = ? AND
     user = ?;
 ";
 
 $sql_count_all_cocktailrating = "SELECT rating FROM
-    cocktailratings
+    cocktailrating
 WHERE
     cocktail = ?;
 ";
 
 $sql_delete_all_cocktailrating = "DELETE FROM
-    cocktailratings
+    cocktailrating
 WHERE
     cocktail = ?;
 ";

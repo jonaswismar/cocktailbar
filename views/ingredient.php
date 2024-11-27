@@ -29,7 +29,7 @@
 					$edit = 0;
 				}
 				$stmt_sql_ingredient = mysqli_prepare($link, $sql_ingredient);
-				mysqli_stmt_bind_param($stmt_sql_ingredient, "i", $ingredientid);
+				mysqli_stmt_bind_param($stmt_sql_ingredient, "ii", $_SESSION["bar"], $ingredientid);
 				mysqli_stmt_execute($stmt_sql_ingredient);
 				$ingredient_all_res=mysqli_stmt_get_result($stmt_sql_ingredient);
 				while($ingredient_all_rows= mysqli_fetch_array($ingredient_all_res, MYSQLI_ASSOC))
@@ -44,7 +44,7 @@
 				}
 				mysqli_stmt_close($stmt_sql_ingredient);
 			?>
-				<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
+				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
 					<div class="container-fluid justify-content-start">
 						<a href="ingredient.php?ingredientid=0&edit=2" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}else{if($edit == 1 || $edit == 2){echo ' disabled';}}?>">
 							<i class="fa-duotone fa-solid fa-file fa-fw"></i>

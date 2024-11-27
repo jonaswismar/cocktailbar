@@ -23,6 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$password_err = "Please enter your password.";
 	} else{
 		$password = trim($_POST["password"]);
+		//$password = password_hash($password, PASSWORD_BCRYPT);
 	}
 
 	if(empty($username_err) && empty($password_err)){
@@ -37,22 +38,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 				if(mysqli_stmt_num_rows($stmt) == 1){
 
-					mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $role, $image);
+					mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $role, $bar, $image);
 					if(mysqli_stmt_fetch($stmt)){
+						//echo $password;
+						//echo $hashed_password;
 						if(password_verify($password, $hashed_password)){
 							session_start();
 							$_SESSION["loggedin"] = true;
 							$_SESSION["id"] = $id;
 							$_SESSION["role"] = $role;
+							$_SESSION["bar"] = $bar;
 							$_SESSION["image"] = $image;
 							$_SESSION["username"] = $username;
+							if($_SESSION["image"] == "")
+							{
+								$stmtrole = mysqli_prepare($link, $sql_roles_image);
+								mysqli_stmt_bind_param($stmtrole, "i", $_SESSION["role"]);
+								mysqli_stmt_execute($stmtrole);
+								mysqli_stmt_bind_result($stmtrole, $image);
+								if(mysqli_stmt_fetch($stmtrole)){
+									$_SESSION["image"] = $image;
+								}
+							}
 							header("location: index.php");
 						} else{
-							$login_err = "Ungültiger Benutzername oder Passwort.";
+							$login_err = "Ungültiges Passwort."; //Change
 						}
 					}
 				} else{
-					$login_err = "Ungültiger Benutzername oder Passwort.";
+					$login_err = "Ungültiger Benutzername.";//Change
 				}
 			} else{
 				echo "Oops! Irgendetwas lief schief. Versuche es später wieder.";

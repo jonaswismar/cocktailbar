@@ -18,7 +18,7 @@
 					$ingredientid = $_GET['ingredientid'];
 				}
 				$stmt_sql_ingredient = mysqli_prepare($link, $sql_ingredient);
-				mysqli_stmt_bind_param($stmt_sql_ingredient, "i", $ingredientid);
+				mysqli_stmt_bind_param($stmt_sql_ingredient, "ii", $_SESSION["bar"], $ingredientid);
 				mysqli_stmt_execute($stmt_sql_ingredient);
 				$ingredient_all_res=mysqli_stmt_get_result($stmt_sql_ingredient);
 				while($ingredient_all_rows= mysqli_fetch_array($ingredient_all_res, MYSQLI_ASSOC))
@@ -86,7 +86,7 @@
 				
 				
 			?>
-				<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
+				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
 					<div class="container-fluid justify-content-start">
 						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#newDialog">
 							<i class="fa-duotone fa-solid fa-file fa-fw"></i>
@@ -111,7 +111,7 @@
 				<div class="modal fade" id="newDialog">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
-						<form id="ingredient_edit" action="/ingredient_save.php">
+						<form id="ingredient_edit" action="/views/ingredient_save.php">
 						<fieldset>
 							<div class="modal-header">
 								<h4 class="modal-title"><strong>Neue Zutat anlegen</strong></h4>
@@ -190,7 +190,7 @@
 				<div class="modal fade" id="editDialog">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
-						<form id="ingredient_edit" action="/ingredient_save.php">
+						<form id="ingredient_edit" action="/views/ingredient_save.php">
 						<fieldset>
 							<div class="modal-header">
 								<h4 class="modal-title"><strong><?php echo $ingredientname;?></strong> bearbeiten</h4>
@@ -444,7 +444,7 @@
 						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
 							<?php 
 								$ingredientrating_all = 0;
-								$stmt_sql_ratings = mysqli_prepare($link, $sql_ingredientratings_all);
+								$stmt_sql_ratings = mysqli_prepare($link, $sql_ingredientrating_all);
 								mysqli_stmt_bind_param($stmt_sql_ratings, "i", $id);
 								mysqli_stmt_execute($stmt_sql_ratings);
 								$ratings_all_res=mysqli_stmt_get_result($stmt_sql_ratings);

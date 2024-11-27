@@ -4,6 +4,7 @@ $sql_users_single = "SELECT
     username, 
     password,
     role,
+    bar,
     image
 FROM 
     user 
@@ -18,7 +19,7 @@ WHERE
     username = ?;
 ";
 
-$sql_users_create = "INSERT INTO user (username, password) VALUES (?, ?);
+$sql_users_create = "INSERT INTO user (username, password, bar) VALUES (?, ?, ?);
 ";
 
 $sql_users_changepassword = "UPDATE user 

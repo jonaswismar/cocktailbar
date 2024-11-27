@@ -4,7 +4,7 @@ $sql_cocktailcategorylists = "SELECT
     cocktail, 
     category
 FROM 
-    cocktailcategorylist 
+    cocktailcategory 
 ORDER BY 
     cocktail ASC,
     category ASC;
@@ -15,7 +15,7 @@ $sql_cocktailcategorylist = "SELECT
     cocktail, 
     category
 FROM 
-    cocktailcategorylist
+    cocktailcategory
 WHERE
 	cocktail = ?
 AND
@@ -23,13 +23,13 @@ category = ?;
 ";
 
 $sql_delete_cocktailcategorylist = "DELETE FROM
-    cocktailcategorylist
+    cocktailcategory
 WHERE
     cocktail = ?
 ";
 
 $sql_create_cocktailcategorylist = "INSERT INTO
-    cocktailcategorylist (cocktail, category)
+    cocktailcategory (cocktail, category)
 VALUES
     (?, ?);
 ";

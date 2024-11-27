@@ -78,7 +78,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		$cocktailid =  $_GET['cocktailid'];
 		$ordered =  $_GET['ordered'];
 		$stmt_create_order = mysqli_prepare($link, $sql_create_order);
-		mysqli_stmt_bind_param($stmt_create_order, "ii", $_SESSION["id"], $cocktailid);
+		mysqli_stmt_bind_param($stmt_create_order, "iii", $_SESSION["id"], $cocktailid, $_SESSION["bar"]);
 		mysqli_stmt_execute($stmt_create_order);
 		mysqli_stmt_close($stmt_create_order);
 		mysqli_commit($link);

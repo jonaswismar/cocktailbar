@@ -1,11 +1,11 @@
 <?php include("header.php") ?>
 			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
-			<div class="scrolling-wrapper-flexbox">
-				<a href="categorys.php" class="btn btn-primary text-uppercase active" aria-current="page">
-					<i class="fa fa-fw fa-solid fa-filter-list"></i> Kategorien
-				</a>
-			</div>
-		</nav>
+				<div class="scrolling-wrapper-flexbox">
+					<a href="categorys.php" class="btn btn-primary text-uppercase active" aria-current="page">
+						<i class="fa fa-fw fa-solid fa-filter-list"></i> Kategorien
+					</a>
+				</div>
+			</nav>
 			<div class="d-flex align-items-center justify-content-center">
 				<div class="list-group flex-fill">
 					<?php 

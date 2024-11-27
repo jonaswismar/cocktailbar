@@ -2,7 +2,7 @@
 $sql_random_cocktails = "SELECT 
     c.* 
 FROM 
-    cocktails c
+    cocktail c
 INNER JOIN (
     SELECT 
         cil.cocktail,

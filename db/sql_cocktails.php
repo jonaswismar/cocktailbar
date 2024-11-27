@@ -1,19 +1,19 @@
 <?php
 $sql_cocktail = "SELECT 
-    cocktails.ID, 
-    cocktails.cocktailname, 
-    cocktails.description, 
-    cocktails.glass, 
-    cocktails.instruction, 
-    cocktails.image, 
-    cocktails.strength 
+    cocktail.ID, 
+    cocktail.cocktailname, 
+    cocktail.description, 
+    cocktail.glass, 
+    cocktail.instruction, 
+    cocktail.image, 
+    cocktail.strength 
 FROM 
-    cocktails 
+    cocktail 
 WHERE 
-    cocktails.ID = ?;
+    cocktail.ID = ?;
 ";
 $sql_update_cocktail = "UPDATE 
-    cocktails
+    cocktail
 SET
     cocktailname = ?,
     description = ?,
@@ -24,31 +24,31 @@ WHERE
 ";
 
 $sql_create_cocktail = "INSERT INTO
-    cocktails (cocktailname, description, instruction, image)
+    cocktail (cocktailname, description, instruction, image)
 VALUES
     (?, ?, ?, ?);
 ";
 
 $sql_delete_cocktail = "DELETE FROM
-    cocktails
+    cocktail
 WHERE
     ID = ?;
 ";
 
 $sql_my_cocktails = "WITH ingredient_counts AS (
     SELECT 
-        cocktailingredientlist.cocktail AS cocktail_id,
+        cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
-        SUM(CASE WHEN ingredients.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
-        SUM(CASE WHEN ingredients.available = 1 OR ingredients.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
+        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 OR ingredientbar.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
     FROM 
-        cocktailingredientlist
+        cocktailingredient
     INNER JOIN 
-        ingredients 
+        ingredientbar 
     ON 
-        cocktailingredientlist.ingredient = ingredients.ID
+        cocktailingredient.ingredient = ingredientbar.ingredient
     GROUP BY 
-        cocktailingredientlist.cocktail
+        cocktailingredient.cocktail
 )
 SELECT 
     c.ID, 
@@ -61,7 +61,7 @@ SELECT
     IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available,
     IF(ic.shoppable_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS shoppable
 FROM 
-    cocktails c
+    cocktail c
 LEFT JOIN 
     ingredient_counts ic 
 ON 
@@ -73,17 +73,17 @@ ORDER BY
 	
 $sql_my_cocktails_random = "WITH ingredient_counts AS (
     SELECT 
-        cocktailingredientlist.cocktail AS cocktail_id,
+        cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
-        SUM(CASE WHEN ingredients.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
+        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
     FROM 
-        cocktailingredientlist
+        cocktailingredient
     INNER JOIN 
-        ingredients 
+        ingredientbar 
     ON 
-        cocktailingredientlist.ingredient = ingredients.ID
+        cocktailingredient.ingredient = ingredientbar.ingredient
     GROUP BY 
-        cocktailingredientlist.cocktail
+        cocktailingredient.cocktail
 )
 SELECT 
     c.ID, 
@@ -95,29 +95,29 @@ SELECT
     c.strength, 
     IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available
 FROM 
-    cocktails c
+    cocktail c
 LEFT JOIN 
     ingredient_counts ic 
 ON 
     c.ID = ic.cocktail_id
 ORDER BY 
     available DESC, 
-	RAND()
+    RAND()
 LIMIT 1;";
 
 $sql_my_cocktails_day = "WITH ingredient_counts AS (
     SELECT 
-        cocktailingredientlist.cocktail AS cocktail_id,
+        cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
-        SUM(CASE WHEN ingredients.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
+        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
     FROM 
-        cocktailingredientlist
+        cocktailingredient
     INNER JOIN 
-        ingredients 
+        ingredientbar 
     ON 
-        cocktailingredientlist.ingredient = ingredients.ID
+        cocktailingredient.ingredient = ingredientbar.ingredient
     GROUP BY 
-        cocktailingredientlist.cocktail
+        cocktailingredient.cocktail
 )
 SELECT 
     c.ID, 
@@ -129,14 +129,14 @@ SELECT
     c.strength, 
     IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available
 FROM 
-    cocktails c
+    cocktail c
 LEFT JOIN 
     ingredient_counts ic 
 ON 
     c.ID = ic.cocktail_id
 ORDER BY 
     available DESC, 
-	RAND(CURDATE())
+    RAND(CURDATE())
 LIMIT 1;";
 
 $sql_fav_cocktails = "SELECT 
@@ -150,9 +150,9 @@ $sql_fav_cocktails = "SELECT
     f.user, 
     f.cocktail 
 FROM 
-    cocktails c
+    cocktail c
 INNER JOIN 
-    cocktailfavorites f ON c.ID = f.cocktail
+    cocktailfavorite f ON c.ID = f.cocktail
 WHERE 
     f.user = ?
 ORDER BY 
@@ -168,23 +168,23 @@ $sql_all_cocktails = "SELECT
     c.image, 
     c.strength
 FROM 
-    cocktails c
+    cocktail c
 ORDER BY 
     c.cocktailname ASC;
 ";
 
 $sql_cocktail = "SELECT 
-    cocktails.ID, 
-    cocktails.cocktailname, 
-    cocktails.description, 
-    cocktails.glass, 
-    cocktails.instruction, 
-    cocktails.image, 
-    cocktails.strength 
+    cocktail.ID, 
+    cocktail.cocktailname, 
+    cocktail.description, 
+    cocktail.glass, 
+    cocktail.instruction, 
+    cocktail.image, 
+    cocktail.strength 
 FROM 
-    cocktails 
+    cocktail 
 WHERE 
-    cocktails.ID = ?;
+    cocktail.ID = ?;
 ";
 
 $sql_delete_cocktail = "DELETE FROM

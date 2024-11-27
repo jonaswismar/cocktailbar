@@ -4,7 +4,7 @@ $sql_ingredienttastelists = "SELECT
     ingredient, 
     taste
 FROM 
-    ingredienttasteslist 
+    ingredienttaste 
 ORDER BY 
     ingredient ASC,
     taste ASC;
@@ -15,7 +15,7 @@ $sql_ingredienttastelist = "SELECT
     ingredient, 
     taste
 FROM 
-    ingredienttasteslist
+    ingredienttaste
 WHERE
 	ingredient = ?
 AND
@@ -23,13 +23,13 @@ AND
 ";
 
 $sql_delete_ingredienttastelist = "DELETE FROM
-    ingredienttasteslist
+    ingredienttaste
 WHERE
     ingredient = ?
 ";
 
 $sql_create_ingredienttastelist = "INSERT INTO
-    ingredienttasteslist (ingredient, taste)
+    ingredienttaste (ingredient, taste)
 VALUES
     (?, ?);
 ";

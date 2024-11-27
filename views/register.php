@@ -46,9 +46,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
 		if($stmt = mysqli_prepare($link, $sql_users_create)){
 			$param_username = $username;
-			$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-			mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+			$param_password = password_hash($password, PASSWORD_BCRYPT); // Creates a password hash
+			if(empty($param_barid)){
+				$param_barid = 1;
+			}
+			mysqli_stmt_bind_param($stmt, "ssi", $param_username, $param_password, $param_barid);
 			if(mysqli_stmt_execute($stmt)){
+				mysqli_close($link);
 				header("location: login.php");
 			} else{
 				echo "Oops! Irgendetwas lief schief. Versuche es später wieder.";
@@ -56,7 +60,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			mysqli_stmt_close($stmt);
 		}
 	}
-	mysqli_close($link);
 }
 ?>
 <?php include("header_login.php") ?>
@@ -71,16 +74,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					}        
 				?>
 				<div class="form-floating">
-					<select type="language" name="language" class="form-select <?php echo (!empty($language_err)) ? 'is-invalid' : ''; ?>" id="floatingDrop" aria-label="Default select example">
+					<select type="language" name="language" class="form-select <?php echo (!empty($language_err)) ? 'is-invalid' : ''; ?>" id="floatingLangDrop">
 						<option value="1" selected>Deutsch</option>
 						<option value="2">English</option>
 						<option value="3">Français</option>
 					</select>
-					<label for="floatingDrop">Sprache</label>
+					<label for="floatingLangDrop">Sprache</label>
 					<span class="invalid-feedback"><?php echo $language_err; ?></span>
 				</div>
 				<div class="form-floating">
-					<select type="barname" name="barname" class="form-select <?php echo (!empty($barname_err)) ? 'is-invalid' : ''; ?>" id="floatingDrop" aria-label="Default select example">
+					<select type="barname" name="barname" class="form-select <?php echo (!empty($barname_err)) ? 'is-invalid' : ''; ?>" id="floatingBarDrop">
 						<?php $stmt_sql_bars = mysqli_prepare($link, $sql_bars);
 							mysqli_stmt_execute($stmt_sql_bars);
 							$bars_all_res=mysqli_stmt_get_result($stmt_sql_bars);
@@ -93,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							
 							 ?>
 					</select>
-					<label for="floatingDrop">Standard Bar</label>
+					<label for="floatingBarDrop">Standard Bar</label>
 					<span class="invalid-feedback"><?php echo $barname_err; ?></span>
 				</div>
 				<div class="form-floating">

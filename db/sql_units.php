@@ -7,7 +7,7 @@ $sql_units = "SELECT
     description, 
     image 
 FROM 
-    units 
+    unit 
 ORDER BY 
     unitshort ASC;
 ";
@@ -20,13 +20,13 @@ $sql_unit = "SELECT
     description, 
     image 
 FROM 
-    units 
+    unit 
 WHERE 
     ID = ?;
 ";
 
 $sql_update_unit = "UPDATE 
-    units
+    unit
 SET
     unitname = ?,
     unitshort = ?,
@@ -38,13 +38,13 @@ WHERE
 ";
 
 $sql_create_unit = "INSERT INTO
-    units (unitname, unitshort, unitshortX, description, image)
+    unit (unitname, unitshort, unitshortX, description, image)
 VALUES
     (?, ?, ?, ?, ?);
 ";
 
 $sql_delete_unit = "DELETE FROM
-    units
+    unit
 WHERE
     ID = ?;
 ";

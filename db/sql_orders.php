@@ -1,25 +1,26 @@
 <?php
 $sql_create_order = "INSERT INTO
-    orders (user, cocktail)
+    `order` (user, cocktail, bar)
 VALUES
-    (?, ?);";
+    (?, ?, ?);";
 
 $sql_ordered_cocktail = "SELECT 
-    orders.id, 
-    orders.cocktail, 
-    orders.user 
+    `order`.id, 
+    `order`.cocktail, 
+    `order`.bar, 
+    `order`.user 
 FROM 
-    orders 
+    `order` 
 WHERE 
-    orders.user = ?
+    `order`.user = ?
 AND
-    orders.cocktail = ?
+    `order`.cocktail = ?
 AND
-    orders.status = 0;
+    `order`.status = 0;
 ";
 
 $sql_delete_cocktailorder = "DELETE FROM
-    orders
+    `order`
 WHERE
     cocktail = ?
 ";

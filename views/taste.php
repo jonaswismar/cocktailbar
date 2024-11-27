@@ -39,7 +39,7 @@
 				mysqli_stmt_close($stmt_sql_taste);
 				mysqli_close($link);
 			?>
-				<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;"<?php
+				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px"<?php
 								if($_SESSION["role"] != 1)
 								{
 									echo ' hidden';

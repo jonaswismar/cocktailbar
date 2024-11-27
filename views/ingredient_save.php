@@ -17,7 +17,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		{
 			$available = $_GET['available'];
 			$stmt_sql_ingredient = mysqli_prepare($link, $sql_update_ingredient_available);
-			mysqli_stmt_bind_param($stmt_sql_ingredient, "ii", $available, $ingredientid);
+			mysqli_stmt_bind_param($stmt_sql_ingredient, "iii", $available, $_SESSION["bar"], $ingredientid);
 			mysqli_stmt_execute($stmt_sql_ingredient);
 			mysqli_stmt_close($stmt_sql_ingredient);
 			mysqli_commit($link);
@@ -27,7 +27,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		{
 			$shoppable = $_GET['shoppable'];
 			$stmt_sql_ingredient = mysqli_prepare($link, $sql_update_ingredient_shoppable);
-			mysqli_stmt_bind_param($stmt_sql_ingredient, "ii", $shoppable, $ingredientid);
+			mysqli_stmt_bind_param($stmt_sql_ingredient, "iii", $shoppable, $_SESSION["bar"], $ingredientid);
 			mysqli_stmt_execute($stmt_sql_ingredient);
 			mysqli_stmt_close($stmt_sql_ingredient);
 			mysqli_commit($link);

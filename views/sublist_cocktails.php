@@ -3,7 +3,7 @@
 	while($cocktails_all_rows= mysqli_fetch_array($cocktails_all_res, MYSQLI_ASSOC))
 	{
 		$stmtingred = mysqli_prepare($link, $sql_ingredients_from_cocktail);
-		mysqli_stmt_bind_param($stmtingred, "i", $cocktails_all_rows['ID']);
+		mysqli_stmt_bind_param($stmtingred, "ii", $_SESSION["bar"], $cocktails_all_rows['ID']);
 		mysqli_stmt_execute($stmtingred);
 		$ingred_all_res=mysqli_stmt_get_result($stmtingred);
 		
@@ -33,7 +33,7 @@
 		}
 		$ingredlist = rtrim($ingredlist, ' ');
 		$ingredlist = rtrim($ingredlist, ',');
-		$favorites_stmt = mysqli_prepare($link, $sql_cocktailfavorites);
+		$favorites_stmt = mysqli_prepare($link, $sql_cocktailfavorite);
 		mysqli_stmt_bind_param($favorites_stmt, "i", $_SESSION["id"]);
 		mysqli_stmt_execute($favorites_stmt);
 		$favorites_all_res=mysqli_stmt_get_result($favorites_stmt);

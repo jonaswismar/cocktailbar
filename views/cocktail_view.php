@@ -11,7 +11,7 @@
 				
 				 ?>
 
-				<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
+				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
 					<div class="container-fluid justify-content-start">
 						<a href="cocktail_edit.php?cocktailid=0" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">
 							<i class="fa-duotone fa-solid fa-file fa-fw"></i>

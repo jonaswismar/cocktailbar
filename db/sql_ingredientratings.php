@@ -1,9 +1,9 @@
 <?php
-$sql_ingredientratings_all = "SELECT 
+$sql_ingredientrating_all = "SELECT 
     ingredient, 
     AVG(rating) AS rating
 FROM 
-    ingredientratings 
+    ingredientrating 
 WHERE 
     ingredient = ?
 AND
@@ -15,7 +15,7 @@ $sql_ingredientrating_my = "SELECT
     ingredient, 
     AVG(rating) AS rating
 FROM 
-    ingredientratings 
+    ingredientrating 
 WHERE 
     ingredient = ? AND
     user = ?
@@ -25,7 +25,7 @@ GROUP BY
 ";
 
 $sql_create_ingredientrating = "INSERT INTO
-    ingredientratings (ingredient, user, rating, active)
+    ingredientrating (ingredient, user, rating, active)
 VALUES
     (?, ?, ?, 1)
 ON DUPLICATE KEY UPDATE
@@ -36,20 +36,20 @@ ON DUPLICATE KEY UPDATE
 ";
 
 $sql_delete_ingredientrating = "DELETE FROM
-    ingredientratings
+    ingredientrating
 WHERE
     ingredient = ? AND
     user = ?;
 ";
 
 $sql_count_all_ingredientrating = "SELECT rating FROM
-    ingredientratings
+    ingredientrating
 WHERE
     ingredient = ?;
 ";
 
 $sql_delete_all_ingredientrating = "DELETE FROM
-    ingredientratings
+    ingredientrating
 WHERE
     ingredient = ?;
 ";

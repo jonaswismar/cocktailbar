@@ -38,23 +38,27 @@
 				if($view == "my")
 				{
 					$stmt_sql_ingredients = mysqli_prepare($link, $sql_my_ingredients);
+					mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $_SESSION["bar"]);
 				}
 				else if($view == "all")
 				{
 					$stmt_sql_ingredients = mysqli_prepare($link, $sql_all_ingredients);
+					mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $_SESSION["bar"]);
 				}
 				else if($view == "fav")
 				{
 					$stmt_sql_ingredients = mysqli_prepare($link, $sql_fav_ingredients);
-					mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $_SESSION["id"]);
+					mysqli_stmt_bind_param($stmt_sql_ingredients, "ii", $_SESSION["bar"], $_SESSION["id"]);
 				}
 				else if($view == "shop")
 				{
 					$stmt_sql_ingredients = mysqli_prepare($link, $sql_shop_ingredients);
+					mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $_SESSION["bar"]);
 				}
 				else
 				{
 					$stmt_sql_ingredients = mysqli_prepare($link, $sql_all_ingredients);
+					mysqli_stmt_bind_param($stmt_sql_ingredients, "i", $_SESSION["bar"]);
 				}
 				mysqli_stmt_execute($stmt_sql_ingredients);
 				$sub_ingredients_show_quantity=false;

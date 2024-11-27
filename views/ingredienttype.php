@@ -34,14 +34,13 @@
 				{
 					$id = $ingredienttype_all_rows['ID'];
 					$typename = $ingredienttype_all_rows['typename'];
-					$color = $ingredienttype_all_rows['color'];
 					$description = $ingredienttype_all_rows['description'];
 					$image = $ingredienttype_all_rows['image'];
 				}
 				mysqli_stmt_close($stmt_sql_ingredienttype);
 				mysqli_close($link);
 			?>
-				<nav class="navbar navbar-dark bg-primary py-1" style="margin-top: -17px;"<?php
+				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px"<?php
 								if($_SESSION["role"] != 1)
 								{
 									echo ' hidden';
@@ -122,14 +121,12 @@
 							<input name="ingredienttypeid" class="form-control" type="hidden" value="<?php echo $id;?>"<?php if($edit == 0){echo ' readonly';}?>>
 							<input name="typename" class="form-control" type="text" placeholder="Name des Zutatentyp" value="<?php echo $typename;?>"<?php if($edit == 0){echo ' readonly';}?>>
 						</div>
-						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-							<input name="color" class="form-control" type="color" placeholder="Farbe" value="<?php echo $color;?>"<?php if($edit == 0){echo ' style="pointer-events: none" tabindex="-1"';}?>>
-						</div>
 						<div class="d-flex p-3 justify-content-around flex-wrap">
 							<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung des Zutatentyp" rows="25"<?php if($edit == 0){echo ' readonly';}?>><?php echo $description;?></textarea>
 						</div>
 						<div class="d-flex p-3 justify-content-around flex-wrap">
 							<input class="btn btn-primary" type="submit"<?php if($edit == 0){echo ' hidden';}?>>
+						</div>
 					</fieldset>
 				</form>
 <?php include("footer.php") ?>
