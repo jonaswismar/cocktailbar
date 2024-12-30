@@ -2,7 +2,7 @@
 require_once "../db/sql_config.php";
 require_once "../db/sql_statements.php";
 
-$username = $password = $confirm_password = "";
+$username = $password = $confirm_password = $language = "";
 $username_err = $password_err = $barname_err = $language_err = $confirm_password_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -47,10 +47,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if($stmt = mysqli_prepare($link, $sql_users_create)){
 			$param_username = $username;
 			$param_password = password_hash($password, PASSWORD_BCRYPT); // Creates a password hash
+			$param_language = trim($_POST["language"]);
+			$param_barid = trim($_POST["barname"]);
 			if(empty($param_barid)){
 				$param_barid = 1;
 			}
-			mysqli_stmt_bind_param($stmt, "ssi", $param_username, $param_password, $param_barid);
+			if(empty($param_language)){
+				$param_language = 'de';
+			}
+			mysqli_stmt_bind_param($stmt, "ssis", $param_username, $param_password, $param_barid, $param_language);
 			if(mysqli_stmt_execute($stmt)){
 				mysqli_close($link);
 				header("location: login.php");
@@ -75,9 +80,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				?>
 				<div class="form-floating">
 					<select type="language" name="language" class="form-select <?php echo (!empty($language_err)) ? 'is-invalid' : ''; ?>" id="floatingLangDrop">
-						<option value="1" selected>Deutsch</option>
-						<option value="2">English</option>
-						<option value="3">Français</option>
+						<option value="de" selected>Deutsch</option>
+						<option value="en">English</option>
+						<option value="fr">Français</option>
 					</select>
 					<label for="floatingLangDrop">Sprache</label>
 					<span class="invalid-feedback"><?php echo $language_err; ?></span>

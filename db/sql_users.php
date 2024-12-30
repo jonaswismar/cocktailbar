@@ -19,7 +19,7 @@ WHERE
     username = ?;
 ";
 
-$sql_users_create = "INSERT INTO user (username, password, bar) VALUES (?, ?, ?);
+$sql_users_create = "INSERT INTO user (username, password, bar, language) VALUES (?, ?, ?, ?);
 ";
 
 $sql_users_changepassword = "UPDATE user 

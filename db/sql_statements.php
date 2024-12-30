@@ -13,7 +13,6 @@ require_once "sql_ingredients.php";
 require_once "sql_ingredienttastelist.php";
 require_once "sql_ingredienttypes.php";
 require_once "sql_orders.php";
-require_once "sql_preferences.php";
 require_once "sql_roles.php";
 require_once "sql_specials.php";
 require_once "sql_tastes.php";

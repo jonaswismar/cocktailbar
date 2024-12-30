@@ -35,16 +35,15 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 		<link rel="stylesheet" href="../assets/css/navbars-offcanvas.css" />
 		<link rel="stylesheet" href="../assets/css/tom-select.bootstrap5.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-		
 		<style>
-.navbutton {
-	padding-top: 0.25rem;
-  padding-left: 0.75rem;
-  font-size: 1.25rem;
-  border-color: rgba(0, 0, 0, 0.15);
-  border-radius: 0.375rem;
-}
-</style>
+			.navbutton {
+				padding-top: 0.25rem;
+				padding-left: 0.75rem;
+				font-size: 1.25rem;
+				border-color: rgba(0, 0, 0, 0.15);
+				border-radius: 0.375rem;
+			}
+		</style>
 		<style>
 			div.cocktailrating-wrapper-my i {
 				cursor: pointer;
@@ -102,14 +101,13 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 			}
 			.scrolling-wrapper-flexbox {
 				-webkit-overflow-scrolling: touch;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-
-  .btn {
-    flex: 0 0 auto;
-  }
-}
+				display: flex;
+				flex-wrap: nowrap;
+				overflow-x: auto;
+				.btn {
+					flex: 0 0 auto;
+				}
+			}
 		</style>
 		<style>
 			body {
@@ -218,47 +216,37 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 				<path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
 			</symbol>
 		</svg>
-				<header>
+		<header>
 			<div class="fixed-top">
 				<nav class="navbar navbar-dark bg-primary bg-gradient" aria-label="Offcanvas navbar large">
 					<div class="container-fluid">
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						
-						
-						
 						<div class="btn-group ms-auto">
-  <a href="javascript:history.go(-1)" type="button" class="btn btn-primary dropdown-toggle navbutton" role="button">
-  <i class="fa fa-fw fa-regular fa-filter"></i> Kein Filter
-  </a>
-</div>
-						
-						
-						
-						
-						
-						
-						
-						
+							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary dropdown-toggle navbutton" role="button">
+								<i class="fa fa-fw fa-regular fa-filter"></i> Kein Filter
+							</a>
+						</div>
 						<div class="btn-group ms-auto">
-  <a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button">
-  <i class="fa fa-fw fa-regular fa-left-long"></i>
-  </a>
-</div><div class="btn-group<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
-  <button type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fa fa-fw fa-regular fa-ellipsis-stroke-vertical"></i>
-  </button>
-  <div class="dropdown-menu dropdown-menu-end">
-    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Zutat</a>
-    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Neuer Cocktail</a>
-    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-filter-list"></i> Neue Kategorie</a>
-    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Neuer Zutatentyp</a>
-    <a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Geschmacksrichtung</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
+							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button">
+								<i class="fa fa-fw fa-regular fa-left-long"></i>
+							</a>
+						</div>
+						<div class="btn-group<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
+							<button type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fa fa-fw fa-regular fa-ellipsis-stroke-vertical"></i>
+							</button>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Zutat</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Neuer Cocktail</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-filter-list"></i> Neue Kategorie</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Neuer Zutatentyp</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Geschmacksrichtung</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Separated link</a>
+							</div>
+						</div>
 						<div class="offcanvas offcanvas-start text-bg-dark bg-primary" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
 							<div class="offcanvas-header">
 								<h5 class="offcanvas-title" id="offcanvasNavbar2Label"><i class="fa-duotone fa-solid fa-bars"></i> Menü</h5>
@@ -306,5 +294,5 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 					</div>
 				</nav>
 			</div>
-				</header>
+		</header>
 		<main>
