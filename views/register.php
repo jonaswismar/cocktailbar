@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 	}
 	if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-		if($stmt = mysqli_prepare($link, $sql_users_create)){
+		if($stmtreg = mysqli_prepare($link, $sql_users_create)){
 			$param_username = $username;
 			$param_password = password_hash($password, PASSWORD_BCRYPT); // Creates a password hash
 			$param_language = trim($_POST["language"]);
@@ -55,14 +55,74 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			if(empty($param_language)){
 				$param_language = 'de';
 			}
-			mysqli_stmt_bind_param($stmt, "ssis", $param_username, $param_password, $param_barid, $param_language);
-			if(mysqli_stmt_execute($stmt)){
+			mysqli_stmt_bind_param($stmtreg, "ssis", $param_username, $param_password, $param_barid, $param_language);
+			if(mysqli_stmt_execute($stmtreg)){
+				
+				
+				
+				
+				
+				
+				
+				if($stmtlogin = mysqli_prepare($link, $sql_users_single)){
+			mysqli_stmt_bind_param($stmtlogin, "s", $param_username);
+			$param_username = $username;
+			if(mysqli_stmt_execute($stmtlogin)){
+				mysqli_stmt_store_result($stmtlogin);
+				if(mysqli_stmt_num_rows($stmtlogin) == 1){
+					mysqli_stmt_bind_result($stmtlogin, $id, $role, $bar, $image, $username, $ignoregarnish, $startpage, $language, $metricunits, $hashed_password);
+					if(mysqli_stmt_fetch($stmtlogin)){
+						//echo $password;
+						//echo $hashed_password;
+						if(password_verify($password, $hashed_password)){
+							session_start();
+							$_SESSION["loggedin"] = true;
+							$_SESSION["id"] = $id;
+							$_SESSION["role"] = $role;
+							$_SESSION["bar"] = $bar;
+							$_SESSION["image"] = $image;
+							$_SESSION["username"] = $username;
+							$_SESSION["ignoregarnish"] = $ignoregarnish;
+							$_SESSION["startpage"] = $startpage;
+							$_SESSION["language"] = $language;
+							$_SESSION["metricunits"] = $metricunits;
+							if($_SESSION["image"] == "")
+							{
+								$stmtrole = mysqli_prepare($link, $sql_roles_image);
+								mysqli_stmt_bind_param($stmtrole, "i", $_SESSION["role"]);
+								mysqli_stmt_execute($stmtrole);
+								mysqli_stmt_bind_result($stmtrole, $image);
+								if(mysqli_stmt_fetch($stmtrole)){
+									$_SESSION["image"] = $image;
+								}
+							}
+							header("location: index.php");
+						} else{
+							$login_err = "Ungültiges Passwort."; //Change
+						}
+					}
+				} else{
+					$login_err = "Ungültiger Benutzername."; //Change
+				}
+			} else{
+				echo "Oops! Irgendetwas lief schief. Versuche es später wieder.";
+			}
+			mysqli_stmt_close($stmt);
+		}
+				
+				
+				
+				
+				
+				
+				
+				
 				mysqli_close($link);
 				header("location: login.php");
 			} else{
 				echo "Oops! Irgendetwas lief schief. Versuche es später wieder.";
 			}
-			mysqli_stmt_close($stmt);
+			mysqli_stmt_close($stmtreg);
 		}
 	}
 }

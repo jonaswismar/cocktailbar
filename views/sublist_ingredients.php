@@ -40,7 +40,7 @@
 								<img decoding = "async" loading="lazy" src="../img/ingredients/png48/unbekannt.png" alt="<?php echo $ingred_all_rows['ingredientname'];?>" class="text-dark border border-secondary rounded-circle shadow-4-strong bg-white flex-shrink-0" style="text-align: center;">
 							</picture>
 							<p class="mb-0 align-self-center text-size-h6"><?php echo $ingred_all_rows['ingredientname'];?></p>
-							<div class="flex-grow-1 d-flex gap-2 w-80 flex-nowrap"></div>
+							<div class="flex-grow-1 d-flex gap-2 w-75 flex-nowrap"></div>
 							<?php
 							if(!empty($sub_ingredients_show_count))
 							{

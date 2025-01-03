@@ -9,7 +9,7 @@ $sql_units = "SELECT
 FROM 
     unit 
 ORDER BY 
-    unitshort ASC;
+    unitname ASC;
 ";
 
 $sql_unit = "SELECT 

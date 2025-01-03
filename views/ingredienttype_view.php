@@ -38,7 +38,6 @@
 					$image = $ingredienttype_all_rows['image'];
 				}
 				mysqli_stmt_close($stmt_sql_ingredienttype);
-				mysqli_close($link);
 			?>
 				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px"<?php
 								if($_SESSION["role"] != 1)
@@ -129,4 +128,14 @@
 						</div>
 					</fieldset>
 				</form>
+			<div class="list-group">
+			<?php
+				$stmt_sql_ingredients = mysqli_prepare($link, $sql_ingredients_from_type);
+				mysqli_stmt_bind_param($stmt_sql_ingredients, "ii", $_SESSION["bar"], $id);
+				mysqli_stmt_execute($stmt_sql_ingredients);
+				$sub_ingredients_show_quantity=false;
+				$sub_ingredients_show_count=true;
+				include("sublist_ingredients.php")
+			?>
+</div>
 <?php include("footer.php") ?>

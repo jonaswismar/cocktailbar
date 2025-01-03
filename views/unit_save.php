@@ -6,18 +6,18 @@
 	$unitname = $_POST['unitname'];
 	$unitshort =  $_POST['unitshort'];
 	$unitshortX =  $_POST['unitshortX'];
-	$description =  $_POST['description'];
-	$image =  $_POST['image'];
+	$unitdescription =  $_POST['unitdescription'];
+	$unitimage =  $_POST['unitimage'];
 
 	if(empty($unitid))
 	{
 		$stmt_sql_unit = mysqli_prepare($link, $sql_create_unit);
-		mysqli_stmt_bind_param($stmt_sql_unit, "sssss", $unitname, $unitshort, $unitshortX, $description, $image);
+		mysqli_stmt_bind_param($stmt_sql_unit, "sssss", $unitname, $unitshort, $unitshortX, $unitdescription, $unitimage);
 	}
 	else
 	{
 		$stmt_sql_unit = mysqli_prepare($link, $sql_update_unit);
-		mysqli_stmt_bind_param($stmt_sql_unit, "sssssi", $unitname, $unitshort, $unitshortX, $description, $image, $unitid);
+		mysqli_stmt_bind_param($stmt_sql_unit, "sssssi", $unitname, $unitshort, $unitshortX, $unitdescription, $unitimage, $unitid);
 	}
 
 	mysqli_stmt_execute($stmt_sql_unit);

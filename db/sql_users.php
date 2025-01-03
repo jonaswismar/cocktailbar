@@ -1,11 +1,15 @@
 <?php
 $sql_users_single = "SELECT 
     id, 
+    role, 
+    bar, 
+    image, 
     username, 
-    password,
-    role,
-    bar,
-    image
+    ignoregarnish, 
+    startpage, 
+    language, 
+    metricunits, 
+    password
 FROM 
     user 
 WHERE 
@@ -26,4 +30,15 @@ $sql_users_changepassword = "UPDATE user
 SET password = ? 
 WHERE id = ?;
 ";
+
+$sql_users_changesettings = "UPDATE user 
+SET image = ?, 
+bar = ?, 
+ignoregarnish = ?, 
+startpage = ?, 
+language = ?, 
+metricunits = ?
+WHERE id = ?;
+";
+
 ?>

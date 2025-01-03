@@ -15,7 +15,7 @@
 						while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))
 						{
 					?>
-						<a href="taste.php?tasteid=<?php echo $tastes_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+						<a href="taste_view.php?tasteid=<?php echo $tastes_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
 							<i class="<?php echo $tastes_all_rows['image'];?> fa-fw"></i>
 							<div class="d-flex gap-2 w-100 justify-content-between">
 								<h6 class="mb-0"><?php echo $tastes_all_rows['taste'];?></h6>

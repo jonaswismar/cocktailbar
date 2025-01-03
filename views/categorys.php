@@ -15,7 +15,7 @@
 						while($categorys_all_rows= mysqli_fetch_array($categorys_all_res, MYSQLI_ASSOC))
 						{
 					?>
-						<a href="category.php?categoryid=<?php echo $categorys_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+						<a href="category_view.php?categoryid=<?php echo $categorys_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
 							<i class="<?php echo $categorys_all_rows['image'];?> fa-fw"></i>
 							<div class="d-flex gap-2 w-100 justify-content-between">
 								<h6 class="mb-0"><?php echo $categorys_all_rows['categoryname'];?></h6>

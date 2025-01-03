@@ -15,6 +15,44 @@ ORDER BY
     cat.categoryname ASC;
 ";
 
+$sql_category_usedin = "WITH ingredient_counts AS (
+    SELECT 
+        cocktailingredient.cocktail AS cocktail_id,
+        COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 OR ingredientbar.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
+    FROM 
+        cocktailingredient
+    INNER JOIN 
+        ingredientbar
+    ON 
+        cocktailingredient.ingredient = ingredientbar.ingredient
+    GROUP BY 
+        cocktailingredient.cocktail
+)
+SELECT 
+    cocktail.*, 
+    IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available,
+    IF(ic.shoppable_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS shoppable
+FROM 
+    cocktail
+LEFT JOIN 
+    ingredient_counts ic 
+ON 
+    cocktail.ID = ic.cocktail_id
+WHERE 
+    cocktail.ID IN (
+        SELECT DISTINCT cocktailcategory.cocktail
+        FROM cocktailcategory
+        WHERE cocktailcategory.category = ?
+    )
+ORDER BY 
+    available DESC, 
+    shoppable DESC, 
+    cocktail.cocktailname ASC;
+";
+
+
 $sql_categorys = "SELECT 
     ca.ID, 
     ca.categoryname, 
@@ -38,6 +76,7 @@ $sql_category = "SELECT
     ID, 
     categoryname, 
     description, 
+    cocktail_count, 
     image 
 FROM 
     category 

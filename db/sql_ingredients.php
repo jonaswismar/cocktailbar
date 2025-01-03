@@ -164,6 +164,51 @@ ORDER BY
     i.ingredientname ASC;
 ";
 
+
+
+
+$sql_ingredients_from_type = "WITH ingredient_counts AS (
+    SELECT 
+        ingredient,
+        COUNT(CASE WHEN available = 1 THEN 1 END) AS available_count,
+        COUNT(CASE WHEN available = 1 OR shoppable = 1 THEN 1 END) AS shoppable_count,
+        COUNT(*) AS total_count
+    FROM 
+        ingredientbar
+    WHERE
+        bar = ?
+    GROUP BY 
+        ingredient
+)
+SELECT 
+    i.ID AS ingredient_ID, 
+    i.ingredientname, 
+    i.description, 
+    i.image, 
+    i.type,
+    CASE 
+        WHEN ic.available_count = ic.total_count AND ic.total_count > 0 THEN '1'
+        ELSE '0'
+    END AS available,
+    CASE 
+        WHEN ic.shoppable_count = ic.total_count AND ic.total_count > 0 THEN '1'
+        ELSE '0'
+    END AS shoppable
+FROM 
+    ingredient i
+INNER JOIN 
+    ingredient_counts ic ON i.ID = ic.ingredient
+WHERE
+    i.type = ?
+ORDER BY 
+    available DESC, 
+    shoppable DESC, 
+    i.ingredientname ASC;
+";
+	
+	
+	
+	
 $sql_create_ingredient = "INSERT INTO
     ingredient (ingredientname, description, image, available, shoppable, type) 
 VALUES
@@ -251,6 +296,43 @@ GROUP BY
     c.ID, c.cocktailname
 ORDER BY 
     c.cocktailname ASC;
+";
+
+$sql_taste_usedin = "WITH ingredient_counts AS (
+    SELECT 
+        cocktailingredient.cocktail AS cocktail_id,
+        COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 OR ingredientbar.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
+    FROM 
+        cocktailingredient
+    INNER JOIN 
+        ingredientbar
+    ON 
+        cocktailingredient.ingredient = ingredientbar.ingredient
+    GROUP BY 
+        cocktailingredient.cocktail
+)
+SELECT 
+    cocktail.*, 
+    IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available,
+    IF(ic.shoppable_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS shoppable
+FROM 
+    cocktail
+LEFT JOIN 
+    ingredient_counts ic 
+ON 
+    cocktail.ID = ic.cocktail_id
+WHERE 
+    cocktail.ID IN (
+        SELECT DISTINCT cocktailtaste.cocktail
+        FROM cocktailtaste
+        WHERE cocktailtaste.taste = ?
+    )
+ORDER BY 
+    available DESC, 
+    shoppable DESC, 
+    cocktail.cocktailname ASC;
 ";
 
 $sql_ingredient_usedin = "WITH ingredient_counts AS (

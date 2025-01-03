@@ -88,27 +88,20 @@
 			?>
 				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
 					<div class="container-fluid justify-content-start">
-						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#newDialog">
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#newDialogIngredient">
 							<i class="fa-duotone fa-solid fa-file fa-fw"></i>
 						</button>
-						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#editDialog">
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#editDialogIngredient">
 							<i class="fa-duotone fa-solid fa-pencil fa-fw"></i>
 						</button>
-						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#deleteDialog">
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#deleteDialogIngredient">
 							<i class="fa-duotone fa-solid fa-trash fa-fw"></i>
 						</button>
 					</div>
 				</nav>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<div class="modal fade" id="newDialog">
+
+
+						<div class="modal fade" id="newDialogIngredient">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
 						<form id="ingredient_edit" action="/views/ingredient_save.php">
@@ -177,23 +170,35 @@
 						</div>
 					</div>
 				</div>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<div class="modal fade" id="editDialog">
+
+
+				<div class="modal fade" id="editDialogIngredient">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
 						<form id="ingredient_edit" action="/views/ingredient_save.php">
 						<fieldset>
 							<div class="modal-header">
-								<h4 class="modal-title"><strong><?php echo $ingredientname;?></strong> bearbeiten</h4>
+								<h4 class="modal-title">
+									<picture><?php
+						$currentfilepath = dirname(__DIR__, 1);
+						if(file_exists($currentfilepath .'/img/ingredients/webp48/' . $image . '.webp'))
+						{
+							echo '
+								<source srcset="../img/ingredients/webp48/' . $image . '.webp" type="image/webp">';
+						}
+						if(file_exists($currentfilepath .'/img/ingredients/png48/' . $image . '.png'))
+						{
+							echo '
+								<source srcset="../img/ingredients/png48/' . $image . '.png" type="image/png">';
+						}
+						if(file_exists($currentfilepath .'/img/ingredients/png48/unbekannt.png'))
+						{
+							echo '
+								<source srcset="../img/ingredients/png48/unbekannt.png" type="image/png">';
+						}?>
+
+								<img loading="lazy" src="../img/ingredients/png48/unbekannt.png" alt="<?php echo $ingredientname;?>" class="border border-secondary text-dark rounded-circle bg-white flex-shrink-0" style="text-align: center;">
+							</picture><strong><?php echo $ingredientname;?></strong> bearbeiten</h4>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 							</div>
 							<div class="modal-body">
@@ -266,7 +271,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal fade" id="deleteDialog">
+
+
+				<div class="modal fade" id="deleteDialogIngredient">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -307,6 +314,8 @@
 						</div>
 					</div>
 				</div>
+
+
 				<form>
 					<fieldset>
 						<div class="d-flex gap-3 p-3 flex-row justify-content-center">

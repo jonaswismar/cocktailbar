@@ -3,19 +3,19 @@
 	require_once "../db/sql_statements.php";
 
 	$tasteid =  $_POST['tasteid'];
-	$taste = $_POST['taste'];
-	$description =  $_POST['description'];
-	$image =  $_POST['image'];
+	$tastename = $_POST['tastename'];
+	$tastedescription =  $_POST['tastedescription'];
+	$tasteimage =  $_POST['tasteimage'];
 
 	if(empty($tasteid))
 	{
 		$stmt_sql_taste = mysqli_prepare($link, $sql_create_taste);
-		mysqli_stmt_bind_param($stmt_sql_taste, "sss", $taste, $description, $image);
+		mysqli_stmt_bind_param($stmt_sql_taste, "sss", $tastename, $tastedescription, $tasteimage);
 	}
 	else
 	{
 		$stmt_sql_taste = mysqli_prepare($link, $sql_update_taste);
-		mysqli_stmt_bind_param($stmt_sql_taste, "sssi", $taste, $description, $image, $tasteid);
+		mysqli_stmt_bind_param($stmt_sql_taste, "sssi", $tastename, $tastedescription, $tasteimage, $tasteid);
 	}
 
 	mysqli_stmt_execute($stmt_sql_taste);

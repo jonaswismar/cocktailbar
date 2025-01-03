@@ -18,6 +18,8 @@ $sql_taste = "SELECT
     t.ID, 
     t.taste, 
     t.description, 
+    t.ingredient_count, 
+    t.cocktail_count, 
     t.image
 FROM 
     taste t

@@ -113,7 +113,7 @@
 						<source srcset="../img/glassware/jpg48/6.jpg" type="image/jpg">
 						<img decoding = "async" loading="lazy" src="../img/glassware/jpg48/6.jpg" alt="<?php echo $cocktails_all_rows['cocktailname'];?>" class="text-dark border border-secondary rounded-circle shadow-4-strong bg-white flex-shrink-0" style="text-align: center;">
 					</picture>
-					<div class="flex-grow-1 d-flex gap-2 w-80 flex-nowrap">
+					<div class="flex-grow-1 d-flex gap-2 w-75 flex-nowrap">
 						<div class="d-flex-column">
 							<p class="mb-0 text-size-h6"><?php echo $cocktails_all_rows['cocktailname'];?></p>
 							<p class="mb-0 text-size-h5 opacity-75 text-truncate textcalcoffset"><?php echo $ingredlist;?></p>

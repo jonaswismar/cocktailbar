@@ -20,16 +20,16 @@
 			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
 		<div class="scrolling-wrapper-flexbox">
 					<a href="ingredients.php?view=my" class="btn btn-primary text-uppercase<?php if($view == "my"){echo ' active" aria-current="page';}?>">
-						<i class="fa-solid fa-lemon fa-fw"></i>Meine Zutaten
+						<i class="fa-solid fa-fw fa-lemon"></i> Meine Zutaten
 					</a>
 					<a href="ingredients.php?view=all" class="btn btn-primary text-uppercase<?php if($view == "all"){echo ' active" aria-current="page';}?>">
-						<i class="fa-solid fa-cubes-stacked fa-fw"></i>Alle Zutaten
+						<i class="fa-solid fa-fw fa-cubes-stacked"></i> Alle Zutaten
 					</a>
 					<a href="ingredients.php?view=fav" class="btn btn-primary text-uppercase<?php if($view == "fav"){echo ' active" aria-current="page';}?>">
-						<i class="fa-solid fa-heart fa-fw"></i>Favoriten
+						<i class="fa-solid fa-fw fa-heart"></i> Favoriten
 					</a>
 					<a href="ingredients.php?view=shop" class="btn btn-primary text-uppercase<?php if($view == "shop"){echo ' active" aria-current="page';}?>">
-						<i class="fa-solid fa-cart-shopping fa-fw"></i>Einkaufsliste
+						<i class="fa-solid fa-fw fa-cart-shopping"></i> Einkaufsliste
 					</a>
 				</div>
 			</nav>

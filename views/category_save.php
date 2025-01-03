@@ -4,18 +4,18 @@
 
 	$categoryid =  $_POST['categoryid'];
 	$categoryname = $_POST['categoryname'];
-	$description =  $_POST['description'];
-	$image =  $_POST['image'];
+	$categorydescription =  $_POST['categorydescription'];
+	$categoryimage =  $_POST['categoryimage'];
 
 	if(empty($categoryid))
 	{
 		$stmt_sql_category = mysqli_prepare($link, $sql_create_category);
-		mysqli_stmt_bind_param($stmt_sql_category, "sss", $categoryname, $description, $image);
+		mysqli_stmt_bind_param($stmt_sql_category, "sss", $categoryname, $categorydescription, $categoryimage);
 	}
 	else
 	{
 		$stmt_sql_category = mysqli_prepare($link, $sql_update_category);
-		mysqli_stmt_bind_param($stmt_sql_category, "sssi", $categoryname, $description, $image, $categoryid);
+		mysqli_stmt_bind_param($stmt_sql_category, "sssi", $categoryname, $categorydescription, $categoryimage, $categoryid);
 	}
 
 	mysqli_stmt_execute($stmt_sql_category);
