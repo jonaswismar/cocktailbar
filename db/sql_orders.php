@@ -8,6 +8,7 @@ $sql_ordered_cocktaildata = "SELECT
     `order`.id, 
     `order`.cocktail, 
     `order`.bar, 
+    `order`.status, 
     `order`.user 
 FROM 
     `order` 

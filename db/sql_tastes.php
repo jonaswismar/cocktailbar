@@ -4,11 +4,10 @@ $sql_tastes = "SELECT
     t.taste, 
     t.description, 
     t.image, 
-    COUNT(ctl.cocktail) AS total_cocktails
+    t.ingredient_count, 
+    t.cocktail_count 
 FROM 
     taste t
-LEFT JOIN 
-    cocktailtaste ctl ON ctl.taste = t.ID
 GROUP BY 
     t.ID, t.taste, t.description, t.image
 ORDER BY 

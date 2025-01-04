@@ -298,7 +298,7 @@ ORDER BY
     c.cocktailname ASC;
 ";
 
-$sql_taste_usedin = "WITH ingredient_counts AS (
+$sql_taste_usedin_cocktails = "WITH ingredient_counts AS (
     SELECT 
         cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
@@ -416,5 +416,44 @@ $sql_delete_all_ingredient = "DELETE FROM
     ingredient
 WHERE
     ID = ?;
+";
+
+$sql_taste_usedin_ingredients ="WITH ingredient_counts AS (
+    SELECT 
+        ingredientbar.ingredient AS ingredient_id,
+        COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 OR ingredientbar.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
+    FROM 
+        ingredientbar
+	WHERE
+		ingredientbar.bar = ?
+    GROUP BY 
+        ingredientbar.ingredient
+)
+SELECT 
+    ingredient.ID AS ingredient_ID, 
+    ingredient.ingredientname, 
+    ingredient.description, 
+    ingredient.image, 
+    ingredient.type,
+    IF(ic.available_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS available,
+    IF(ic.shoppable_ingredients = ic.total_ingredients AND ic.total_ingredients > 0, '1', '0') AS shoppable
+FROM 
+    ingredient
+LEFT JOIN 
+    ingredient_counts ic 
+ON 
+    ingredient.ID = ic.ingredient_id
+WHERE 
+    ingredient.ID IN (
+        SELECT DISTINCT ingredienttaste.ingredient
+        FROM ingredienttaste
+        WHERE ingredienttaste.taste = ?
+    )
+ORDER BY 
+    available DESC, 
+    shoppable DESC, 
+    ingredient.ingredientname ASC;;
 ";
 ?>

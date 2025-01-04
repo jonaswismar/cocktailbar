@@ -23,6 +23,14 @@ WHERE
     username = ?;
 ";
 
+$sql_users_singlename = "SELECT 
+    username 
+FROM 
+    user 
+WHERE 
+    id = ?;
+";
+
 $sql_users_create = "INSERT INTO user (username, password, bar, language) VALUES (?, ?, ?, ?);
 ";
 

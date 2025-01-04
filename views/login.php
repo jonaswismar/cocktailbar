@@ -22,7 +22,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$password_err = "Please enter your password.";
 	} else{
 		$password = trim($_POST["password"]);
-		//$password = password_hash($password, PASSWORD_BCRYPT);
 	}
 	if(empty($username_err) && empty($password_err)){
 		if($stmtlogin = mysqli_prepare($link, $sql_users_single)){
@@ -33,8 +32,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				if(mysqli_stmt_num_rows($stmtlogin) == 1){
 					mysqli_stmt_bind_result($stmtlogin, $id, $role, $bar, $image, $username, $ignoregarnish, $startpage, $language, $metricunits, $hashed_password);
 					if(mysqli_stmt_fetch($stmtlogin)){
-						//echo $password;
-						//echo $hashed_password;
 						if(password_verify($password, $hashed_password)){
 							session_start();
 							$_SESSION["loggedin"] = true;
@@ -59,11 +56,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							}
 							header("location: index.php");
 						} else{
-							$login_err = "Ungültiges Passwort."; //Change
+							$login_err = "Ungültiger/s Benutzername/Passwort."; //Ungültiges Passwort
 						}
 					}
 				} else{
-					$login_err = "Ungültiger Benutzername."; //Change
+					$login_err = "Ungültiger/s Benutzername/Passwort."; //Ungültiger Benutzername
 				}
 			} else{
 				echo "Oops! Irgendetwas lief schief. Versuche es später wieder.";
@@ -86,11 +83,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					}
 				?>
 				<div class="form-floating">
-					<input type="username" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
+					<input type="username" name="username" class="form-control" id="floatingInput" placeholder="Benutzername" data-toggle="tooltip" data-placement="bottom" title="Benutzername">
 					<label for="floatingInput">Benutzername</label>
 				</div>
 				<div class="form-floating">
-					<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+					<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Passwort" data-toggle="tooltip" data-placement="bottom" title="Passwort">
 					<label for="floatingPassword">Passwort</label>
 				</div>
 				<div class="form-check text-start my-3">
@@ -98,7 +95,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<label class="form-check-label" for="flexCheckDefault">Angemeldet bleiben</label>
 				</div>
 				<button class="btn btn-primary w-100 py-2" type="submit">Anmelden</button>
-				<p class="mt-1 mb-3 text-body-secondary">Noch keinen Account? <a href="register.php">Hier</a> registrieren</p>
+				<p class="mt-1 mb-3 text-body-secondary">Noch keinen Account? 
+					<a href="register.php">Hier</a> registrieren
+				</p>
 				<p class="mt-5 mb-3 text-body-secondary">&copy; 2024–<?php echo date("Y"); ?></p>
 			</form>
 <?php include("footer_login.php") ?>

@@ -1,16 +1,16 @@
 <?php
-if(!isset($_SESSION)) 
-	{
-		session_start(); 
+	if(!isset($_SESSION)) 
+		{
+			session_start(); 
+		}
+	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+		header("location: login.php");
+		exit;
 	}
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-	header("location: login.php");
-	exit;
-}
-require_once "../db/sql_config.php";
-require_once "../db/sql_statements.php";
+	require_once "../db/sql_config.php";
+	require_once "../db/sql_statements.php";
 
-$current_file_name = basename($_SERVER['PHP_SELF']);
+	$current_file_name = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="de" data-bs-theme="auto">
@@ -205,16 +205,16 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 			<div class="fixed-top">
 				<nav class="navbar navbar-dark bg-primary bg-gradient" aria-label="Offcanvas navbar large">
 					<div class="container-fluid">
-						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Menü ein/ausblenden" data-toggle="tooltip" data-placement="bottom" title="Menü ein/ausblenden">
 							<span class="navbar-toggler-icon"></span>
 						</button>
 						<div class="btn-group ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){}else{echo ' d-none invisible';}?>">
-							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary dropdown-toggle navbutton" role="button">
+							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-toggle="tooltip" data-placement="bottom" title="Sucht/filtert Cocktails/Zutaten">
 								<i class="fa fa-fw fa-regular fa-filter"></i> Kein Filter
 							</a>
 						</div>
 						<div class="btn-group ms-auto">
-							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button">
+							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button" data-toggle="tooltip" data-placement="bottom" title="Springt eine Seite zurück">
 								<i class="fa fa-fw fa-regular fa-left-long"></i>
 							</a>
 						</div>
@@ -235,53 +235,96 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 						<div class="offcanvas offcanvas-start text-bg-dark bg-primary" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
 							<div class="offcanvas-header">
 								<h5 class="offcanvas-title" id="offcanvasNavbar2Label"><i class="fa-duotone fa-solid fa-bars"></i> Menü</h5>
-								<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+								<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="Menü schliessen"></button>
 							</div>
 							<div class="offcanvas-body">
 								<ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
 									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw <?php echo $_SESSION["image"];?>"></i> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Benutzer spezifische Aktionen"><i class="fa fa-fw <?php echo $_SESSION["image"];?>"></i> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item<?php if($current_file_name == "user_view.php"){echo ' active" aria-current="page';} ?>" href="user_view.php"><i class="fa fa-fw fa-regular fa-user-gear"></i></i> Einstellungen</a></li>
-											<li><a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="password.php"><i class="fa fa-fw fa-regular fa-user-lock"></i> Passwort ändern</a></li>
-											<li><a class="dropdown-item" href="logout.php"><i class="fa fa-fw fa-regular fa-person-to-door"></i> Abmelden</a></li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "user_view.php"){echo ' active" aria-current="page';} ?>" href="user_view.php" data-toggle="tooltip" data-placement="bottom" title="Ändere deine App Einstellungen">
+													<i class="fa fa-fw fa-regular fa-user-gear"></i> Einstellungen
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="password.php" data-toggle="tooltip" data-placement="bottom" title="Ändere dein Passwort">
+													<i class="fa fa-fw fa-regular fa-user-lock"></i> Passwort ändern
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "orders.php"||$current_file_name == "order_view.php"){echo ' active" aria-current="page';} ?>" href="orders.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch deine Bestellungen">
+													<i class="fa fa-fw fa-regular fa-bag-shopping"></i> Bestellungen
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="logout.php" data-toggle="tooltip" data-placement="bottom" title="Abmelden aus der App">
+													<i class="fa fa-fw fa-regular fa-person-to-door"></i> Abmelden
+												</a>
+											</li>
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my"><i class="fa fa-fw fa-regular fa-lemon"></i> Zutaten</a>
+										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my" data-toggle="tooltip" data-placement="bottom" title="Blättere durch die Cocktails">
+											<i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Cocktails
+										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my"><i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Cocktails</a>
+										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my" data-toggle="tooltip" data-placement="bottom" title="Blättere durch die Zutaten">
+											<i class="fa fa-fw fa-regular fa-lemon"></i> Zutaten
+										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "specials.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=rand"><i class="fa fa-fw fa-regular fa-dice-<?php $dice=array("one","two","three","four","five", "six"); echo $dice[rand(0,5)]; ?>"></i> Specials</a>
+										<a class="nav-link<?php if($current_file_name == "specials.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=day" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Tagestipp und andere Specials">
+											<i class="fa fa-fw fa-regular fa-dice-<?php $dice=array("one","two","three","four","five", "six"); echo $dice[rand(0,5)]; ?>"></i> Specials
+										</a>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "orders.php"||$current_file_name == "order_view.php"){echo ' active" aria-current="page';} ?>" href="orders.php"><i class="fa fa-fw fa-regular fa-bag-shopping"></i> Bestellungen</a>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "categorys.php"||$current_file_name == "category_view.php"||$current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype_view.php"||$current_file_name == "tastes.php"||$current_file_name == "taste_view.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Sonstige Kategorien">
+											<i class="fa fa-fw fa-regular fa-list"></i> Sonstiges
+										</a>
+										<ul class="dropdown-menu">
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "categorys.php"||$current_file_name == "category_view.php"){echo ' active" aria-current="page';} ?>" href="categorys.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Cocktail Kategorien">
+													<i class="fa fa-fw fa-regular fa-filter-list"></i> Kategorien
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype_view.php"){echo ' active" aria-current="page';} ?>" href="ingredienttypes.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Zutatentypen">
+													<i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Zutatentypen
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "tastes.php"||$current_file_name == "taste_view.php"){echo ' active" aria-current="page';} ?>" href="tastes.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Geschmacksrichtungen">
+													<i class="fa fa-fw fa-regular fa-lemon"></i> Geschmacksrichtungen
+												</a>
+											</li>
+										</ul>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "categorys.php"||$current_file_name == "category_view.php"){echo ' active" aria-current="page';} ?>" href="categorys.php"><i class="fa fa-fw fa-regular fa-filter-list"></i> Kategorien</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype_view.php"){echo ' active" aria-current="page';} ?>" href="ingredienttypes.php"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Zutatentypen</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "tastes.php"||$current_file_name == "taste_view.php"){echo ' active" aria-current="page';} ?>" href="tastes.php"><i class="fa fa-fw fa-regular fa-lemon"></i> Geschmacksrichtungen</a>
-									</li>
-									
-									
 									<li class="nav-item dropdown<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "debug.php"){echo 'true';}else{echo 'false';} ?>"><i class="fa fa-fw fa-regular fa-hammer"></i> Admin</a>
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "debug.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Adminbereich der App">
+											<i class="fa fa-fw fa-regular fa-hammer"></i> Admin
+										</a>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item<?php if($current_file_name == "units.php"||$current_file_name == "unit_view.php"){echo ' active" aria-current="page';} ?>" href="units.php"><i class="fa fa-fw fa-regular fa-ruler"></i> Einheiten</a></li>
-											<li><a class="dropdown-item<?php if($current_file_name == "debug.php"){echo ' active" aria-current="page';} ?>" href="debug.php"><i class="fa fa-fw fa-regular fa-bug"></i> Debugging</a></li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "units.php"||$current_file_name == "unit_view.php"){echo ' active" aria-current="page';} ?>" href="units.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Maß-Einheiten">
+													<i class="fa fa-fw fa-regular fa-ruler"></i> Einheiten
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item<?php if($current_file_name == "debug.php"){echo ' active" aria-current="page';} ?>" href="debug.php" data-toggle="tooltip" data-placement="bottom" title="Debugmenü">
+													<i class="fa fa-fw fa-regular fa-bug"></i> Debugging
+												</a>
+											</li>
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="about.php"><i class="fa fa-fw fa-regular fa-circle-question"></i> Über</a>
+										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="about.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Infos über die App">
+											<i class="fa fa-fw fa-regular fa-circle-question"></i> Über
+										</a>
 									</li>
 								</ul>
-								<form class="d-flex mt-3 mt-lg-0" role="search">
+								<form class="d-flex mt-3 mt-lg-0" role="search" data-toggle="tooltip" data-placement="bottom" title="Durchsuche die App">
 									<input class="form-control me-2" type="search" placeholder="Suchen" aria-label="Suchen">
 									<button class="btn btn-secondary" type="submit">Suchen</button>
 								</form>

@@ -1,11 +1,11 @@
 <?php include("header.php") ?>
 			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
-			<div class="scrolling-wrapper-flexbox">
-				<a href="about.php" class="btn btn-primary text-uppercase active" aria-current="page">
-					<i class="fa fa-fw fa-solid fa-circle-question"></i> Über
-				</a>
-			</div>
-		</nav>
+				<div class="scrolling-wrapper-flexbox">
+					<a href="about.php" class="btn btn-primary text-uppercase active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Infos über die Cocktail App">
+						<i class="fa fa-fw fa-solid fa-circle-question"></i> Über
+					</a>
+				</div>
+			</nav>
 			<div class="accordion">
 				<div class="accordion-item">
 					<h2 class="accordion-header">

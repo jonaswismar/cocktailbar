@@ -49,18 +49,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<div class="logo-blurred-edge"></div>
 				</div>
 				<h1 class="h3 mb-3 fw-normal">Passwort ändern</h1>
-				<?php 
-					if(!empty($login_err)){
-						echo '<div class="alert alert-danger">' . $login_err . '</div>';
-					}        
-				?>
+<?php 
+	if(!empty($login_err)){
+		echo '<div class="alert alert-danger">' . $login_err . '</div>';
+	}        
+?>
 				<div class="form-floating">
-					<input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password" value="<?php echo $password; ?>" style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0;">
+					<input type="password" name="password" class="form-control<?php echo (!empty($password_err)) ? ' is-invalid' : ''; ?>" id="floatingPassword" placeholder="Passwort" value="<?php echo $password; ?>" style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0;" data-toggle="tooltip" data-placement="bottom" title="Passwort">
 					<label for="floatingPassword">Passwort</label>
 					<span class="invalid-feedback"><?php echo $password_err; ?></span>
 				</div>
 				<div class="form-floating">
-					<input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingConfirmPassword" placeholder="Password" value="<?php echo $confirm_password; ?>" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: var(--bs-border-radius);border-bottom-left-radius: var(--bs-border-radius);">
+					<input type="password" name="confirm_password" class="form-control<?php echo (!empty($confirm_password_err)) ? ' is-invalid' : ''; ?>" id="floatingConfirmPassword" placeholder="Passwort" value="<?php echo $confirm_password; ?>" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: var(--bs-border-radius);border-bottom-left-radius: var(--bs-border-radius);" data-toggle="tooltip" data-placement="bottom" title="Passwort bestätigen">
 					<label for="floatingConfirmPassword">Passwort bestätigen</label>
 					<span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
 				</div>
