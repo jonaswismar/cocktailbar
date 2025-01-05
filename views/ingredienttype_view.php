@@ -5,6 +5,7 @@
 	$color = "";
 	$description = "";
 	$image = "";
+	$ingredient_count = 0;
 	
 	if(empty($_GET['ingredienttypeid']))
 	{
@@ -36,6 +37,7 @@
 		$typename = $ingredienttype_all_rows['typename'];
 		$description = $ingredienttype_all_rows['description'];
 		$image = $ingredienttype_all_rows['image'];
+		$ingredient_count = $ingredienttype_all_rows['ingredient_count'];
 	}
 	mysqli_stmt_close($stmt_sql_ingredienttype);
 ?>
@@ -121,7 +123,7 @@
 						</div>
 						<div class="modal-body">
 							<p>Möchten Sie den Zutatentyp <strong><?php echo $typename;?></strong> wirklich löschen?</p>
-							<p>Sie wird von <strong>XXXFeatureXXX</strong> Zutaten verwendet.</p>
+							<p>Sie wird von <strong><?php echo $ingredient_count;?></strong> Zutaten verwendet.</p>
 							<p>Wenn Sie <strong><?php echo $typename;?></strong> löschen, werden diese (einschließlich Zutaten) ebenfalls gelöscht! Diese Aktion kann nicht rückgängig gemacht werden!</p>
 						</div>
 						<div class="modal-footer">

@@ -61,8 +61,8 @@
 										<input name="unitname" class="form-control form-control-lg" type="text" placeholder="Name der Einheit" data-toggle="tooltip" data-placement="bottom" title="Name der Einheit">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="unitshort" class="form-control form-control-lg" type="text" placeholder="Kürzel (Einzahl)" data-toggle="tooltip" data-placement="bottom" title="Kürzel (Einzahl)" value="<?php echo $unitshort;?>">
-										<input name="unitshortX" class="form-control form-control-lg" type="text" placeholder="Kürzel (Mehrzahl)" data-toggle="tooltip" data-placement="bottom" title="Kürzel (Mehrzahl)" value="<?php echo $unitshortX;?>">
+										<input name="unitshort" class="form-control form-control-lg" type="text" placeholder="Kürzel (Einzahl)" data-toggle="tooltip" data-placement="bottom" title="Kürzel (Einzahl)">
+										<input name="unitshortX" class="form-control form-control-lg" type="text" placeholder="Kürzel (Mehrzahl)" data-toggle="tooltip" data-placement="bottom" title="Kürzel (Mehrzahl)">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="unitdescription" class="form-control auto-resize" type="text" placeholder="Beschreibung der Einheit" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung der Einheit"></textarea>
@@ -129,10 +129,10 @@
 					</div>
 				</div>
 			</div>
-			<form action="unit_save.php" method="POST">
+			<form>
 				<fieldset>
 					<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-						<i class="<?php echo $unitimage;?> fa-4x"></i>
+						<i class="fa fa-fw<?php echo $unitimage;?> fa-4x"></i>
 						<input name="unitimage" class="form-control" type="hidden" value="<?php echo $unitimage;?>" autocomplete="off" spellcheck="false" readonly>
 						<input name="unitid" class="form-control" type="hidden" value="<?php echo $unitid;?>" readonly>
 						<input name="unitname" class="form-control" type="text" placeholder="Name der Einheit" value="<?php echo $unitname;?>" readonly>

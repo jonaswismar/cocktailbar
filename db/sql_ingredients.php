@@ -164,9 +164,6 @@ ORDER BY
     i.ingredientname ASC;
 ";
 
-
-
-
 $sql_ingredients_from_type = "WITH ingredient_counts AS (
     SELECT 
         ingredient,

@@ -1,14 +1,25 @@
- <?php
-if(!isset($_SESSION)) 
-	{
+<?php
+	if(!isset($_SESSION)){
 		session_start(); 
 	}
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-	header("location: login.php");
-	exit;
-}
+	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+		header("location: login.php");
+		exit;
+	}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
+
+
+
+
+
+
+
+
+
+
+
+
 
 	if(isset($_GET['ingredientid']))
 	{

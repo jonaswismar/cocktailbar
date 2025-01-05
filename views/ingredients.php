@@ -54,7 +54,7 @@
 	mysqli_stmt_execute($stmt_sql_ingredients);
 	$sub_ingredients_show_quantity=false;
 	$sub_ingredients_show_count=true;
-	include("sublist_ingredients.php")
+	include("sublist_ingredients.php");
 ?>
 			</div>
 <?php include("footer.php") ?>

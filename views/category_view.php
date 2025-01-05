@@ -6,17 +6,11 @@
 	$cocktail_count = "";
 	$categoryimage = "";
 	
-	if(empty($_GET['categoryid']))
-	{
+	if(empty($_GET['categoryid'])){
 		$categoryid = 0;
 	}
-	else
-	{
+	else{
 		$categoryid = $_GET['categoryid'];
-	}
-	if($_SESSION["role"] != 1)
-	{
-		$edit = 0;
 	}
 	$stmt_sql_category = mysqli_prepare($link, $sql_category);
 	mysqli_stmt_bind_param($stmt_sql_category, "i", $categoryid);

@@ -14,6 +14,7 @@ require_once "sql_ingredienttastelist.php";
 require_once "sql_ingredienttypes.php";
 require_once "sql_orders.php";
 require_once "sql_roles.php";
+require_once "sql_search.php";
 require_once "sql_specials.php";
 require_once "sql_tastes.php";
 require_once "sql_units.php";

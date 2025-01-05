@@ -208,10 +208,11 @@
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Menü ein/ausblenden" data-toggle="tooltip" data-placement="bottom" title="Menü ein/ausblenden">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div class="btn-group ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){}else{echo ' d-none invisible';}?>">
-							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-toggle="tooltip" data-placement="bottom" title="Sucht/filtert Cocktails/Zutaten">
-								<i class="fa fa-fw fa-regular fa-filter"></i> Kein Filter
-							</a>
+						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
+							<form class="btn-group" action="search.php">
+								<input type="text" class="form-control" placeholder="Suchen.." name="search">
+								<button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-regular fa-search"></i></button>
+							</form>
 						</div>
 						<div class="btn-group ms-auto">
 							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button" data-toggle="tooltip" data-placement="bottom" title="Springt eine Seite zurück">
@@ -324,10 +325,6 @@
 										</a>
 									</li>
 								</ul>
-								<form class="d-flex mt-3 mt-lg-0" role="search" data-toggle="tooltip" data-placement="bottom" title="Durchsuche die App">
-									<input class="form-control me-2" type="search" placeholder="Suchen" aria-label="Suchen">
-									<button class="btn btn-secondary" type="submit">Suchen</button>
-								</form>
 							</div>
 						</div>
 					</div>

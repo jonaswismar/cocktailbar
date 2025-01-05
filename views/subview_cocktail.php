@@ -120,6 +120,9 @@
 										<div class="d-flex p-3 justify-content-around flex-wrap">
 											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Name des Cocktails">
 										</div>
+										<div class="d-flex p-3 justify-content-around flex-wrap">
+											<input name="image" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Bildname des Cocktails">
+										</div>
 										<div class="d-flex gap-3 p-3 flex-row justify-content-center">
 											<select id="input-tags-cocktailcategory-new" name="cocktailcategoryedit[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Kategorie">
 <?php 

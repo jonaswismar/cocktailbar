@@ -40,22 +40,27 @@
 					</h2>
 					<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 						<div class="accordion-body">
-							<?php ob_start();
-							phpinfo();
-							$pinfo = ob_get_contents();
-							ob_end_clean();
-							 
-							
-							$config = array(
-           'indent'         => true,
-           'output-xhtml'   => true,
-           'wrap'           => 200);
-		   
-		   $tidy = new tidy;
-$tidy->parseString($pinfo, $config, 'utf8');
-$tidy->cleanRepair();
-							$tidy = preg_replace( '%^.*<body>(.*)</body>.*$%ms','$1',$tidy);
-							echo $tidy; ?>
+<?php
+	ob_start();
+	phpinfo();
+	$pinfo = ob_get_contents();
+	ob_end_clean();
+	if(extension_loaded('tidy')){
+		$tidy = new tidy;
+	$config = array(
+		'indent'		=> true,
+		'output-xhtml'	=> true,
+		'wrap'			=> 200);
+		$tidy->parseString($pinfo, $config, 'utf8');
+		$tidy->cleanRepair();
+		$tidy = preg_replace( '%^.*<body>(.*)</body>.*$%ms','$1',$tidy);
+		echo $tidy;
+	}
+	else{
+		$pinfo = preg_replace( '%^.*<body>(.*)</body>.*$%ms','$1',$pinfo);
+		echo $pinfo;
+	}
+?>
 						</div>
 					</div>
 				</div>

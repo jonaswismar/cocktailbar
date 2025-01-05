@@ -1,17 +1,14 @@
 <?php
-if(!isset($_SESSION)) 
-	{
+	if(!isset($_SESSION)){
 		session_start(); 
 	}
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-	header("location: login.php");
-	exit;
-}
+	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+		header("location: login.php");
+		exit;
+	}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
-
-	if(isset($_GET['cocktailid'])&&isset($_GET['rating']))
-	{
+	if(isset($_GET['cocktailid'])&&isset($_GET['rating'])){
 		$cocktailid =  $_GET['cocktailid'];
 		$rating =  $_GET['rating'];
 		$userid =  $_SESSION["id"];

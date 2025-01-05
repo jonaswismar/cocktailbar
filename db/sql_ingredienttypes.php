@@ -22,7 +22,8 @@ $sql_ingredienttype = "SELECT
     ID, 
     typename, 
     description,
-    image
+    image,
+    ingredient_count
 FROM 
     ingredienttype 
 WHERE 
