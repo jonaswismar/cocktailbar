@@ -188,7 +188,7 @@ WHERE
 ";
 
 $sql_delete_cocktail = "DELETE FROM
-    cocktails
+    cocktail
 WHERE
     ID = ?
 ";

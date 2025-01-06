@@ -52,29 +52,29 @@
 			header('location: '. $_SERVER['REQUEST_URI']);
 		}
 	}else{
-		include("header_login.php")
+		include("header_login.php");
 ?>
 			<form method="post">
 				<fieldset>
 					<legend>Datenbank:</legend>
 					<div class="form-floating">
 						<input type="texttop" name="dbhost" class="form-control <?php echo (!empty($database_err)) ? 'is-invalid' : ''; ?>" id="dbhost" placeholder="localhost">
-						<label for="dbhost">Hostname</label>
+						<label for="dbhost"><i class="fa fa-fw fa-solid fa-server"></i> Hostname</label>
 						<span class="invalid-feedback"><?php echo $database_err; ?></span>
 					</div>
 					<div class="form-floating">
 						<input type="textmiddle" name="dbname" class="form-control <?php echo (!empty($database_err)) ? 'is-invalid' : ''; ?>" id="dbname" placeholder="dbname">
-						<label for="dbname">Datenbank</label>
+						<label for="dbname"><i class="fa fa-fw fa-solid fa-database"></i> Datenbank</label>
 						<span class="invalid-feedback"><?php echo $database_err; ?></span>
 					</div>
 					<div class="form-floating">
 						<input type="textmiddle" name="dbusername" class="form-control <?php echo (!empty($database_err)) ? 'is-invalid' : ''; ?>" id="dbusername" placeholder="username">
-						<label for="dbusername">Benutzer</label>
+						<label for="dbusername"><i class="fa fa-fw fa-solid fa-user"></i> Benutzer</label>
 						<span class="invalid-feedback"><?php echo $database_err; ?></span>
 					</div>
 					<div class="form-floating">
 						<input type="password" name="dbpassword" class="form-control <?php echo (!empty($database_err)) ? 'is-invalid' : ''; ?>" id="dbpassword" placeholder="password">
-						<label for="dbpassword">Passwort</label>
+						<label for="dbpassword"><i class="fa fa-fw fa-solid fa-lock"></i> Passwort</label>
 						<span class="invalid-feedback"><?php echo $database_err; ?></span>
 					</div>
 				</fieldset>
@@ -82,15 +82,15 @@
 					<legend>App:</legend>
 					<div class="form-floating">
 						<input type="texttop" name="apptitel" class="form-control" id="apptitel" placeholder="Cocktailbar Web App">
-						<label for="apptitel">Titel</label>
+						<label for="apptitel"><i class="fa fa-fw fa-solid fa-input-text"></i> Titel</label>
 					</div>
 					<div class="form-floating">
 						<input type="textmiddle" name="appusername" class="form-control" id="appusername" placeholder="username">
-						<label for="appusername">Benutzer</label>
+						<label for="appusername"><i class="fa fa-fw fa-solid fa-user"></i> Benutzer</label>
 					</div>
 					<div class="form-floating">
 						<input type="password" name="apppassword" class="form-control" id="apppassword" placeholder="password">
-						<label for="apppassword">Passwort</label>
+						<label for="apppassword"><i class="fa fa-fw fa-solid fa-lock"></i> Passwort</label>
 					</div>
 					<div class="form-check text-start my-3">
 						<input class="form-check-input" type="checkbox" value="remember-me" id="appdataimport">

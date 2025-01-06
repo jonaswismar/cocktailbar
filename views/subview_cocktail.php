@@ -121,10 +121,10 @@
 											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Name des Cocktails">
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<input name="image" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Bildname des Cocktails">
+											<input name="cocktailimage" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Bildname des Cocktails">
 										</div>
 										<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-											<select id="input-tags-cocktailcategory-new" name="cocktailcategoryedit[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Kategorie">
+											<select id="input-tags-cocktailcategory-new" name="cocktailcategory[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Kategorie">
 <?php 
 	$stmt_sql_categorys = mysqli_prepare($link, $sql_categorys);
 	mysqli_stmt_execute($stmt_sql_categorys);
@@ -151,7 +151,7 @@
 											</select>
 										</div>
 										<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-											<select id="input-tags-cocktailtaste-new" name="cocktailtasteedit[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Geschmack">
+											<select id="input-tags-cocktailtaste-new" name="cocktailtaste[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Geschmack">
 <?php 
 	$stmt_sql_tastes = mysqli_prepare($link, $sql_tastes);
 	mysqli_stmt_execute($stmt_sql_tastes);
@@ -178,10 +178,10 @@
 											</select>
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung des Cocktails" rows="25"></textarea>
+											<textarea name="cocktaildescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Cocktails" rows="25"></textarea>
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<textarea name="instruction" class="form-control auto-resize" type="text" placeholder="Anleitung des Cocktails" rows="25"></textarea>
+											<textarea name="cocktailinstruction" class="form-control auto-resize" type="text" placeholder="Anleitung des Cocktails" rows="25"></textarea>
 										</div>
 									</div>
 									<div class="modal-footer">
@@ -233,10 +233,10 @@
 											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" value="<?php echo $cocktailname;?>">
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<input name="image" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" value="<?php echo $image;?>">
+											<input name="cocktailimage" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" value="<?php echo $image;?>">
 										</div>
 										<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-											<select id="input-tags-cocktailcategory-edit" name="cocktailcategoryedit[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Kategorie">
+											<select id="input-tags-cocktailcategory-edit" name="cocktailcategory[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Kategorie">
 <?php 
 	$stmt_sql_categorys = mysqli_prepare($link, $sql_categorys);
 	mysqli_stmt_execute($stmt_sql_categorys);
@@ -263,7 +263,7 @@
 											</select>
 										</div>
 										<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-											<select id="input-tags-cocktailtaste-edit" name="cocktailtasteedit[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Geschmack">
+											<select id="input-tags-cocktailtaste-edit" name="cocktailtaste[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Cocktail Geschmack">
 <?php 
 	$stmt_sql_tastes = mysqli_prepare($link, $sql_tastes);
 	mysqli_stmt_execute($stmt_sql_tastes);
@@ -290,10 +290,10 @@
 											</select>
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung des Cocktails" rows="25"><?php echo $description;?></textarea>
+											<textarea name="cocktaildescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Cocktails" rows="25"><?php echo $description;?></textarea>
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<textarea name="instruction" class="form-control auto-resize" type="text" placeholder="Anleitung des Cocktails" rows="25"><?php echo $instruction;?></textarea>
+											<textarea name="cocktailinstruction" class="form-control auto-resize" type="text" placeholder="Anleitung des Cocktails" rows="25"><?php echo $instruction;?></textarea>
 										</div>
 									</div>
 									<div class="modal-footer">
@@ -352,18 +352,17 @@
 				<form>
 					<fieldset>
 						<div class="d-flex gap-3 p-3 flex-row justify-content-center">
-							<input name="userid" class="form-control" type="hidden" value="<?php echo $_SESSION["id"];?>" readonly>
 							<input name="cocktailid" class="form-control" type="hidden" value="<?php echo $id;?>" readonly>
-							<input name="ordered" class="form-control" type="hidden" value="<?php echo $ordered;?>" readonly>
-							<input name="favorite" class="form-control" type="hidden" value="<?php echo $favorite;?>" readonly>
+							<input name="cocktailordered" class="form-control" type="hidden" value="<?php echo $ordered;?>" readonly>
+							<input name="cocktailfavorite" class="form-control" type="hidden" value="<?php echo $favorite;?>" readonly>
 							<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" value="<?php echo $cocktailname;?>" readonly>
 							<div class="btn-group">
-								<a href="cocktail_save.php?cocktailid=<?php echo $id;?>&ordered=<?php if($ordered == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Bestellen"><i class="fa-fw fa-2x <?php if($ordered == 0){echo 'fa-regular fa-bag-shopping';}else{echo 'fa-solid fa-bag-shopping';}?>"></i></a>
-								<a href="cocktail_save.php?cocktailid=<?php echo $id;?>&favorite=<?php if($favorite == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Favorisieren"><i class="fa-fw fa-2x <?php if($favorite == 0){echo 'fa-regular fa-heart';}else{echo 'fa-solid fa-heart';}?>"></i></a>
+								<a href="cocktail_save.php?cocktailid=<?php echo $id;?>&cocktailordered=<?php if($ordered == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Bestellen"><i class="fa-fw fa-2x <?php if($ordered == 0){echo 'fa-regular fa-bag-shopping';}else{echo 'fa-solid fa-bag-shopping';}?>"></i></a>
+								<a href="cocktail_save.php?cocktailid=<?php echo $id;?>&cocktailfavorite=<?php if($favorite == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Favorisieren"><i class="fa-fw fa-2x <?php if($favorite == 0){echo 'fa-regular fa-heart';}else{echo 'fa-solid fa-heart';}?>"></i></a>
 							</div>
 						</div>
 						<div class="d-flex justify-content-center">
-							<input name="image" class="form-control" type="hidden" value="<?php echo $image;?>" readonly>
+							<input name="cocktailimage" class="form-control" type="hidden" value="<?php echo $image;?>" readonly>
 							<picture>
 <?php
 	$currentfilepath = dirname(__DIR__, 1);
@@ -551,10 +550,10 @@
 							</div>
 						</div>
 						<div class="d-flex p-3 justify-content-around flex-wrap<?php if(empty($description)){echo ' d-none';}?>">
-							<textarea name="description" class="form-control auto-resize" type="text" placeholder="Beschreibung des Cocktails" rows="25" readonly><?php echo $description;?></textarea>
+							<textarea name="cocktaildescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Cocktails" rows="25" readonly><?php echo $description;?></textarea>
 						</div>
 						<div class="d-flex p-3 justify-content-around flex-wrap<?php if(empty($instruction)){echo ' d-none';}?>">
-							<textarea name="instruction" class="form-control auto-resize" type="text" placeholder="Anleitung des Cocktails" rows="25" readonly><?php echo $instruction;?></textarea>
+							<textarea name="cocktailinstruction" class="form-control auto-resize" type="text" placeholder="Anleitung des Cocktails" rows="25" readonly><?php echo $instruction;?></textarea>
 						</div>
 					</fieldset>
 				</form>

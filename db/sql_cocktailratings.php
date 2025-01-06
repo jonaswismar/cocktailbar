@@ -25,14 +25,13 @@ GROUP BY
 ";
 
 $sql_create_cocktailrating = "INSERT INTO
-    cocktailrating (cocktail, user, rating, active)
+    cocktailrating (cocktail, user, rating)
 VALUES
-    (?, ?, ?, 1)
+    (?, ?, ?)
 ON DUPLICATE KEY UPDATE
   cocktail = ?,
   user = ?,
-  rating = ?,
-  active = 1;
+  rating = ?;
 ";
 
 $sql_delete_cocktailrating = "DELETE FROM
