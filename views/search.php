@@ -1,7 +1,4 @@
 <?php include("header.php") ?>
-<?php
-	$searchstring = $_GET['search'];
-?>
 			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px;">
 				<div class="scrolling-wrapper-flexbox">
 					<a href="search.php?search=" class="btn btn-primary text-uppercase active" aria-current="page">
@@ -134,5 +131,11 @@
 	$sub_ingredients_show_count=true;
 	include("sublist_ingredients.php")
 ?>
+	<li class="list-group-item list-group-item-primary">Kategorie</li>
+	<li class="list-group-item list-group-item-primary">Zutatentyp</li>
+	<li class="list-group-item list-group-item-primary">Geschmacksrichtung</li>
+	<li class="list-group-item list-group-item-primary">Einheit</li>
+	<li class="list-group-item list-group-item-primary">Glas</li>
+	<li class="list-group-item list-group-item-primary">Tools</li>
 			</div>
 <?php include("footer.php") ?>

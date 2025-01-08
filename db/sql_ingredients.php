@@ -207,9 +207,9 @@ ORDER BY
 	
 	
 $sql_create_ingredient = "INSERT INTO
-    ingredient (ingredientname, description, image, available, shoppable, type) 
+    ingredient (ingredientname, description, image, type) 
 VALUES
-    (?, ?, ?, ?, ?, ?);
+    (?, ?, ?, ?);
 ";
 
 $sql_update_ingredient = "UPDATE ingredient 
@@ -217,8 +217,6 @@ SET
     ingredientname = ?, 
     description = ?, 
     image = ?, 
-    available = ?, 
-    shoppable = ?, 
     type = ? 
 WHERE 
     ID = ?;

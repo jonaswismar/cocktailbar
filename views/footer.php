@@ -211,5 +211,21 @@
 				}
 			});
 		</script>
+		<script>
+			new TomSelect('#input-tags-ingredient',{
+				plugins: ['clear_button','remove_button','input_autogrow'],
+				persist: false,
+				create: false,
+				maxItems: 1,
+				render: {
+					option: function (data, escape) {
+						return `<div>${data.text}</div>`;
+					},
+					item: function (item, escape) {
+						return `<div>${item.text}</div>`;
+					}
+				}
+			});
+		</script>
 	</body>
 </html>

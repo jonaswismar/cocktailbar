@@ -16,4 +16,28 @@ $sql_delete_all_cocktailingredientlist = "DELETE FROM
 WHERE
     cocktail = ?;
 ";
+
+$sql_delete_cocktailingredientlist = "DELETE FROM
+    cocktailingredient
+WHERE
+    cocktail = ? AND ingredient = ?;
+";
+
+$sql_create_cocktailingredientlist = "INSERT INTO
+    cocktailingredient (cocktail, ingredient, quantity, unit, optional, garnish) 
+VALUES
+    (?, ?, ?, ?, ?, ?);
+";
+
+$sql_update_cocktailingredientlist = "UPDATE
+    cocktailingredient 
+SET
+    cocktail = ?, 
+    ingredient = ?, 
+    quantity = ?, , 
+    unit = ?, , 
+    optional = ?, 
+    garnish = ? 
+WHERE
+    ID = ?";
 ?>

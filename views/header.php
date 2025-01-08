@@ -9,8 +9,14 @@
 	}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
-
 	$current_file_name = basename($_SERVER['PHP_SELF']);
+	$searchstring = "";
+	if(isset($_POST['search'])){
+		$searchstring =  $_POST['search'];
+	}
+	if(isset($_GET['search'])){
+		$searchstring =  $_GET['search'];
+	}
 ?>
 <!DOCTYPE html>
 <html lang="de" data-bs-theme="auto">
@@ -210,7 +216,7 @@
 						</button>
 						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
 							<form class="btn-group" action="search.php">
-								<input type="text" class="form-control" placeholder="Suchen.." name="search">
+								<input type="text" class="form-control" placeholder="Suchen.."<?php if(!empty($searchstring)){ echo ' value="' . $searchstring . '"';} ?> name="search">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-regular fa-search"></i></button>
 							</form>
 						</div>

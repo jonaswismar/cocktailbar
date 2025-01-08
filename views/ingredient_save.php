@@ -8,6 +8,8 @@
 	}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
+	print_r($_POST);
+	print_r($_GET);
 	if(isset($_POST['ingredientid'])){
 		$ingredientid = $_POST['ingredientid'];
 		if(isset($_POST['available'])){
@@ -41,8 +43,8 @@
 			mysqli_commit($link);
 			mysqli_close($link);
 		}
-		header("location: ingredient_view.php?ingredientid=" . $ingredientid);
-		exit;
+		//header("location: ingredient_view.php?ingredientid=" . $ingredientid);
+		//exit;
 	}
 	if(isset($_GET['ingredientid'])){
 		$ingredientid = $_GET['ingredientid'];
@@ -77,20 +79,26 @@
 			mysqli_commit($link);
 			mysqli_close($link);
 		}
-		header("location: ingredient_view.php?ingredientid=" . $ingredientid);
-		exit;
+		//header("location: ingredient_view.php?ingredientid=" . $ingredientid);
+		//exit;
 	}
 	if(isset($_GET['ingredientname'])){
-		$ingredientid =  $_GET['ingredientid'];
-		$ingredientname =  $_GET['ingredientname'];
-		$ingredienttype =  $_GET['ingredienttype'];
-		$description =  $_GET['description'];
-		$available =  $_GET['available'];
-		$shoppable =  $_GET['shoppable'];
-		$image =  $_GET['image'];
+		$ingredientid = $_GET['ingredientid'];
+		$ingredientname = $_GET['ingredientname'];
+		$ingredienttype = $_GET['ingredienttype'];
+		$description = $_GET['description'];
+		$available = 0;
+		$shoppable = 0;
+		if(isset($_GET['available'])){
+			$available =  $_GET['available'];
+		}
+		if(isset($_GET['shoppable'])){
+			$shoppable =  $_GET['shoppable'];
+		}
+		$image =  $_GET['ingredientimage'];
 		if(empty($ingredientid)){
 			$stmt_sql_ingredient = mysqli_prepare($link, $sql_create_ingredient);
-			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssiii", $ingredientname, $description, $image, $available, $shoppable, $ingredienttype);
+			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssi", $ingredientname, $description, $image, $ingredienttype);
 			mysqli_stmt_execute($stmt_sql_ingredient);
 			mysqli_stmt_close($stmt_sql_ingredient);
 			mysqli_commit($link);
@@ -98,26 +106,32 @@
 		}
 		else{
 			$stmt_sql_ingredient = mysqli_prepare($link, $sql_update_ingredient);
-			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssiiii", $ingredientname, $description, $image, $available, $shoppable, $ingredienttype, $ingredientid);
+			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssii", $ingredientname, $description, $image, $ingredienttype, $ingredientid);
 			mysqli_stmt_execute($stmt_sql_ingredient);
 			mysqli_stmt_close($stmt_sql_ingredient);
 			mysqli_commit($link);
 			mysqli_close($link);
 		}
-		header("location: ingredient_view.php?ingredientid=" . $ingredientid);
-		exit;
+		//header("location: ingredient_view.php?ingredientid=" . $ingredientid);
+		//exit;
 	}
 	if(isset($_POST['ingredientname'])){
 		$ingredientid =  $_POST['ingredientid'];
 		$ingredientname =  $_POST['ingredientname'];
 		$ingredienttype =  $_POST['ingredienttype'];
 		$description =  $_POST['description'];
-		$available =  $_POST['available'];
-		$shoppable =  $_POST['shoppable'];
-		$image =  $_POST['image'];
+		$available = 0;
+		$shoppable = 0;
+		if(isset($_POST['available'])){
+			$available =  $_POST['available'];
+		}
+		if(isset($_POST['shoppable'])){
+			$shoppable =  $_POST['shoppable'];
+		}
+		$image =  $_POST['ingredientimage'];
 		if(empty($ingredientid)){
 			$stmt_sql_ingredient = mysqli_prepare($link, $sql_create_ingredient);
-			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssiii", $ingredientname, $description, $image, $available, $shoppable, $ingredienttype);
+			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssi", $ingredientname, $description, $image, $ingredienttype);
 			mysqli_stmt_execute($stmt_sql_ingredient);
 			mysqli_stmt_close($stmt_sql_ingredient);
 			mysqli_commit($link);
@@ -125,13 +139,13 @@
 		}
 		else{
 			$stmt_sql_ingredient = mysqli_prepare($link, $sql_update_ingredient);
-			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssiiii", $ingredientname, $description, $image, $available, $shoppable, $ingredienttype, $ingredientid);
+			mysqli_stmt_bind_param($stmt_sql_ingredient, "sssii", $ingredientname, $description, $image, $ingredienttype, $ingredientid);
 			mysqli_stmt_execute($stmt_sql_ingredient);
 			mysqli_stmt_close($stmt_sql_ingredient);
 			mysqli_commit($link);
 			mysqli_close($link);
 		}
-		header("location: ingredient_view.php?ingredientid=" . $ingredientid);
-		exit;
+		//header("location: ingredient_view.php?ingredientid=" . $ingredientid);
+		//exit;
 	}
 ?>

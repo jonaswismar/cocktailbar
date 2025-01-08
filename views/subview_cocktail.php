@@ -558,7 +558,7 @@
 					</fieldset>
 				</form>
 				<div class="list-group">
-					<li class="list-group-item list-group-item-primary">Zutaten</li>
+					<li class="list-group-item list-group-item-primary">Zutaten<a href="cocktailingredient_view.php?cocktailid=<?php echo $id;?>" class="btn btn-primary float-end<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-toggle="tooltip" data-placement="bottom" title="Bearbeiten"><i class="fa-duotone fa-solid fa-pencil fa-fw"></i></a></li>
 <?php 
 	$stmt_sql_ingredients = mysqli_prepare($link, $sql_ingredients_from_cocktail);
 	mysqli_stmt_bind_param($stmt_sql_ingredients, "ii", $_SESSION["bar"], $id);

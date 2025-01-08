@@ -1,0 +1,11 @@
+print_r($_POST);
+print_r($_GET);
+
+
+
+Readme:
+
+Die Cocktailbar Web App ist als reine PHP Anwendung mit einer MySQL Datenbank angelegt.
+Es werden außer der MySQL Erweiterung prinzippiel keine anderen Erweiterungen benötigt.
+Damit manche Teile des HTML Codes schöner eingerückt werden kann allerdings 'PHP Tidy'
+aktiviert werden.
