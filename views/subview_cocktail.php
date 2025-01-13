@@ -100,7 +100,7 @@
 								<p>Möchten Sie die Zubereitung des Cocktail <strong><?php echo $cocktailname;?></strong> wirklich abschliessen?</p>
 							</div>
 							<div class="modal-footer">
-								<a href="order_save.php?orderid=<?php echo $orderid;?>?prepared=1" class="btn btn-danger<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">Abschliessen</a>
+								<a href="/api/order_save.php?orderid=<?php echo $orderid;?>?prepared=1" class="btn btn-danger<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">Abschliessen</a>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
 							</div>
 						</div>
@@ -109,7 +109,7 @@
 				<div class="modal fade" id="newDialogCocktail">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
-							<form id="cocktail_edit" action="/views/cocktail_save.php">
+							<form id="cocktail_edit" action="/api/cocktail_save.php">
 								<fieldset>
 									<div class="modal-header">
 										<h4 class="modal-title"><strong>Neuen Cocktail anlegen</strong></h4>
@@ -132,7 +132,7 @@
 	while($categorys_all_rows= mysqli_fetch_array($categorys_all_res, MYSQLI_ASSOC)){
 		$categoryid = $categorys_all_rows['ID'];
 		$categoryname = $categorys_all_rows['categoryname'];
-		$categoryimage = $categorys_all_rows['image'];
+		$categoryicon = $categorys_all_rows['icon'];
 		$stmt_sql_cocktailcategorylist = mysqli_prepare($link, $sql_cocktailcategorylist);
 		mysqli_stmt_bind_param($stmt_sql_cocktailcategorylist, "ii", $id, $categoryid);
 		mysqli_stmt_execute($stmt_sql_cocktailcategorylist);
@@ -159,7 +159,7 @@
 	while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))	{
 		$tasteid = $tastes_all_rows['ID'];
 		$tastename = $tastes_all_rows['taste'];
-		$tasteimage = $tastes_all_rows['image'];
+		$tasteicon = $tastes_all_rows['icon'];
 		$stmt_sql_cocktailtastelist = mysqli_prepare($link, $sql_cocktailtastelist);
 		mysqli_stmt_bind_param($stmt_sql_cocktailtastelist, "ii", $id, $tasteid);
 		mysqli_stmt_execute($stmt_sql_cocktailtastelist);
@@ -170,7 +170,7 @@
 		}
 		mysqli_stmt_close($stmt_sql_cocktailtastelist);
 ?>
-												<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteimage;?>"><?php echo $tastename;?></option>
+												<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteicon;?>"><?php echo $tastename;?></option>
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_tastes);
@@ -196,7 +196,7 @@
 				<div class="modal fade" id="editDialogCocktail">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
-							<form id="cocktail_edit" action="/views/cocktail_save.php">
+							<form id="cocktail_edit" action="/api/cocktail_save.php">
 								<fieldset>
 									<div class="modal-header">
 										<h4 class="modal-title">
@@ -244,7 +244,7 @@
 	while($categorys_all_rows= mysqli_fetch_array($categorys_all_res, MYSQLI_ASSOC)){
 		$categoryid = $categorys_all_rows['ID'];
 		$categoryname = $categorys_all_rows['categoryname'];
-		$categoryimage = $categorys_all_rows['image'];
+		$categoryicon = $categorys_all_rows['icon'];
 		$stmt_sql_cocktailcategorylist = mysqli_prepare($link, $sql_cocktailcategorylist);
 		mysqli_stmt_bind_param($stmt_sql_cocktailcategorylist, "ii", $id, $categoryid);
 		mysqli_stmt_execute($stmt_sql_cocktailcategorylist);
@@ -255,7 +255,7 @@
 		}
 		mysqli_stmt_close($stmt_sql_cocktailcategorylist);
 ?>
-												<option value="<?php echo $categoryid;?>" data-src="<?php echo $categoryimage;?>"<?php if($cocktailcategory == 1){echo ' selected';}?>><?php echo $categoryname;?></option>
+												<option value="<?php echo $categoryid;?>" data-src="<?php echo $categoryicon;?>"<?php if($cocktailcategory == 1){echo ' selected';}?>><?php echo $categoryname;?></option>
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_categorys);
@@ -271,7 +271,7 @@
 	while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))	{
 		$tasteid = $tastes_all_rows['ID'];
 		$tastename = $tastes_all_rows['taste'];
-		$tasteimage = $tastes_all_rows['image'];
+		$tasteicon = $tastes_all_rows['icon'];
 		$stmt_sql_cocktailtastelist = mysqli_prepare($link, $sql_cocktailtastelist);
 		mysqli_stmt_bind_param($stmt_sql_cocktailtastelist, "ii", $id, $tasteid);
 		mysqli_stmt_execute($stmt_sql_cocktailtastelist);
@@ -282,7 +282,7 @@
 		}
 		mysqli_stmt_close($stmt_sql_cocktailtastelist);
 ?>
-												<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteimage;?>"<?php if($cocktailtastes == 1){echo ' selected';}?>><?php echo $tastename;?></option>
+												<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteicon;?>"<?php if($cocktailtastes == 1){echo ' selected';}?>><?php echo $tastename;?></option>
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_tastes);
@@ -343,7 +343,7 @@
 								<p>Wenn Sie <strong><?php echo $cocktailname;?></strong> löschen, werden diese ebenfalls gelöscht! Diese Aktion kann nicht rückgängig gemacht werden!</p>
 							</div>
 							<div class="modal-footer">
-								<a href="cocktail_delete.php?cocktailid=<?php echo $id;?>" class="btn btn-danger<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">Trotzdem löschen</a>
+								<a href="/api/cocktail_delete.php?cocktailid=<?php echo $id;?>" class="btn btn-danger<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">Trotzdem löschen</a>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
 							</div>
 						</div>
@@ -357,8 +357,8 @@
 							<input name="cocktailfavorite" class="form-control" type="hidden" value="<?php echo $favorite;?>" readonly>
 							<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" value="<?php echo $cocktailname;?>" readonly>
 							<div class="btn-group">
-								<a href="cocktail_save.php?cocktailid=<?php echo $id;?>&cocktailordered=<?php if($ordered == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Bestellen"><i class="fa-fw fa-2x <?php if($ordered == 0){echo 'fa-regular fa-bag-shopping';}else{echo 'fa-solid fa-bag-shopping';}?>"></i></a>
-								<a href="cocktail_save.php?cocktailid=<?php echo $id;?>&cocktailfavorite=<?php if($favorite == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Favorisieren"><i class="fa-fw fa-2x <?php if($favorite == 0){echo 'fa-regular fa-heart';}else{echo 'fa-solid fa-heart';}?>"></i></a>
+								<a href="/api/cocktail_save.php?cocktailid=<?php echo $id;?>&cocktailordered=<?php if($ordered == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Bestellen"><i class="fa-fw fa-2x <?php if($ordered == 0){echo 'fa-regular fa-bag-shopping';}else{echo 'fa-solid fa-bag-shopping';}?>"></i></a>
+								<a href="/api/cocktail_save.php?cocktailid=<?php echo $id;?>&cocktailfavorite=<?php if($favorite == 0){echo '1';}else{echo '0';}?>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Favorisieren"><i class="fa-fw fa-2x <?php if($favorite == 0){echo 'fa-regular fa-heart';}else{echo 'fa-solid fa-heart';}?>"></i></a>
 							</div>
 						</div>
 						<div class="d-flex justify-content-center">
@@ -447,7 +447,7 @@
 	while($categorys_all_rows= mysqli_fetch_array($categorys_all_res, MYSQLI_ASSOC)){
 		$categoryid = $categorys_all_rows['ID'];
 		$categoryname = $categorys_all_rows['categoryname'];
-		$categoryimage = $categorys_all_rows['image'];
+		$categoryicon = $categorys_all_rows['icon'];
 		$stmt_sql_cocktailcategorylist = mysqli_prepare($link, $sql_cocktailcategorylist);
 		mysqli_stmt_bind_param($stmt_sql_cocktailcategorylist, "ii", $id, $categoryid);
 		mysqli_stmt_execute($stmt_sql_cocktailcategorylist);
@@ -458,7 +458,7 @@
 		}
 		mysqli_stmt_close($stmt_sql_cocktailcategorylist);
 ?>
-								<option value="<?php echo $categoryid;?>" data-src="<?php echo $categoryimage;?>"<?php if($cocktailcategory == 1){echo ' selected';}?>><?php echo $categoryname;?></option>
+								<option value="<?php echo $categoryid;?>" data-src="<?php echo $categoryicon;?>"<?php if($cocktailcategory == 1){echo ' selected';}?>><?php echo $categoryname;?></option>
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_categorys);
@@ -474,7 +474,7 @@
 	while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC)){
 		$tasteid = $tastes_all_rows['ID'];
 		$tastename = $tastes_all_rows['taste'];
-		$tasteimage = $tastes_all_rows['image'];
+		$tasteicon = $tastes_all_rows['icon'];
 		$stmt_sql_cocktailtastelist = mysqli_prepare($link, $sql_cocktailtastelist);
 		mysqli_stmt_bind_param($stmt_sql_cocktailtastelist, "ii", $id, $tasteid);
 		mysqli_stmt_execute($stmt_sql_cocktailtastelist);
@@ -485,7 +485,7 @@
 		}
 		mysqli_stmt_close($stmt_sql_cocktailtastelist);
 ?>
-								<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteimage;?>"<?php if($cocktailtastes == 1){echo ' selected';}?>><?php echo $tastename;?></option>
+								<option value="<?php echo $tasteid . ",";?>" data-src="<?php echo $tasteicon;?>"<?php if($cocktailtastes == 1){echo ' selected';}?>><?php echo $tastename;?></option>
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_tastes);
@@ -558,7 +558,7 @@
 					</fieldset>
 				</form>
 				<div class="list-group">
-					<li class="list-group-item list-group-item-primary">Zutaten<a href="cocktailingredient_view.php?cocktailid=<?php echo $id;?>" class="btn btn-primary float-end<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-toggle="tooltip" data-placement="bottom" title="Bearbeiten"><i class="fa-duotone fa-solid fa-pencil fa-fw"></i></a></li>
+					<li class="list-group-item list-group-item-primary">Zutaten<a href="/views/cocktailingredient.php?cocktailid=<?php echo $id;?>" class="btn btn-primary float-end<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-toggle="tooltip" data-placement="bottom" title="Bearbeiten"><i class="fa-duotone fa-solid fa-pencil fa-fw"></i></a></li>
 <?php 
 	$stmt_sql_ingredients = mysqli_prepare($link, $sql_ingredients_from_cocktail);
 	mysqli_stmt_bind_param($stmt_sql_ingredients, "ii", $_SESSION["bar"], $id);

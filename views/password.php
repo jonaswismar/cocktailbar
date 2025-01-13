@@ -27,12 +27,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 	if(empty($password_err) && empty($confirm_password_err)){
 		if($stmt = mysqli_prepare($link, $sql_users_changepassword)){
-			mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
 			$param_password = password_hash($password, PASSWORD_DEFAULT);
 			$param_id = $_SESSION["id"];
+			mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
 			if(mysqli_stmt_execute($stmt)){
 				session_destroy();
-				header("location: login.php");
+				header("location: /views/login.php");
 				exit();
 			} else{
 				echo "Oops! Irgendetwas lief schief. Versuche es später wieder.";

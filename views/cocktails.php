@@ -31,6 +31,7 @@
 <?php
 	if($view == "my"){
 		$stmt_sql_cocktails = mysqli_prepare($link, $sql_my_cocktails);
+		mysqli_stmt_bind_param($stmt_sql_cocktails, "i", $_SESSION["bar"]);
 	}
 	else if($view == "all"){
 		$stmt_sql_cocktails = mysqli_prepare($link, $sql_all_cocktails);

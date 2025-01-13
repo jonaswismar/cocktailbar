@@ -57,7 +57,7 @@ $sql_categorys = "SELECT
     ca.ID, 
     ca.categoryname, 
     ca.description, 
-    ca.image, 
+    ca.icon, 
     COUNT(ccl.ID) AS total_cocktails
 FROM 
     category ca
@@ -67,7 +67,7 @@ GROUP BY
     ca.ID, 
     ca.categoryname, 
     ca.description, 
-    ca.image
+    ca.icon
 ORDER BY 
     ca.categoryname ASC;
 ";
@@ -77,7 +77,7 @@ $sql_category = "SELECT
     categoryname, 
     description, 
     cocktail_count, 
-    image 
+    icon 
 FROM 
     category 
 WHERE 
@@ -89,13 +89,13 @@ $sql_update_category = "UPDATE
 SET
     categoryname = ?,
     description = ?,
-    image = ?
+    icon = ?
 WHERE
     ID = ?;
 ";
 
 $sql_create_category = "INSERT INTO
-    category (categoryname, description, image)
+    category (categoryname, description, icon)
 VALUES
     (?, ?, ?);
 ";

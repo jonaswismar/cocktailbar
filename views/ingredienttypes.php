@@ -15,8 +15,8 @@
 	while($ingredienttypes_all_rows= mysqli_fetch_array($ingredienttypes_all_res, MYSQLI_ASSOC))
 	{
 ?>
-					<a href="ingredienttype_view.php?ingredienttypeid=<?php echo $ingredienttypes_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
-						<i class="<?php echo $ingredienttypes_all_rows['image'];?> fa-fw"></i>
+					<a href="/views/ingredienttype.php?ingredienttypeid=<?php echo $ingredienttypes_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+						<i class="<?php echo $ingredienttypes_all_rows['icon'];?> fa-fw"></i>
 						<div class="d-flex gap-2 w-100 justify-content-between">
 							<h6 class="mb-0"><?php echo $ingredienttypes_all_rows['typename'];?></h6>
 						</div>
@@ -25,7 +25,6 @@
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_ingredienttypes);
-	mysqli_close($link);
 ?>
 				</div>
 			</div>

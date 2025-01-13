@@ -39,14 +39,18 @@ $sql_my_cocktails = "WITH ingredient_counts AS (
     SELECT 
         cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
-        SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients,
-        SUM(CASE WHEN ingredientbar.available = 1 OR ingredientbar.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
+        SUM(CASE WHEN cocktailingredient.garnish = 1 THEN 1 ELSE 0 END) AS garnish_ingredients,
+        SUM(CASE WHEN cocktailingredient.optional = 1 THEN 1 ELSE 0 END) AS optional_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 OR cocktailingredient.garnish = 1 OR cocktailingredient.optional THEN 1 ELSE 0 END) AS available_ingredients,
+        SUM(CASE WHEN ingredientbar.available = 1 OR cocktailingredient.garnish = 1 OR cocktailingredient.optional OR ingredientbar.shoppable = 1 THEN 1 ELSE 0 END) AS shoppable_ingredients
     FROM 
         cocktailingredient
     INNER JOIN 
         ingredientbar 
     ON 
         cocktailingredient.ingredient = ingredientbar.ingredient
+    WHERE
+        ingredientbar.bar = ?
     GROUP BY 
         cocktailingredient.cocktail
 )
@@ -70,11 +74,13 @@ ORDER BY
     available DESC, 
     shoppable DESC, 
     c.cocktailname ASC;";
-	
+
 $sql_my_cocktails_random = "WITH ingredient_counts AS (
     SELECT 
         cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN cocktailingredient.garnish = 1 THEN 1 ELSE 0 END) AS garnish_ingredients,
+        SUM(CASE WHEN cocktailingredient.optional = 1 THEN 1 ELSE 0 END) AS optional_ingredients,
         SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
     FROM 
         cocktailingredient
@@ -109,6 +115,8 @@ $sql_my_cocktails_day = "WITH ingredient_counts AS (
     SELECT 
         cocktailingredient.cocktail AS cocktail_id,
         COUNT(*) AS total_ingredients,
+        SUM(CASE WHEN cocktailingredient.garnish = 1 THEN 1 ELSE 0 END) AS garnish_ingredients,
+        SUM(CASE WHEN cocktailingredient.optional = 1 THEN 1 ELSE 0 END) AS optional_ingredients,
         SUM(CASE WHEN ingredientbar.available = 1 THEN 1 ELSE 0 END) AS available_ingredients
     FROM 
         cocktailingredient

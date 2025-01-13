@@ -9,3 +9,21 @@ Die Cocktailbar Web App ist als reine PHP Anwendung mit einer MySQL Datenbank an
 Es werden außer der MySQL Erweiterung prinzippiel keine anderen Erweiterungen benötigt.
 Damit manche Teile des HTML Codes schöner eingerückt werden kann allerdings 'PHP Tidy'
 aktiviert werden.
+
+
+ToDo:
+
+Bilder Upload und speichern im Filesystem/Datenbank
+Relation Bilder zu restlichen Objekten
+
+Wiki mit Beiträgen aus Cocktailbuch
+
+Zubereitungsarten als neue Kategorie + Zuordnung zu Cocktails
+
+Barzubehör Zuordnung zu Cocktails & Bar
+
+Statistikseite - Anzahl Cocktails, Anzahl zubereitete Cocktails etc.
+
+Rezepte aus Cocktailbuch abtippen
+
+Kommentarfunktion für User

@@ -45,7 +45,7 @@
 			$username = $username_all_rows['username'];
 		}
 ?>
-				<a href="order_view.php?orderid=<?php echo $orders_all_rows['ID']; ?>" class="list-group-item list-group-item-action d-flex gap-2 py-2 d-block">
+				<a href="/views/order.php?orderid=<?php echo $orders_all_rows['ID']; ?>" class="list-group-item list-group-item-action d-flex gap-2 py-2 d-block">
 					<picture>
 <?php
 	$currentfilepath = dirname(__DIR__, 1);

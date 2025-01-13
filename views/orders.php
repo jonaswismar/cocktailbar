@@ -9,13 +9,13 @@
 ?>
 			<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px">
 				<div class="scrolling-wrapper-flexbox">
-					<a href="orders.php?view=ordered" class="btn btn-primary text-uppercase <?php if($view == "ordered"){echo ' active" aria-current="page';}?>" data-toggle="tooltip" data-placement="bottom" title="Deine Bestellungen des aktuellen Besuches">
+					<a href="/views/orders.php?view=ordered" class="btn btn-primary text-uppercase <?php if($view == "ordered"){echo ' active" aria-current="page';}?>" data-toggle="tooltip" data-placement="bottom" title="Deine Bestellungen des aktuellen Besuches">
 						<i class="fa fa-fw fa-solid fa-bag-shopping"></i> Bestellt
 					</a>
-					<a href="orders.php?view=prepared" class="btn btn-primary text-uppercase <?php if($view == "prepared"){echo ' active" aria-current="page';}?>" data-toggle="tooltip" data-placement="bottom" title="Deine Bestellungen in Zubereitung">
+					<a href="/views/orders.php?view=prepared" class="btn btn-primary text-uppercase <?php if($view == "prepared"){echo ' active" aria-current="page';}?>" data-toggle="tooltip" data-placement="bottom" title="Deine Bestellungen in Zubereitung">
 						<i class="fa fa-fw fa-solid fa-hourglass-half"></i> In Zubereitung
 					</a>
-					<a href="orders.php?view=history" class="btn btn-primary text-uppercase <?php if($view == "history"){echo ' active" aria-current="page';}?>" data-toggle="tooltip" data-placement="bottom" title="Deine Bestellhistorie">
+					<a href="/views/orders.php?view=history" class="btn btn-primary text-uppercase <?php if($view == "history"){echo ' active" aria-current="page';}?>" data-toggle="tooltip" data-placement="bottom" title="Deine Bestellhistorie">
 						<i class="fa fa-fw fa-solid fa-calendar"></i> Historie
 					</a>
 				</div>

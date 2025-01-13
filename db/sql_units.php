@@ -5,7 +5,7 @@ $sql_units = "SELECT
     unitshort, 
     unitshortX, 
     description, 
-    image 
+    icon 
 FROM 
     unit 
 ORDER BY 
@@ -18,7 +18,7 @@ $sql_unit = "SELECT
     unitshort, 
     unitshortX, 
     description, 
-    image 
+    icon 
 FROM 
     unit 
 WHERE 
@@ -32,13 +32,13 @@ SET
     unitshort = ?,
     unitshortX = ?,
     description = ?,
-    image = ?
+    icon = ?
 WHERE
     ID = ?;
 ";
 
 $sql_create_unit = "INSERT INTO
-    unit (unitname, unitshort, unitshortX, description, image)
+    unit (unitname, unitshort, unitshortX, description, icon)
 VALUES
     (?, ?, ?, ?, ?);
 ";

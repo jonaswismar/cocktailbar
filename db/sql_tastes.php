@@ -3,13 +3,13 @@ $sql_tastes = "SELECT
     t.ID, 
     t.taste, 
     t.description, 
-    t.image, 
+    t.icon, 
     t.ingredient_count, 
     t.cocktail_count 
 FROM 
     taste t
 GROUP BY 
-    t.ID, t.taste, t.description, t.image
+    t.ID, t.taste, t.description, t.icon
 ORDER BY 
     t.taste ASC;
 ";
@@ -19,7 +19,7 @@ $sql_taste = "SELECT
     t.description, 
     t.ingredient_count, 
     t.cocktail_count, 
-    t.image
+    t.icon
 FROM 
     taste t
 WHERE
@@ -31,13 +31,13 @@ $sql_update_taste = "UPDATE
 SET
     taste = ?,
     description = ?,
-    image = ?
+    icon = ?
 WHERE
     ID = ?;
 ";
 
 $sql_create_taste = "INSERT INTO
-    taste (taste, description, image)
+    taste (taste, description, icon)
 VALUES
     (?, ?, ?);
 ";

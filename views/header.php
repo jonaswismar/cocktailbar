@@ -1,8 +1,7 @@
 <?php
-	if(!isset($_SESSION)) 
-		{
-			session_start(); 
-		}
+	if(!isset($_SESSION)){
+		session_start(); 
+	}
 	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		header("location: login.php");
 		exit;
@@ -19,7 +18,7 @@
 	}
 ?>
 <!DOCTYPE html>
-<html lang="de" data-bs-theme="auto">
+<html lang="de" data-bs-theme="<?php echo $_SESSION["darkmode"]; ?>">
 	<head>
 		<title>Cocktailbar Web App</title>
 		<meta charset="utf-8">
@@ -28,7 +27,86 @@
 		<meta name="author" content="Jonas Wismar">
 		<link rel="icon" type="image/x-icon" href="../favicon.ico">
 		<link rel="icon" type="image/png" href="../favicon.png">
-		<link rel="stylesheet" href="../assets/css/bootstrap.css">
+<?php 
+	$themeurl = "";
+	if($_SESSION["theme"] == "cerulean"){
+		$themeurl = "themes/cerulean/";
+	}
+	else if($_SESSION["theme"] == "cosmo"){
+		$themeurl = "themes/cosmo/";
+	}
+	else if($_SESSION["theme"] == "cyborg"){
+		$themeurl = "themes/cyborg/";
+	}
+	else if($_SESSION["theme"] == "darkly"){
+		$themeurl = "themes/darkly/";
+	}
+	else if($_SESSION["theme"] == "flatly"){
+		$themeurl = "themes/flatly/";
+	}
+	else if($_SESSION["theme"] == "journal"){
+		$themeurl = "themes/journal/";
+	}
+	else if($_SESSION["theme"] == "litera"){
+		$themeurl = "themes/litera/";
+	}
+	else if($_SESSION["theme"] == "lumen"){
+		$themeurl = "themes/lumen/";
+	}
+	else if($_SESSION["theme"] == "lux"){
+		$themeurl = "themes/lux/";
+	}
+	else if($_SESSION["theme"] == "materia"){
+		$themeurl = "themes/materia/";
+	}
+	else if($_SESSION["theme"] == "minty"){
+		$themeurl = "themes/minty/";
+	}
+	else if($_SESSION["theme"] == "morph"){
+		$themeurl = "themes/morph/";
+	}
+	else if($_SESSION["theme"] == "pulse"){
+		$themeurl = "themes/pulse/";
+	}
+	else if($_SESSION["theme"] == "quartz"){
+		$themeurl = "themes/quartz/";
+	}
+	else if($_SESSION["theme"] == "sandstone"){
+		$themeurl = "themes/sandstone/";
+	}
+	else if($_SESSION["theme"] == "simplex"){
+		$themeurl = "themes/simplex/";
+	}
+	else if($_SESSION["theme"] == "sketchy"){
+		$themeurl = "themes/sketchy/";
+	}
+	else if($_SESSION["theme"] == "slate"){
+		$themeurl = "themes/slate/";
+	}
+	else if($_SESSION["theme"] == "solar"){
+		$themeurl = "themes/solar/";
+	}
+	else if($_SESSION["theme"] == "spacelab"){
+		$themeurl = "themes/spacelab/";
+	}
+	else if($_SESSION["theme"] == "superhero"){
+		$themeurl = "themes/superhero/";
+	}
+	else if($_SESSION["theme"] == "united"){
+		$themeurl = "themes/united/";
+	}
+	else if($_SESSION["theme"] == "vapor"){
+		$themeurl = "themes/vapor/";
+	}
+	else if($_SESSION["theme"] == "yeti"){
+		$themeurl = "themes/yeti/";
+	}
+	else if($_SESSION["theme"] == "zephyr"){
+		$themeurl = "themes/zephyr/";
+	}
+	echo "		<link rel=\"stylesheet\" href=\"../assets/css/" . $themeurl . "bootstrap.css\">";
+?>
+
 		<link rel="stylesheet" href="../assets/css/bootstrap-icons.min.css">
 		<link rel="stylesheet" href="../assets/css/css@3.css">
 		<link rel="stylesheet" href="../assets/css/fontawesome.css">
@@ -37,7 +115,6 @@
 		<link rel="stylesheet" href="../assets/css/fontawesome-sharp-regular.css">
 		<link rel="stylesheet" href="../assets/css/fontawesome-sharp-solid.css">
 		<link rel="stylesheet" href="../assets/css/fontawesome-sharp-thin.css">
-		<link rel="stylesheet" href="../assets/css/iconpicker.css" />
 		<link rel="stylesheet" href="../assets/css/navbars-offcanvas.css" />
 		<link rel="stylesheet" href="../assets/css/tom-select.bootstrap5.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -137,7 +214,7 @@
 				margin: 0 auto;
 			}
 		</style>
-		<style>
+		<!--<style>
 			.bd-placeholder-img {
 				font-size: 1.125rem;
 				text-anchor: middle;
@@ -204,7 +281,7 @@
 			.bd-mode-toggle .dropdown-menu .active .bi {
 				display: block !important;
 			}
-		</style>
+		</style>-->
 	</head>
 	<body>
 		<header>
@@ -214,10 +291,15 @@
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Menü ein/ausblenden" data-toggle="tooltip" data-placement="bottom" title="Menü ein/ausblenden">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
-							<form class="btn-group" action="search.php">
-								<input type="text" class="form-control" placeholder="Suchen.."<?php if(!empty($searchstring)){ echo ' value="' . $searchstring . '"';} ?> name="search">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-regular fa-search"></i></button>
+						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
+							<form class="btn-group" action="/views/search.php">
+								<input type="text" id="search" class="form-control" placeholder="Suchen.."<?php if(!empty($searchstring)){ echo ' value="' . $searchstring . '"';} ?> name="search">
+								<button type="submit" class="btn btn-primary">
+									<div class="row">
+									<i class="fa fa-fw fa-regular fa-search"></i>
+									<i class="fa fa-fw fa-regular <?php if($_SESSION["searchmode"] == 2){ echo 'fa-comment';}else{echo 'fa-object-intersect';} ?>"></i>
+									</div>
+								</button>
 							</form>
 						</div>
 						<div class="btn-group ms-auto">
@@ -247,86 +329,101 @@
 							<div class="offcanvas-body">
 								<ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
 									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Benutzer spezifische Aktionen"><i class="fa fa-fw <?php echo $_SESSION["image"];?>"></i> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "userprefs.php"||$current_file_name == "orders.php"||$current_file_name == "order.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Benutzer spezifische Aktionen"><i class="fa fa-fw <?php echo $_SESSION["icon"];?>"></i> <?php echo htmlspecialchars($_SESSION["username"]); ?></a>
 										<ul class="dropdown-menu">
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "user_view.php"){echo ' active" aria-current="page';} ?>" href="user_view.php" data-toggle="tooltip" data-placement="bottom" title="Ändere deine App Einstellungen">
+												<a class="dropdown-item<?php if($current_file_name == "userprefs.php"){echo ' active" aria-current="page';} ?>" href="/views/userprefs.php" data-toggle="tooltip" data-placement="bottom" title="Ändere deine App Einstellungen">
 													<i class="fa fa-fw fa-regular fa-user-gear"></i> Einstellungen
 												</a>
 											</li>
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="password.php" data-toggle="tooltip" data-placement="bottom" title="Ändere dein Passwort">
+												<a class="dropdown-item<?php if($current_file_name == "password.php"){echo ' active" aria-current="page';} ?>" href="/views/password.php" data-toggle="tooltip" data-placement="bottom" title="Ändere dein Passwort">
 													<i class="fa fa-fw fa-regular fa-user-lock"></i> Passwort ändern
 												</a>
 											</li>
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "orders.php"||$current_file_name == "order_view.php"){echo ' active" aria-current="page';} ?>" href="orders.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch deine Bestellungen">
+												<a class="dropdown-item<?php if($current_file_name == "orders.php"||$current_file_name == "order.php"){echo ' active" aria-current="page';} ?>" href="/views/orders.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch deine Bestellungen">
 													<i class="fa fa-fw fa-regular fa-bag-shopping"></i> Bestellungen
 												</a>
 											</li>
 											<li>
-												<a class="dropdown-item" href="logout.php" data-toggle="tooltip" data-placement="bottom" title="Abmelden aus der App">
+												<a class="dropdown-item" href="/views/logout.php" data-toggle="tooltip" data-placement="bottom" title="Abmelden aus der App">
 													<i class="fa fa-fw fa-regular fa-person-to-door"></i> Abmelden
 												</a>
 											</li>
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail_view.php"){echo ' active" aria-current="page';} ?>" href="cocktails.php?view=my" data-toggle="tooltip" data-placement="bottom" title="Blättere durch die Cocktails">
+										<a class="nav-link<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail.php"){echo ' active" aria-current="page';} ?>" href="/views/cocktails.php?view=my" data-toggle="tooltip" data-placement="bottom" title="Blättere durch die Cocktails">
 											<i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Cocktails
 										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient_view.php"){echo ' active" aria-current="page';} ?>" href="ingredients.php?view=my" data-toggle="tooltip" data-placement="bottom" title="Blättere durch die Zutaten">
+										<a class="nav-link<?php if($current_file_name == "ingredients.php"||$current_file_name == "ingredient.php"){echo ' active" aria-current="page';} ?>" href="/views/ingredients.php?view=my" data-toggle="tooltip" data-placement="bottom" title="Blättere durch die Zutaten">
 											<i class="fa fa-fw fa-regular fa-lemon"></i> Zutaten
 										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "specials.php"){echo ' active" aria-current="page';} ?>" href="specials.php?view=day" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Tagestipp und andere Specials">
+										<a class="nav-link<?php if($current_file_name == "specials.php"){echo ' active" aria-current="page';} ?>" href="/views/specials.php?view=day" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Tagestipp und andere Specials">
 											<i class="fa fa-fw fa-regular fa-dice-<?php $dice=array("one","two","three","four","five", "six"); echo $dice[rand(0,5)]; ?>"></i> Specials
 										</a>
 									</li>
 									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "categorys.php"||$current_file_name == "category_view.php"||$current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype_view.php"||$current_file_name == "tastes.php"||$current_file_name == "taste_view.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Sonstige Kategorien">
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"||$current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"||$current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Sonstige Kategorien">
 											<i class="fa fa-fw fa-regular fa-list"></i> Sonstiges
 										</a>
 										<ul class="dropdown-menu">
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "categorys.php"||$current_file_name == "category_view.php"){echo ' active" aria-current="page';} ?>" href="categorys.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Cocktail Kategorien">
+												<a class="dropdown-item<?php if($current_file_name == "categorys.php"||$current_file_name == "category.php"){echo ' active" aria-current="page';} ?>" href="/views/categorys.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Cocktail Kategorien">
 													<i class="fa fa-fw fa-regular fa-filter-list"></i> Kategorien
 												</a>
 											</li>
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype_view.php"){echo ' active" aria-current="page';} ?>" href="ingredienttypes.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Zutatentypen">
+												<a class="dropdown-item<?php if($current_file_name == "ingredienttypes.php"||$current_file_name == "ingredienttype.php"){echo ' active" aria-current="page';} ?>" href="/views/ingredienttypes.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Zutatentypen">
 													<i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Zutatentypen
 												</a>
 											</li>
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "tastes.php"||$current_file_name == "taste_view.php"){echo ' active" aria-current="page';} ?>" href="tastes.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Geschmacksrichtungen">
+												<a class="dropdown-item<?php if($current_file_name == "tastes.php"||$current_file_name == "taste.php"){echo ' active" aria-current="page';} ?>" href="/views/tastes.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Geschmacksrichtungen">
 													<i class="fa fa-fw fa-regular fa-lemon"></i> Geschmacksrichtungen
 												</a>
 											</li>
 										</ul>
 									</li>
-									<li class="nav-item dropdown<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
-										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "debug.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Adminbereich der App">
-											<i class="fa fa-fw fa-regular fa-hammer"></i> Admin
+									<li class="nav-item dropdown<?php if($_SESSION["role"] != 1 && $_SESSION["role"] != 2){echo ' d-none invisible';}?>">
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="false" data-bs-toggle="dropdown" aria-expanded="<?php if($current_file_name == "debug.php"||$current_file_name == "bars.php"||$current_file_name == "bar.php"||$current_file_name == "units.php"||$current_file_name == "unit.php"||$current_file_name == "users.php"||$current_file_name == "user.php"){echo 'true';}else{echo 'false';} ?>" data-toggle="tooltip" data-placement="bottom" title="Adminbereich der App">
+											<i class="fa fa-fw fa-regular fa-hammer"></i> <?php if($_SESSION["role"] == 1){echo 'Admin';}else{echo 'Barkeeper';}?>
 										</a>
 										<ul class="dropdown-menu">
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "units.php"||$current_file_name == "unit_view.php"){echo ' active" aria-current="page';} ?>" href="units.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Maß-Einheiten">
-													<i class="fa fa-fw fa-regular fa-ruler"></i> Einheiten
+												<a class="dropdown-item<?php if($current_file_name == "bars.php"||$current_file_name == "bar.php"){echo ' active" aria-current="page';} ?>" href="/views/bars.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Bars">
+													<i class="fa fa-fw fa-regular fa-map-location-dot"></i> Bars
 												</a>
 											</li>
 											<li>
-												<a class="dropdown-item<?php if($current_file_name == "debug.php"){echo ' active" aria-current="page';} ?>" href="debug.php" data-toggle="tooltip" data-placement="bottom" title="Debugmenü">
+												<a class="dropdown-item<?php if($current_file_name == "users.php"||$current_file_name == "user.php"){echo ' active" aria-current="page';} ?>" href="/views/users.php" data-toggle="tooltip" data-placement="bottom" title="Benutzerverwaltung">
+													<i class="fa fa-fw fa-regular fa-users"></i> Benutzer
+												</a>
+											</li>
+											<li class="nav-item dropdown<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
+												<a class="dropdown-item<?php if($current_file_name == "units.php"||$current_file_name == "unit.php"){echo ' active" aria-current="page';} ?>" href="/views/units.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Maß-Einheiten">
+													<i class="fa fa-fw fa-regular fa-ruler"></i> Einheiten
+												</a>
+											</li>
+											<li class="nav-item dropdown<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
+												<a class="dropdown-item<?php if($current_file_name == "tools.php"||$current_file_name == "tool.php"){echo ' active" aria-current="page';} ?>" href="/views/tools.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Bar Werkzeuge">
+													<i class="fa fa-fw fa-regular fa-screwdriver-wrench"></i> Werkzeuge
+												</a>
+											</li>
+											<li class="nav-item dropdown<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
+												<a class="dropdown-item<?php if($current_file_name == "debug.php"){echo ' active" aria-current="page';} ?>" href="/views/debug.php" data-toggle="tooltip" data-placement="bottom" title="Debugmenü">
 													<i class="fa fa-fw fa-regular fa-bug"></i> Debugging
 												</a>
 											</li>
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="about.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Infos über die App">
+										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="/views/about.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Infos über die App">
 											<i class="fa fa-fw fa-regular fa-circle-question"></i> Über
 										</a>
 									</li>

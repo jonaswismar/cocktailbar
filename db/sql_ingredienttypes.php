@@ -3,7 +3,7 @@ $sql_ingredienttypes = "SELECT
     t.ID, 
     t.typename, 
     t.description,
-    t.image, 
+    t.icon, 
     COUNT(i.ingredientname) AS total_ingredients
 FROM 
     ingredienttype t
@@ -13,7 +13,7 @@ GROUP BY
     t.ID, 
     t.typename, 
     t.description,
-    t.image
+    t.icon
 ORDER BY 
     t.typename ASC;
 ";
@@ -22,7 +22,7 @@ $sql_ingredienttype = "SELECT
     ID, 
     typename, 
     description,
-    image,
+    icon,
     ingredient_count
 FROM 
     ingredienttype 
@@ -35,13 +35,13 @@ $sql_update_ingredienttype = "UPDATE
 SET
     typename = ?,
     description = ?,
-    image = ?
+    icon = ?
 WHERE
     ID = ?;
 ";
 
 $sql_create_ingredienttype = "INSERT INTO
-    ingredienttype (typename, description, image)
+    ingredienttype (typename, description, icon)
 VALUES
     (?, ?, ?);
 ";

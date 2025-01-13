@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					if(mysqli_stmt_execute($stmtlogin)){
 						mysqli_stmt_store_result($stmtlogin);
 						if(mysqli_stmt_num_rows($stmtlogin) == 1){
-							mysqli_stmt_bind_result($stmtlogin, $id, $role, $bar, $image, $username, $ignoregarnish, $startpage, $language, $metricunits, $hashed_password);
+							mysqli_stmt_bind_result($stmtlogin, $id, $role, $bar, $icon, $username, $ignoregarnish, $startpage, $language, $metricunits, $searchmode, $darkmode, $theme, $hashed_password);
 							if(mysqli_stmt_fetch($stmtlogin)){
 								if(password_verify($password, $hashed_password)){
 									session_start();
@@ -77,23 +77,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 									$_SESSION["id"] = $id;
 									$_SESSION["role"] = $role;
 									$_SESSION["bar"] = $bar;
-									$_SESSION["image"] = $image;
+									$_SESSION["icon"] = $icon;
 									$_SESSION["username"] = $username;
 									$_SESSION["ignoregarnish"] = $ignoregarnish;
 									$_SESSION["startpage"] = $startpage;
 									$_SESSION["language"] = $language;
 									$_SESSION["metricunits"] = $metricunits;
-									if($_SESSION["image"] == "")
+									$_SESSION["searchmode"] = $searchmode;
+									$_SESSION["darkmode"] = $darkmode;
+									$_SESSION["theme"] = $theme;
+									if($_SESSION["icon"] == "")
 									{
-										$stmtrole = mysqli_prepare($link, $sql_roles_image);
+										$stmtrole = mysqli_prepare($link, $sql_roles_icon);
 										mysqli_stmt_bind_param($stmtrole, "i", $_SESSION["role"]);
 										mysqli_stmt_execute($stmtrole);
-										mysqli_stmt_bind_result($stmtrole, $image);
+										mysqli_stmt_bind_result($stmtrole, $icon);
 										if(mysqli_stmt_fetch($stmtrole)){
-											$_SESSION["image"] = $image;
+											$_SESSION["icon"] = $icon;
 										}
 									}
-									header("location: index.php");
+									header("location: /views/index.php");
 								}
 								else{
 									$login_err = "Ungültiges Passwort."; //Change

@@ -1,5 +1,6 @@
 <?php
 require_once "sql_bar.php";
+require_once "sql_barkeeper.php";
 require_once "sql_categorys.php";
 require_once "sql_cocktailcategorylist.php";
 require_once "sql_cocktailfavorites.php";
@@ -17,6 +18,7 @@ require_once "sql_roles.php";
 require_once "sql_search.php";
 require_once "sql_specials.php";
 require_once "sql_tastes.php";
+require_once "sql_tools.php";
 require_once "sql_units.php";
 require_once "sql_users.php";
 
