@@ -1,0 +1,9 @@
+<FilesMatch "\.(gif|jpg|jpeg|png|ttf|webp|woff|woff2)$">
+	Header set Cache-Control "max-age=172800"
+</FilesMatch>
+<FilesMatch "\.(css|js|map)$">
+	Header set Cache-Control "max-age=172800"
+</FilesMatch>
+<FilesMatch "\.(json)$">
+	Header set Cache-Control "max-age=172800"
+</FilesMatch>

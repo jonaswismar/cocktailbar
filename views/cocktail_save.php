@@ -1,0 +1,92 @@
+ <?php
+	require_once "../db/sql_config.php";
+	require_once "../db/sql_statements.php";
+	
+	if(isset($_POST['cocktailid']))
+	{
+		$userid =  $_POST['userid'];
+		$cocktailid =  $_POST['cocktailid'];
+		$ordered =  $_POST['ordered'];
+		$favorite =  $_POST['favorite'];
+		$cocktailname =  $_POST['cocktailname'];
+		$image =  $_POST['image'];
+		$cocktailcategory =  $_POST['cocktailcategory'];
+		$cocktailtaste =  $_POST['cocktailtaste'];
+		$description =  $_POST['description'];
+		$rating =  $_POST['myrating'];
+		if(empty($cocktailid))
+		{
+			$stmt_sql_cocktail = mysqli_prepare($link, $sql_create_cocktail);
+			mysqli_stmt_bind_param($stmt_sql_cocktail, "ssss", $cocktailname, $description, $instruction, $image);
+			mysqli_stmt_execute($stmt_sql_cocktail);
+			mysqli_stmt_close($stmt_sql_cocktail);
+			mysqli_commit($link);
+		}
+		else
+		{
+			$stmt_sql_cocktail = mysqli_prepare($link, $sql_update_cocktail);
+			mysqli_stmt_bind_param($stmt_sql_cocktail, "ssssi", $cocktailname, $description, $instruction, $image, $cocktailid);
+			mysqli_stmt_execute($stmt_sql_cocktail);
+			mysqli_stmt_close($stmt_sql_cocktail);
+			mysqli_commit($link);
+		}
+		$stmt_delete_cocktailcategorylist = mysqli_prepare($link, $sql_delete_cocktailcategorylist);
+		mysqli_stmt_bind_param($stmt_delete_cocktailcategorylist, "i", $cocktailid);
+		mysqli_stmt_execute($stmt_delete_cocktailcategorylist);
+		mysqli_stmt_close($stmt_delete_cocktailcategorylist);
+		mysqli_commit($link);
+		if(isset($cocktailcategory))
+		{
+			foreach ($cocktailcategory as $category)
+			{
+				$stmt_create_cocktailcategorylist = mysqli_prepare($link, $sql_create_cocktailcategorylist);
+				mysqli_stmt_bind_param($stmt_create_cocktailcategorylist, "ii", $cocktailid, $category);
+				mysqli_stmt_execute($stmt_create_cocktailcategorylist);
+				mysqli_stmt_close($stmt_create_cocktailcategorylist);
+				mysqli_commit($link);
+			}
+		}
+		$stmt_delete_cocktailtastelist = mysqli_prepare($link, $sql_delete_cocktailtastelist);
+		mysqli_stmt_bind_param($stmt_delete_cocktailtastelist, "i", $cocktailid);
+		mysqli_stmt_execute($stmt_delete_cocktailtastelist);
+		mysqli_stmt_close($stmt_delete_cocktailtastelist);
+		mysqli_commit($link);
+		if(isset($cocktailtaste))
+		{
+			foreach ($cocktailtaste as $taste)
+			{
+				$stmt_create_cocktailtastelist = mysqli_prepare($link, $sql_create_cocktailtastelist);
+				mysqli_stmt_bind_param($stmt_create_cocktailtastelist, "ii", $cocktailid, $taste);
+				mysqli_stmt_execute($stmt_create_cocktailtastelist);
+				mysqli_stmt_close($stmt_create_cocktailtastelist);
+				mysqli_commit($link);
+			}
+		}
+		mysqli_close($link);
+		header("location: cocktail.php?cocktailid=" . $cocktailid);
+	}
+	if(isset($_GET['cocktailid'])&&isset($_GET['ordered']))
+	{
+		$cocktailid =  $_GET['cocktailid'];
+		$ordered =  $_GET['ordered'];
+		$stmt_create_order = mysqli_prepare($link, $sql_create_order);
+		mysqli_stmt_bind_param($stmt_create_order, "ii", $_SESSION["id"], $cocktailid);
+		mysqli_stmt_execute($stmt_create_order);
+		mysqli_stmt_close($stmt_create_order);
+		mysqli_commit($link);
+		mysqli_close($link);
+		header("location: cocktail.php?cocktailid=" . $cocktailid);
+	}
+	if(isset($_GET['cocktailid'])&&isset($_GET['favorite']))
+	{
+		$cocktailid =  $_GET['cocktailid'];
+		$favorite =  $_GET['favorite'];
+		$stmt_create_order = mysqli_prepare($link, $sql_create_cocktailfavorite);
+		mysqli_stmt_bind_param($stmt_create_order, "ii", $_SESSION["id"], $cocktailid);
+		mysqli_stmt_execute($stmt_create_order);
+		mysqli_stmt_close($stmt_create_order);
+		mysqli_commit($link);
+		mysqli_close($link);
+		header("location: cocktail.php?cocktailid=" . $cocktailid);
+	}
+?>

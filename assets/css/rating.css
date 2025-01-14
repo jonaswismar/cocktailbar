@@ -1,0 +1,13 @@
+div.rating-wrapper-all {
+  font-size: 2rem;
+}
+div.rating-wrapper-my {
+  font-size: 2rem;
+}
+div.rating-wrapper-my i {
+  cursor: pointer;
+}
+p.v-data {
+  background: #ccc;
+  padding: 0.5rem;
+}
