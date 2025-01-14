@@ -23,7 +23,7 @@
 					$stmt_sql_ingredient = mysqli_prepare($link, $sql_create_ingredient);
 					mysqli_stmt_bind_param($stmt_sql_ingredient, "sssi", $ingredientname, $description, $image, $type);
 					mysqli_stmt_execute($stmt_sql_ingredient);
-					$ingredientid = mysqli_stmt_insert_id($stmt_sql_cocktail);
+					$ingredientid = mysqli_stmt_insert_id($stmt_sql_ingredient);
 					mysqli_stmt_close($stmt_sql_ingredient);
 					mysqli_commit($link);
 				}
@@ -92,7 +92,7 @@
 					$stmt_sql_ingredient = mysqli_prepare($link, $sql_create_ingredient);
 					mysqli_stmt_bind_param($stmt_sql_ingredient, "sssi", $ingredientname, $description, $image, $type);
 					mysqli_stmt_execute($stmt_sql_ingredient);
-					$ingredientid = mysqli_stmt_insert_id($stmt_sql_cocktail);
+					$ingredientid = mysqli_stmt_insert_id($stmt_sql_ingredient);
 					mysqli_stmt_close($stmt_sql_ingredient);
 					mysqli_commit($link);
 				}

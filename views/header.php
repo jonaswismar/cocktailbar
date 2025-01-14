@@ -291,7 +291,7 @@
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Menü ein/ausblenden" data-toggle="tooltip" data-placement="bottom" title="Menü ein/ausblenden">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
+						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail.php"||$current_file_name == "cocktailingredient.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
 							<form class="btn-group" action="/views/search.php">
 								<input type="text" id="search" class="form-control" placeholder="Suchen.."<?php if(!empty($searchstring)){ echo ' value="' . $searchstring . '"';} ?> name="search">
 								<button type="submit" class="btn btn-primary">
@@ -421,6 +421,11 @@
 												</a>
 											</li>
 										</ul>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link<?php if($current_file_name == "statistics.php"){echo ' active" aria-current="page';} ?>" href="/views/statistics.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Statistiken der App">
+											<i class="fa fa-fw fa-regular fa-chart-simple"></i> Statistiken
+										</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link<?php if($current_file_name == "about.php"){echo ' active" aria-current="page';} ?>" href="/views/about.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Infos über die App">

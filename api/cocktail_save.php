@@ -67,6 +67,21 @@
 				mysqli_commit($link);
 			}
 		}
+		if(isset($_POST['cocktailtool'])){
+			$cocktailtool = $_POST['cocktailtool'];
+			$stmt_delete_cocktailtoollist = mysqli_prepare($link, $sql_delete_cocktailtoollist);
+			mysqli_stmt_bind_param($stmt_delete_cocktailtoollist, "i", $cocktailid);
+			mysqli_stmt_execute($stmt_delete_cocktailtoollist);
+			mysqli_stmt_close($stmt_delete_cocktailtoollist);
+			mysqli_commit($link);
+			foreach ($cocktailtool as $tool){
+				$stmt_create_cocktailtoollist = mysqli_prepare($link, $sql_create_cocktailtoollist);
+				mysqli_stmt_bind_param($stmt_create_cocktailtoollist, "ii", $cocktailid, $tool);
+				mysqli_stmt_execute($stmt_create_cocktailtoollist);
+				mysqli_stmt_close($stmt_create_cocktailtoollist);
+				mysqli_commit($link);
+			}
+		}
 		if(isset($_POST['cocktailfavorite'])){
 			$cocktailfavorite = $_POST['cocktailfavorite'];
 			$stmt_create_order = mysqli_prepare($link, $sql_create_cocktailfavorite);
@@ -141,6 +156,21 @@
 				mysqli_stmt_bind_param($stmt_create_cocktailtastelist, "ii", $cocktailid, $taste);
 				mysqli_stmt_execute($stmt_create_cocktailtastelist);
 				mysqli_stmt_close($stmt_create_cocktailtastelist);
+				mysqli_commit($link);
+			}
+		}
+		if(isset($_GET['cocktailtool'])){
+			$cocktailtool = $_GET['cocktailtool'];
+			$stmt_delete_cocktailtoollist = mysqli_prepare($link, $sql_delete_cocktailtoollist);
+			mysqli_stmt_bind_param($stmt_delete_cocktailtoollist, "i", $cocktailid);
+			mysqli_stmt_execute($stmt_delete_cocktailtoollist);
+			mysqli_stmt_close($stmt_delete_cocktailtoollist);
+			mysqli_commit($link);
+			foreach ($cocktailtool as $tool){
+				$stmt_create_cocktailtoollist = mysqli_prepare($link, $sql_create_cocktailtoollist);
+				mysqli_stmt_bind_param($stmt_create_cocktailtoollist, "ii", $cocktailid, $tool);
+				mysqli_stmt_execute($stmt_create_cocktailtoollist);
+				mysqli_stmt_close($stmt_create_cocktailtoollist);
 				mysqli_commit($link);
 			}
 		}

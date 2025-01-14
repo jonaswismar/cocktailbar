@@ -143,7 +143,7 @@
 		}
 		mysqli_stmt_close($stmt_sql_cocktailcategorylist);
 ?>
-												<option value="<?php echo $categoryid;?>" data-src="<?php echo $categoryimage;?>"><?php echo $categoryname;?></option>
+												<option value="<?php echo $categoryid;?>" data-src="<?php echo $categoryicon;?>"><?php echo $categoryname;?></option>
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_categorys);
