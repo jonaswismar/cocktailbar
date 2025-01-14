@@ -11,15 +11,15 @@
 				
 				 ?>
 
-				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
+				<nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px;"<?php if($_SESSION["role"] != 1){echo ' hidden';}?>>
 					<div class="container-fluid justify-content-start">
-						<a href="cocktail_edit.php?cocktailid=0" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#newDialog">
 							<i class="fa-duotone fa-solid fa-file fa-fw"></i>
-						</a>
-						<a href="cocktail_edit.php?cocktailid=<?php echo $cocktailid;?>" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>">
+						</button>
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#editDialog">
 							<i class="fa-duotone fa-solid fa-pencil fa-fw"></i>
-						</a>
-						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#deleteQuestion">
+						</button>
+						<button type="button" class="btn btn-primary<?php if($_SESSION["role"] != 1){echo ' disabled';}?>" data-bs-toggle="modal" data-bs-target="#deleteDialog">
 							<i class="fa-duotone fa-solid fa-trash fa-fw"></i>
 						</button>
 					</div>

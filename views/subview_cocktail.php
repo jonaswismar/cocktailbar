@@ -81,7 +81,7 @@
 				mysqli_stmt_close($stmt_sql_favorite);
 				
 				?>
-				<div class="modal fade" id="deleteQuestion">
+				<div class="modal fade" id="deleteDialog">
 					<div class="modal-dialog modal-xl modal-fullscreen-sm-down">
 						<div class="modal-content">
 							<div class="modal-header">

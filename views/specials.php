@@ -35,10 +35,10 @@
 <nav class="navbar navbar-dark fixed-top bg-primary text-white" style="z-index: 900; margin-top: 56px;">
 				<div class="container-fluid justify-content-start">
 					<a href="specials.php?view=day" class="btn btn-primary text-uppercase<?php if($view == "day"){echo ' active" aria-current="page';}?>">
-						<i class="fa-solid fa-calendar-days fa-fw"></i>Tagestipp
+						<i class="fa-solid fa-calendar-days fa-fw"></i> Tagestipp
 					</a>
 					<a href="specials.php?view=rand" class="btn btn-primary text-uppercase<?php if($view == "rand"){echo ' active" aria-current="page';}?>">
-						<i class="bi bi-dice-<?php echo rand(1, 6)?> fa-fw"></i>Zufällig
+						<i class="bi bi-dice-<?php echo rand(1, 6)?> fa-fw"></i> Zufällig
 					</a>
 				</div>
 			</nav>
