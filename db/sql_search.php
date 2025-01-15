@@ -102,6 +102,43 @@ FROM
 HAVING score > 0 ORDER BY score DESC, u.unitname ASC;
 ";
 
+$sql_search_bool_wiki = "SELECT DISTINCT * FROM (
+	SELECT 
+		w.ID, 
+		w.wikiname, 
+		w.content, 
+		w.subcontent, 
+		w.icon, 
+		MATCH(wikiname) AGAINST(? IN BOOLEAN MODE) AS score
+	FROM 
+		wiki w
+	HAVING score > 0
+	UNION ALL
+	SELECT 
+		w.ID, 
+		w.wikiname, 
+		w.content, 
+		w.subcontent, 
+		w.icon, 
+		MATCH(content) AGAINST(? IN BOOLEAN MODE) AS score
+	FROM 
+		wiki w
+	HAVING score > 0
+	UNION ALL
+	SELECT 
+		w.ID, 
+		w.wikiname, 
+		w.content, 
+		w.subcontent, 
+		w.icon, 
+		MATCH(content) AGAINST(? IN BOOLEAN MODE) AS score
+	FROM 
+		wiki w
+	HAVING score > 0
+	) a
+	ORDER BY score DESC, wikiname ASC;
+";
+
 $sql_search_nat_cocktail = "SELECT 
     c.ID, 
     c.cocktailname, 
@@ -205,4 +242,40 @@ FROM
 HAVING score > 0 ORDER BY score DESC, u.unitname ASC;
 ";
 
+$sql_search_nat_wiki = "SELECT DISTINCT * FROM (
+	SELECT 
+		w.ID, 
+		w.wikiname, 
+		w.content, 
+		w.subcontent, 
+		w.icon, 
+		MATCH(wikiname) AGAINST(? IN NATURAL LANGUAGE MODE) AS score
+	FROM 
+		wiki w
+	HAVING score > 0
+	UNION ALL
+	SELECT 
+		w.ID, 
+		w.wikiname, 
+		w.content, 
+		w.subcontent, 
+		w.icon, 
+		MATCH(content) AGAINST(? IN NATURAL LANGUAGE MODE) AS score
+	FROM 
+		wiki w
+	HAVING score > 0
+	UNION ALL
+	SELECT 
+		w.ID, 
+		w.wikiname, 
+		w.content, 
+		w.subcontent, 
+		w.icon, 
+		MATCH(content) AGAINST(? IN NATURAL LANGUAGE MODE) AS score
+	FROM 
+		wiki w
+	HAVING score > 0
+	) a
+	ORDER BY score DESC, wikiname ASC;
+";
 ?>

@@ -23,6 +23,7 @@ require_once "sql_tastes.php";
 require_once "sql_tools.php";
 require_once "sql_units.php";
 require_once "sql_users.php";
+require_once "sql_wikis.php";
 
 $sql_glassware_single = "SELECT 
     glassware.id, 

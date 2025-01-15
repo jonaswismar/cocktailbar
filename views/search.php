@@ -6,11 +6,16 @@
 					</a>
 				</div>
 			</nav>
-	<div class="list-group">
-			<li class="list-group-item list-group-item-primary">Cocktails</li>
-								<div class="list-group flex-fill">
+			<div class="accordion">
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCocktails" aria-expanded="true" aria-controls="collapseCocktails">Cocktails</button>
+					</h2>
+					<div id="collapseCocktails" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
 <?php
-
+try {
 	$stmt_sql_cocktails = mysqli_prepare($link, $sql_search_bool_cocktail);
 	if($_SESSION["searchmode"] == "2"){
 		$stmt_sql_cocktails = mysqli_prepare($link, $sql_search_nat_cocktail);
@@ -129,12 +134,24 @@
 						<i class="bi text-primary text-size-h6-2x<?php if($cockavail == 1){echo " bi-check-lg";}else if($cockbuy == 1){echo " bi-cart";} ?>"></i>
 						<i class="bi text-info bi-heart-fill text-size-h6-2x<?php if($cockfav == 0){echo " d-none";} ?>"></i>
 					</a>
-<?php	}?>
+<?php	}
+	}
+	catch(Exception $e)
+	{
+}?>
 		</div>
-			<li class="list-group-item list-group-item-primary">Zutaten</li>
-			<div class="list-group flex-fill">
-	<?php
-	
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZutaten" aria-expanded="true" aria-controls="collapseZutaten">Zutaten</button>
+					</h2>
+					<div id="collapseZutaten" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+<?php
+try {
 	$stmt_sql_ingredients = mysqli_prepare($link, $sql_search_bool_ingredient);
 	if($_SESSION["searchmode"] == "2"){
 		$stmt_sql_ingredients = mysqli_prepare($link, $sql_search_nat_ingredient);
@@ -143,11 +160,25 @@
 	mysqli_stmt_execute($stmt_sql_ingredients);
 	$sub_ingredients_show_quantity=false;
 	$sub_ingredients_show_count=true;
-	include("sublist_ingredients.php")
+	include("sublist_ingredients.php");
+}
+catch(Exception $e)
+	{
+}
 ?>
-	<li class="list-group-item list-group-item-primary">Kategorie</li>
-			<div class="list-group flex-fill">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKategorie" aria-expanded="true" aria-controls="collapseKategorie">Kategorie</button>
+					</h2>
+					<div id="collapseKategorie" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
 	<?php 
+try {
 	$stmt_sql_categorys = mysqli_prepare($link, $sql_search_bool_category);
 	if($_SESSION["searchmode"] == "2"){
 		$stmt_sql_categorys = mysqli_prepare($link, $sql_search_nat_category);
@@ -168,12 +199,24 @@
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_categorys);
+	}
+	catch(Exception $e)
+	{
+}
 ?>
-</div>
-
-	<li class="list-group-item list-group-item-primary">Zutatentyp</li>
-	<div class="list-group flex-fill">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZutatentyp" aria-expanded="true" aria-controls="collapseZutatentyp">Zutatentyp</button>
+					</h2>
+					<div id="collapseZutatentyp" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
 <?php 
+try {
 	$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_search_bool_ingredienttype);
 	if($_SESSION["searchmode"] == "2"){
 		$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_search_nat_ingredienttype);
@@ -194,11 +237,24 @@
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_ingredienttypes);
+	}
+	catch(Exception $e)
+	{
+}
 ?>
-</div>
-	<li class="list-group-item list-group-item-primary">Geschmacksrichtung</li>
-	<div class="list-group flex-fill">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeschmacksrichtung" aria-expanded="true" aria-controls="collapseGeschmacksrichtung">Geschmacksrichtung</button>
+					</h2>
+					<div id="collapseGeschmacksrichtung" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
 <?php 
+try {
 	$stmt_sql_tastes = mysqli_prepare($link, $sql_search_bool_taste);
 	if($_SESSION["searchmode"] == "2"){
 		$stmt_sql_tastes = mysqli_prepare($link, $sql_search_nat_taste);
@@ -220,12 +276,25 @@
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_tastes);
+	}
+	catch(Exception $e)
+	{
+}
 ?>
+							</div>
+						</div>
+					</div>
 				</div>
-	<li class="list-group-item list-group-item-primary">Einheit</li>
-	<div class="list-group flex-fill">
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEinheit" aria-expanded="true" aria-controls="collapseEinheit">Einheit</button>
+					</h2>
+					<div id="collapseEinheit" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
 <?php 
 	
+try {
 	$stmt_sql_units = mysqli_prepare($link, $sql_search_bool_unit);
 	if($_SESSION["searchmode"] == "2"){
 		$stmt_sql_units = mysqli_prepare($link, $sql_search_nat_unit);
@@ -233,8 +302,7 @@
 	mysqli_stmt_bind_param($stmt_sql_units, "s", $searchstring);
 	mysqli_stmt_execute($stmt_sql_units);
 	$units_all_res=mysqli_stmt_get_result($stmt_sql_units);
-	while($units_all_rows= mysqli_fetch_array($units_all_res, MYSQLI_ASSOC))
-	{
+	while($units_all_rows= mysqli_fetch_array($units_all_res, MYSQLI_ASSOC)){
 ?>
 						<a href="/views/unit.php?unitid=<?php echo $units_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
 							<i class="fa-fw <?php echo $units_all_rows['icon'];?>"></i>
@@ -245,7 +313,46 @@
 <?php
 	}
 	mysqli_stmt_close($stmt_sql_units);
+	}
+	catch(Exception $e)
+	{
+}
+?>							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWiki" aria-expanded="true" aria-controls="collapseWiki">Wiki</button>
+					</h2>
+					<div id="collapseWiki" class="accordion-collapse collapse show" >
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+<?php 
+	
+	$stmt_sql_wikis = mysqli_prepare($link, $sql_search_bool_wiki);
+	if($_SESSION["searchmode"] == "2"){
+		$stmt_sql_wikis = mysqli_prepare($link, $sql_search_nat_wiki);
+	}
+	mysqli_stmt_bind_param($stmt_sql_wikis, "sss", $searchstring, $searchstring, $searchstring);
+	mysqli_stmt_execute($stmt_sql_wikis);
+	$wikis_all_res=mysqli_stmt_get_result($stmt_sql_wikis);
+	while($wikis_all_rows= mysqli_fetch_array($wikis_all_res, MYSQLI_ASSOC)){
 ?>
+						<a href="/views/wiki.php?wikiid=<?php echo $wikis_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+							<i class="fa-fw <?php echo $wikis_all_rows['icon'];?>"></i>
+							<div class="d-flex gap-2 w-100 justify-content-between">
+								<h6 class="mb-0"><?php echo $wikis_all_rows['wikiname'];?></h6>
+							</div>
+						</a>
+<?php
+	}
+	mysqli_stmt_close($stmt_sql_wikis);
+	
+?>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 <?php include("footer.php") ?>

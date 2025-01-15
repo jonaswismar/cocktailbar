@@ -6,7 +6,7 @@ print_r($_GET);
 Readme:
 
 Die Cocktailbar Web App ist als reine PHP Anwendung mit einer MySQL Datenbank angelegt.
-Es werden außer der MySQL Erweiterung prinzippiel keine anderen Erweiterungen benötigt.
+Es werden außer der MySQL Erweiterung prinzippiel keine anderen PHP Erweiterungen benötigt.
 Damit manche Teile des HTML Codes schöner eingerückt werden kann allerdings 'PHP Tidy'
 aktiviert werden.
 
@@ -22,8 +22,8 @@ Zubereitungsarten als neue Kategorie + Zuordnung zu Cocktails
 
 Barzubehör Zuordnung zu Cocktails & Bar
 
-Statistikseite - Anzahl Cocktails, Anzahl zubereitete Cocktails etc.
-
 Rezepte aus Cocktailbuch abtippen
 
 Kommentarfunktion für User
+
+After 18th Hour reparieren
