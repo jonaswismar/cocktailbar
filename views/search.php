@@ -7,13 +7,17 @@
 				</div>
 			</nav>
 			<div class="accordion">
+			
+			
+			
+			
+			
+			
+			
+			
+			
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCocktails" aria-expanded="true" aria-controls="collapseCocktails">Cocktails</button>
-					</h2>
-					<div id="collapseCocktails" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 <?php
 try {
 	$stmt_sql_cocktails = mysqli_prepare($link, $sql_search_bool_cocktail);
@@ -23,41 +27,62 @@ try {
 	mysqli_stmt_bind_param($stmt_sql_cocktails, "s", $searchstring);
 	mysqli_stmt_execute($stmt_sql_cocktails);
 	$cocktails_all_res=mysqli_stmt_get_result($stmt_sql_cocktails);
+	
+	
+	if(mysqli_num_rows($cocktails_all_res) > 0){
+		$expandedCocktails = true;
+	}
+	else{
+		$expandedCocktails = false;
+	}
+	?>
+	
+	
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCocktails" aria-expanded="<?php if($expandedCocktails == true){echo "true";}else{echo "false";}?>" aria-controls="collapseCocktails">Cocktails</button>
+					</h2>
+					<div id="collapseCocktails" class="accordion-collapse collapse<?php if($expandedCocktails == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	
+	
+	
+	<?php
 	while($cocktails_all_rows= mysqli_fetch_array($cocktails_all_res, MYSQLI_ASSOC)){
-	$stmtingred = mysqli_prepare($link, $sql_ingredients_from_cocktail);
-	mysqli_stmt_bind_param($stmtingred, "ii", $_SESSION["bar"], $cocktails_all_rows['ID']);
-	mysqli_stmt_execute($stmtingred);
-	$ingred_all_res=mysqli_stmt_get_result($stmtingred);
-	$ingredlist = "";
-	$cockavail = 1;
-	$cockbuy = 1;
-	$cockfav = 0;
-	if(mysqli_num_rows($ingred_all_res) > 0){
-		while($ingred_all_rows= mysqli_fetch_array($ingred_all_res, MYSQLI_ASSOC)){
-			$ingredlist = $ingredlist . $ingred_all_rows['ingredientname'] . ", ";
-			if($ingred_all_rows['available'] == 0 and $ingred_all_rows['garnish'] == 0 and $ingred_all_rows['optional'] == 0){
-				$cockavail = 0;
-				if($ingred_all_rows['shoppable'] == 0){
-					$cockbuy = 0;
+		$stmtingred = mysqli_prepare($link, $sql_ingredients_from_cocktail);
+		mysqli_stmt_bind_param($stmtingred, "ii", $_SESSION["bar"], $cocktails_all_rows['ID']);
+		mysqli_stmt_execute($stmtingred);
+		$ingred_all_res=mysqli_stmt_get_result($stmtingred);
+		$ingredlist = "";
+		$cockavail = 1;
+		$cockbuy = 1;
+		$cockfav = 0;
+		if(mysqli_num_rows($ingred_all_res) > 0){
+			while($ingred_all_rows= mysqli_fetch_array($ingred_all_res, MYSQLI_ASSOC)){
+				$ingredlist = $ingredlist . $ingred_all_rows['ingredientname'] . ", ";
+				if($ingred_all_rows['available'] == 0 and $ingred_all_rows['garnish'] == 0 and $ingred_all_rows['optional'] == 0){
+					$cockavail = 0;
+					if($ingred_all_rows['shoppable'] == 0){
+						$cockbuy = 0;
+					}
 				}
 			}
 		}
-	}
-	else{
-		$cockavail = 0;
-		$cockbuy = 0;
-	}
-	$ingredlist = rtrim($ingredlist, ' ');
-	$ingredlist = rtrim($ingredlist, ',');
-	$favorites_stmt = mysqli_prepare($link, $sql_cocktailfavorite);
-	mysqli_stmt_bind_param($favorites_stmt, "i", $_SESSION["id"]);
-	mysqli_stmt_execute($favorites_stmt);
-	$favorites_all_res=mysqli_stmt_get_result($favorites_stmt);
-	while($favorites_all_rows= mysqli_fetch_array($favorites_all_res, MYSQLI_ASSOC)){
-		if($cocktails_all_rows['ID'] == $favorites_all_rows['cocktail']){
-			$cockfav = 1;
+		else{
+			$cockavail = 0;
+			$cockbuy = 0;
 		}
-	}
+		$ingredlist = rtrim($ingredlist, ' ');
+		$ingredlist = rtrim($ingredlist, ',');
+		$favorites_stmt = mysqli_prepare($link, $sql_cocktailfavorite);
+		mysqli_stmt_bind_param($favorites_stmt, "i", $_SESSION["id"]);
+		mysqli_stmt_execute($favorites_stmt);
+		$favorites_all_res=mysqli_stmt_get_result($favorites_stmt);
+		while($favorites_all_rows= mysqli_fetch_array($favorites_all_res, MYSQLI_ASSOC)){
+			if($cocktails_all_rows['ID'] == $favorites_all_rows['cocktail']){
+				$cockfav = 1;
+			}
+		}
 ?>
 	<a href="/views/cocktail.php?cocktailid=<?php echo $cocktails_all_rows['ID'];?>" class="<?php if($cockavail == 0){echo "bg-secondary-subtle";}else{echo "bg-primary-subtle";} ?> list-group-item list-group-item-action d-flex gap-2 py-2 d-block<?php if(isset($cocktailid)){if($cocktails_all_rows['ID'] == $cocktailid){echo ' active" aria-current="true';}}?>">
 						<picture>
@@ -144,12 +169,7 @@ try {
 					</div>
 				</div>
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZutaten" aria-expanded="true" aria-controls="collapseZutaten">Zutaten</button>
-					</h2>
-					<div id="collapseZutaten" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 <?php
 try {
 	$stmt_sql_ingredients = mysqli_prepare($link, $sql_search_bool_ingredient);
@@ -158,6 +178,28 @@ try {
 	}
 	mysqli_stmt_bind_param($stmt_sql_ingredients, "is", $_SESSION["bar"], $searchstring);
 	mysqli_stmt_execute($stmt_sql_ingredients);
+	$ingred_all_res=mysqli_stmt_get_result($stmt_sql_ingredients);
+	if(mysqli_num_rows($ingred_all_res) > 0){
+		$expandedIngredients = true;
+	}
+	else{
+		$expandedIngredients = false;
+	}
+	?>
+	
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZutaten" aria-expanded="<?php if($expandedIngredients == true){echo "true";}else{echo "false";}?>" aria-controls="collapseZutaten">Zutaten</button>
+					</h2>
+					<div id="collapseZutaten" class="accordion-collapse collapse<?php if($expandedIngredients == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	
+	<?php
+	mysqli_stmt_bind_param($stmt_sql_ingredients, "is", $_SESSION["bar"], $searchstring);
+	mysqli_stmt_execute($stmt_sql_ingredients);
+	
+	
+	
 	$sub_ingredients_show_quantity=false;
 	$sub_ingredients_show_count=true;
 	include("sublist_ingredients.php");
@@ -171,12 +213,7 @@ catch(Exception $e)
 					</div>
 				</div>
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKategorie" aria-expanded="true" aria-controls="collapseKategorie">Kategorie</button>
-					</h2>
-					<div id="collapseKategorie" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 	<?php 
 try {
 	$stmt_sql_categorys = mysqli_prepare($link, $sql_search_bool_category);
@@ -186,6 +223,21 @@ try {
 	mysqli_stmt_bind_param($stmt_sql_categorys, "s", $searchstring);
 	mysqli_stmt_execute($stmt_sql_categorys);
 	$categorys_all_res=mysqli_stmt_get_result($stmt_sql_categorys);
+		if(mysqli_num_rows($categorys_all_res) > 0){
+		$expandedCategorys = true;
+	}
+	else{
+		$expandedCategorys = false;
+	}
+	?>
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKategorie" aria-expanded="<?php if($expandedCategorys == true){echo "true";}else{echo "false";}?>" aria-controls="collapseKategorie">Kategorie</button>
+					</h2>
+					<div id="collapseKategorie" class="accordion-collapse collapse<?php if($expandedCategorys == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	
+	<?php 
 	while($categorys_all_rows= mysqli_fetch_array($categorys_all_res, MYSQLI_ASSOC))
 	{
 ?>
@@ -209,12 +261,7 @@ try {
 					</div>
 				</div>
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZutatentyp" aria-expanded="true" aria-controls="collapseZutatentyp">Zutatentyp</button>
-					</h2>
-					<div id="collapseZutatentyp" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 <?php 
 try {
 	$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_search_bool_ingredienttype);
@@ -224,6 +271,23 @@ try {
 	mysqli_stmt_bind_param($stmt_sql_ingredienttypes, "s", $searchstring);
 	mysqli_stmt_execute($stmt_sql_ingredienttypes);
 	$ingredienttypes_all_res=mysqli_stmt_get_result($stmt_sql_ingredienttypes);
+	
+	if(mysqli_num_rows($ingredienttypes_all_res) > 0){
+		$expandedIngredienttypes = true;
+	}
+	else{
+		$expandedIngredienttypes = false;
+	}
+	?>
+	
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZutatentyp" aria-expanded="<?php if($expandedIngredienttypes == true){echo "true";}else{echo "false";}?>" aria-controls="collapseZutatentyp">Zutatentyp</button>
+					</h2>
+					<div id="collapseZutatentyp" class="accordion-collapse collapse<?php if($expandedIngredienttypes == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	
+	<?php 
 	while($ingredienttypes_all_rows= mysqli_fetch_array($ingredienttypes_all_res, MYSQLI_ASSOC))
 	{
 ?>
@@ -247,12 +311,7 @@ try {
 					</div>
 				</div>
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeschmacksrichtung" aria-expanded="true" aria-controls="collapseGeschmacksrichtung">Geschmacksrichtung</button>
-					</h2>
-					<div id="collapseGeschmacksrichtung" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 <?php 
 try {
 	$stmt_sql_tastes = mysqli_prepare($link, $sql_search_bool_taste);
@@ -262,6 +321,22 @@ try {
 	mysqli_stmt_bind_param($stmt_sql_tastes, "s", $searchstring);
 	mysqli_stmt_execute($stmt_sql_tastes);
 	$tastes_all_res=mysqli_stmt_get_result($stmt_sql_tastes);
+	
+	if(mysqli_num_rows($tastes_all_res) > 0){
+		$expandedTastes = true;
+	}
+	else{
+		$expandedTastes = false;
+	}
+	?>
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeschmacksrichtung" aria-expanded="<?php if($expandedTastes == true){echo "true";}else{echo "false";}?>" aria-controls="collapseGeschmacksrichtung">Geschmacksrichtung</button>
+					</h2>
+					<div id="collapseGeschmacksrichtung" class="accordion-collapse collapse<?php if($expandedTastes == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	
+	<?php 
 	while($tastes_all_rows= mysqli_fetch_array($tastes_all_res, MYSQLI_ASSOC))
 	{
 ?>
@@ -286,12 +361,7 @@ try {
 					</div>
 				</div>
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEinheit" aria-expanded="true" aria-controls="collapseEinheit">Einheit</button>
-					</h2>
-					<div id="collapseEinheit" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 <?php 
 	
 try {
@@ -302,6 +372,21 @@ try {
 	mysqli_stmt_bind_param($stmt_sql_units, "s", $searchstring);
 	mysqli_stmt_execute($stmt_sql_units);
 	$units_all_res=mysqli_stmt_get_result($stmt_sql_units);
+	
+	if(mysqli_num_rows($units_all_res) > 0){
+		$expandedUnits = true;
+	}
+	else{
+		$expandedUnits = false;
+	}
+	?>
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEinheit" aria-expanded="<?php if($expandedUnits == true){echo "true";}else{echo "false";}?>" aria-controls="collapseEinheit">Einheit</button>
+					</h2>
+					<div id="collapseEinheit" class="accordion-collapse collapse<?php if($expandedUnits == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	<?php
 	while($units_all_rows= mysqli_fetch_array($units_all_res, MYSQLI_ASSOC)){
 ?>
 						<a href="/views/unit.php?unitid=<?php echo $units_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">
@@ -322,12 +407,7 @@ try {
 					</div>
 				</div>
 				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWiki" aria-expanded="true" aria-controls="collapseWiki">Wiki</button>
-					</h2>
-					<div id="collapseWiki" class="accordion-collapse collapse show" >
-						<div class="accordion-body">
-							<div class="list-group flex-fill">
+					
 <?php 
 	
 	$stmt_sql_wikis = mysqli_prepare($link, $sql_search_bool_wiki);
@@ -337,6 +417,23 @@ try {
 	mysqli_stmt_bind_param($stmt_sql_wikis, "sss", $searchstring, $searchstring, $searchstring);
 	mysqli_stmt_execute($stmt_sql_wikis);
 	$wikis_all_res=mysqli_stmt_get_result($stmt_sql_wikis);
+	
+	
+	if(mysqli_num_rows($wikis_all_res) > 0){
+		$expandedWiki = true;
+	}
+	else{
+		$expandedWiki = false;
+	}
+	
+	?>
+	<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWiki" aria-expanded="<?php if($expandedWiki == true){echo "true";}else{echo "false";}?>" aria-controls="collapseWiki">Wiki</button>
+					</h2>
+					<div id="collapseWiki" class="accordion-collapse collapse<?php if($expandedWiki == true){echo " show";}?>">
+						<div class="accordion-body">
+							<div class="list-group flex-fill">
+	<?php 
 	while($wikis_all_rows= mysqli_fetch_array($wikis_all_res, MYSQLI_ASSOC)){
 ?>
 						<a href="/views/wiki.php?wikiid=<?php echo $wikis_all_rows['ID'];?>" class="list-group-item list-group-item-action d-flex gap-3 py-3">

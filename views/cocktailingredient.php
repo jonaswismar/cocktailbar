@@ -46,7 +46,7 @@
 											</select>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="ingredientquantity" class="form-control form-control-lg" type="number" data-toggle="tooltip" data-placement="bottom" title="Menge der Zutat">
+										<input name="ingredientquantity" class="form-control form-control-lg" type="number" step="0.1" data-toggle="tooltip" data-placement="bottom" title="Menge der Zutat">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<select name="ingredientunit" class="form-select form-select-lg" data-toggle="tooltip" data-placement="bottom" title="Einheit">
@@ -131,7 +131,7 @@
 								<input name="cocktailid" class="form-control" type="hidden" value="<?php echo $cocktailid;?>" readonly>
 								<input name="cocktailingredientid" class="form-control" type="hidden" value="<?php echo $ingred_all_rows['cocktailingredientlist_ID'];?>" readonly>
 								<input name="ingredientid" class="form-control" type="hidden" value="<?php echo $ingred_all_rows['ingredient_ID'];?>" readonly>
-								<input name="quantity" class="form-control form-control-lg" type="number" placeholder="0" value="<?php echo $ingred_all_rows['quantity'];?>">
+								<input name="quantity" class="form-control form-control-lg" type="number" step="0.1" placeholder="0" value="<?php echo $ingred_all_rows['quantity'];?>">
 							</div>
 							<div class="align-self-center gap-0 col-4">
 								<select name="unit" class="align-self-center form-select form-select-lg">

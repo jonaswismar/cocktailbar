@@ -223,7 +223,7 @@
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Menü ein/ausblenden" data-toggle="tooltip" data-placement="bottom" title="Menü ein/ausblenden">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div class="ms-auto<?php if($current_file_name == "cocktails.php"||$current_file_name == "cocktail.php"||$current_file_name == "cocktailingredient.php"||$current_file_name == "ingredients.php"||$current_file_name == "ingredient.php"||$current_file_name == "wikis.php"||$current_file_name == "wiki.php"||$current_file_name == "search.php"){}else{echo ' d-none invisible';}?>">
+						<div class="ms-auto">
 							<form class="btn-group" action="/views/search.php">
 								<input type="text" id="search" class="form-control" placeholder="Suchen.."<?php if(!empty($searchstring)){ echo ' value="' . $searchstring . '"';} ?> name="search">
 								<button type="submit" class="btn btn-primary">
@@ -238,20 +238,6 @@
 							<a href="javascript:history.go(-1)" type="button" class="btn btn-primary navbutton" role="button" data-toggle="tooltip" data-placement="bottom" title="Springt eine Seite zurück">
 								<i class="fa fa-fw fa-regular fa-left-long"></i>
 							</a>
-						</div>
-						<div class="btn-group<?php if($_SESSION["role"] != 1){echo ' d-none invisible';}?>">
-							<button type="button" class="btn btn-primary dropdown-toggle navbutton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fa fa-fw fa-regular fa-ellipsis-stroke-vertical"></i>
-							</button>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Zutat</a>
-								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-martini-glass-citrus"></i> Neuer Cocktail</a>
-								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-filter-list"></i> Neue Kategorie</a>
-								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-cubes-stacked"></i> Neuer Zutatentyp</a>
-								<a class="dropdown-item" href="#"><i class="fa fa-fw fa-regular fa-lemon"></i> Neue Geschmacksrichtung</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Separated link</a>
-							</div>
 						</div>
 						<div class="offcanvas offcanvas-start text-bg-dark bg-primary" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
 							<div class="offcanvas-header">
@@ -355,13 +341,13 @@
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "statistics.php"){echo ' active" aria-current="page';} ?>" href="/views/statistics.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Statistiken der App">
-											<i class="fa fa-fw fa-regular fa-chart-simple"></i> Statistiken
+										<a class="nav-link<?php if($current_file_name == "wikis.php"||$current_file_name == "wiki.php"){echo ' active" aria-current="page';} ?>" href="/views/wikis.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch das Wiki der App">
+											<i class="fa fa-fw fa-brands fa-wikipedia-w"></i> Wiki
 										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link<?php if($current_file_name == "wikis.php"||$current_file_name == "wiki.php"){echo ' active" aria-current="page';} ?>" href="/views/wikis.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch das Wiki der App">
-											<i class="fa fa-fw fa-brands fa-wikipedia-w"></i> Wiki
+										<a class="nav-link<?php if($current_file_name == "statistics.php"){echo ' active" aria-current="page';} ?>" href="/views/statistics.php" data-toggle="tooltip" data-placement="bottom" title="Blättere durch Statistiken der App">
+											<i class="fa fa-fw fa-regular fa-chart-simple"></i> Statistiken
 										</a>
 									</li>
 									<li class="nav-item">

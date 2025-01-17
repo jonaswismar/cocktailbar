@@ -8,9 +8,6 @@
 	}
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
-	print_r($_POST);
-	print_r($_GET);
-	
 	$cocktailid = 0;
 	$ingredientidlist;
 	$ingredientquantity = 0;
@@ -64,13 +61,13 @@
 		foreach ($ingredientidlist as $ingredientid){
 			if($cocktailingredientid == 0){
 				$stmt_sql_cocktailingredientlist = mysqli_prepare($link, $sql_create_cocktailingredientlist);
-				mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iiiiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish);
+				mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iidiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish);
 				mysqli_stmt_execute($stmt_sql_cocktailingredientlist);
 				mysqli_stmt_close($stmt_sql_cocktailingredientlist);
 			}
 			else{
 				$stmt_sql_cocktailingredientlist = mysqli_prepare($link, $sql_update_cocktailingredientlist);
-				mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iiiiiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish, $cocktailingredientid);
+				mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iidiiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish, $cocktailingredientid);
 				mysqli_stmt_execute($stmt_sql_cocktailingredientlist);
 				mysqli_stmt_close($stmt_sql_cocktailingredientlist);
 			}
