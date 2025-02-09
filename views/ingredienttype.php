@@ -69,7 +69,7 @@
 										<input name="ingredienttypeicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="ingredienttypename" class="form-control form-control-lg" type="text" placeholder="Name des Zutatentyp" data-toggle="tooltip" data-placement="bottom" title="Name des Zutatentyp">
+										<input name="ingredienttypename" class="form-control form-control-lg" type="text" placeholder="Name des Zutatentyp" data-toggle="tooltip" data-placement="bottom" title="Name des Zutatentyp" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="ingredienttypedescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Zutatentyp" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung des Zutatentyp"></textarea>
@@ -99,7 +99,7 @@
 										<input name="ingredienttypeicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $image;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="ingredienttypename" class="form-control form-control-lg" type="text" placeholder="Name des Zutatentyp" data-toggle="tooltip" data-placement="bottom" title="Name des Zutatentyp" value="<?php echo $typename;?>">
+										<input name="ingredienttypename" class="form-control form-control-lg" type="text" placeholder="Name des Zutatentyp" data-toggle="tooltip" data-placement="bottom" title="Name des Zutatentyp" value="<?php echo $typename;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="ingredientdescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Zutatentyp" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung des Zutatentyp"><?php echo $description;?></textarea>

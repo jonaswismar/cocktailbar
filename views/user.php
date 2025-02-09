@@ -50,9 +50,9 @@
 										<input name="usericon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="username" class="form-control form-control-lg" type="text" placeholder="Name des Benutzers" data-toggle="tooltip" data-placement="bottom" title="Name des Benutzers">
+										<input name="username" class="form-control form-control-lg" type="text" placeholder="Name des Benutzers" data-toggle="tooltip" data-placement="bottom" title="Name des Benutzers" required>
 									</div>
-						<select name="userrole" autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Benutzerrolle">
+						<select name="userrole" autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Benutzerrolle" required>
 <?php 
 	$stmt_sql_roles = mysqli_prepare($link, $sql_roles);
 	mysqli_stmt_execute($stmt_sql_roles);
@@ -93,9 +93,9 @@
 										<input name="usericon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $userimage;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="username" class="form-control form-control-lg" type="text" placeholder="Name des Benutzers" data-toggle="tooltip" data-placement="bottom" title="Name des Benutzers" value="<?php echo $username;?>">
+										<input name="username" class="form-control form-control-lg" type="text" placeholder="Name des Benutzers" data-toggle="tooltip" data-placement="bottom" title="Name des Benutzers" value="<?php echo $username;?>" required>
 									</div>
-						<select name="userrole" autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Benutzerrolle">
+						<select name="userrole" autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Benutzerrolle" required>
 <?php 
 	$stmt_sql_roles = mysqli_prepare($link, $sql_roles);
 	mysqli_stmt_execute($stmt_sql_roles);

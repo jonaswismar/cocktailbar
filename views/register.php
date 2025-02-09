@@ -144,7 +144,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<span class="invalid-feedback"><?php echo $language_err; ?></span>
 				</div>
 				<div class="form-floating">
-					<select type="barname" name="barname" class="form-select <?php echo (!empty($barname_err)) ? 'is-invalid' : ''; ?>" id="floatingBarDrop" data-toggle="tooltip" data-placement="bottom" title="Standard Bar">
+					<select type="barname" name="barname" class="form-select <?php echo (!empty($barname_err)) ? 'is-invalid' : ''; ?>" id="floatingBarDrop" data-toggle="tooltip" data-placement="bottom" title="Standard Bar" required>
 <?php
 	$stmt_sql_bars = mysqli_prepare($link, $sql_bars);
 	mysqli_stmt_execute($stmt_sql_bars);
@@ -161,17 +161,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<span class="invalid-feedback"><?php echo $barname_err; ?></span>
 				</div>
 				<div class="form-floating">
-					<input type="username" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="floatingInput" placeholder="Benutzername" value="<?php echo $username; ?>" data-toggle="tooltip" data-placement="bottom" title="Benutzername">
+					<input type="username" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="floatingInput" placeholder="Benutzername" value="<?php echo $username; ?>" data-toggle="tooltip" data-placement="bottom" title="Benutzername" required>
 					<label for="floatingInput">Benutzername</label>
 					<span class="invalid-feedback"><?php echo $username_err; ?></span>
 				</div>
 				<div class="form-floating">
-					<input type="password" name="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Passwort" value="<?php echo $confirm_password; ?>" style="margin-bottom: 0px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;border-bottom-left-radius: 0;" data-toggle="tooltip" data-placement="bottom" title="Passwort">
+					<input type="password" name="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Passwort" value="<?php echo $confirm_password; ?>" style="margin-bottom: 0px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;border-bottom-left-radius: 0;" data-toggle="tooltip" data-placement="bottom" title="Passwort" required>
 					<label for="floatingPassword">Passwort</label>
 					<span class="invalid-feedback"><?php echo $password_err; ?></span>
 				</div>
 				<div class="form-floating">
-					<input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingConfirmPassword" placeholder="Password" value="<?php echo $confirm_password; ?>" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: var(--bs-border-radius);border-bottom-left-radius: var(--bs-border-radius);" data-toggle="tooltip" data-placement="bottom" title="Passwort bestätigen">
+					<input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingConfirmPassword" placeholder="Password" value="<?php echo $confirm_password; ?>" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: var(--bs-border-radius);border-bottom-left-radius: var(--bs-border-radius);" data-toggle="tooltip" data-placement="bottom" title="Passwort bestätigen" required>
 					<label for="floatingConfirmPassword">Passwort bestätigen</label>
 					<span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
 				</div>

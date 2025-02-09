@@ -51,10 +51,10 @@
 								<div class="modal-body">
 									<input name="toolid" class="form-control" type="hidden" value="0" readonly>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="toolicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
+										<input name="toolicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="toolname" class="form-control form-control-lg" type="text" placeholder="Name des Bar Werkzeug" data-toggle="tooltip" data-placement="bottom" title="Name des Bar Werkzeug">
+										<input name="toolname" class="form-control form-control-lg" type="text" placeholder="Name des Bar Werkzeug" data-toggle="tooltip" data-placement="bottom" title="Name des Bar Werkzeug" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="tooldescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Bar Werkzeug" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung des Bar Werkzeug"></textarea>
@@ -81,10 +81,10 @@
 								<div class="modal-body">
 									<input name="toolid" class="form-control" type="hidden" value="<?php echo $toolid;?>" readonly>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="toolicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $toolicon;?>">
+										<input name="toolicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $toolicon;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="toolname" class="form-control form-control-lg" type="text" placeholder="Name des Bar Werkzeug" data-toggle="tooltip" data-placement="bottom" title="Name des Bar Werkzeug" value="<?php echo $toolname;?>">
+										<input name="toolname" class="form-control form-control-lg" type="text" placeholder="Name des Bar Werkzeug" data-toggle="tooltip" data-placement="bottom" title="Name des Bar Werkzeug" value="<?php echo $toolname;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="tooldescription" class="form-control auto-resize" type="text" placeholder="Beschreibung des Bar Werkzeug" data-toggle="tooltip" data-placement="bottom" title="Beschreibung des Bar Werkzeug" rows="25"><?php echo $tooldescription;?></textarea>

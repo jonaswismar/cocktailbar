@@ -77,7 +77,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php include("header_login.php") ?>
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 				<div class="mb-4 d-flex justify-content-center">
-					<div class="logo-blurred-edge"></div>
+					<!--<div class="logo-blurred-edge"></div>-->
+					
+					
+					<picture>
+<?php
+	$currentfilepath = dirname(__DIR__, 1);
+		if(file_exists($currentfilepath .'/img/logo/png700/default.png')){
+		echo '							<source srcset="../img/logo/png700/default.png" type="image/png" media="(min-width: 1600px)">
+';
+	}
+	if(file_exists($currentfilepath .'/img/logo/png512/default.png')){
+		echo '							<source srcset="../img/logo/png512/default.png" type="image/png" media="(min-width: 960px)">
+';
+	}
+	if(file_exists($currentfilepath .'/img/logo/png256/default.png')){
+		echo '							<source srcset="../img/logo/png256/default.png" type="image/png">
+';
+	}
+?>
+							<img loading="lazy" src="../img/logo/png256/default.png" style="text-align: center;">
+						</picture>
 				</div>
 				<h1 class="h3 mb-3 fw-normal">Bitte anmelden</h1>
 				<?php 
@@ -86,11 +106,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					}
 				?>
 				<div class="form-floating">
-					<input type="username" name="username" class="form-control" id="floatingInput" placeholder="Benutzername" data-toggle="tooltip" data-placement="bottom" title="Benutzername">
+					<input type="username" name="username" class="form-control" id="floatingInput" placeholder="Benutzername" data-toggle="tooltip" data-placement="bottom" title="Benutzername" required>
 					<label for="floatingInput">Benutzername</label>
 				</div>
 				<div class="form-floating">
-					<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Passwort" data-toggle="tooltip" data-placement="bottom" title="Passwort">
+					<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Passwort" data-toggle="tooltip" data-placement="bottom" title="Passwort" required>
 					<label for="floatingPassword">Passwort</label>
 				</div>
 				<div class="form-check text-start my-3">

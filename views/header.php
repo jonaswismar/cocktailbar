@@ -6,6 +6,7 @@
 		header("location: login.php");
 		exit;
 	}
+	require_once "../cfg/config.php";
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
 	$current_file_name = basename($_SERVER['PHP_SELF']);
@@ -22,6 +23,7 @@
 	<head>
 		<title>Cocktailbar Web App</title>
 		<meta charset="utf-8">
+		<meta name="csrf_token" content="<?php echo createToken(); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="Cocktailbar Web App">
 		<meta name="author" content="Jonas Wismar">

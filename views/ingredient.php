@@ -90,13 +90,13 @@
 								<div class="modal-body">
 									<input name="ingredientid" class="form-control" type="hidden" value="0" readonly>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="ingredientname" class="form-control form-control-lg" type="text" placeholder="Name der Zutat" data-toggle="tooltip" data-placement="bottom" title="Name der Zutat">
+										<input name="ingredientname" class="form-control form-control-lg" type="text" placeholder="Name der Zutat" data-toggle="tooltip" data-placement="bottom" title="Name der Zutat" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<input name="ingredientimage" class="form-control form-control-lg" type="text" placeholder="Bildname der Zutat" data-toggle="tooltip" data-placement="bottom" title="Bildname der Zutat">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<select id="input-tags-ingredienttype-new" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Zutatentyp">
+										<select id="input-tags-ingredienttype-new" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Zutatentyp" required>
 <?php 
 	$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_ingredienttypes);
 	mysqli_stmt_execute($stmt_sql_ingredienttypes);
@@ -176,13 +176,13 @@
 								<div class="modal-body">
 									<input name="ingredientid" class="form-control" type="hidden" value="<?php echo $id;?>" readonly>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="ingredientname" class="form-control form-control-lg" type="text" placeholder="Name der Zutat" data-toggle="tooltip" data-placement="bottom" title="Name der Zutat" value="<?php echo $ingredientname;?>">
+										<input name="ingredientname" class="form-control form-control-lg" type="text" placeholder="Name der Zutat" data-toggle="tooltip" data-placement="bottom" title="Name der Zutat" value="<?php echo $ingredientname;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<input name="ingredientimage" class="form-control form-control-lg" type="text" placeholder="Bildname der Zutat" data-toggle="tooltip" data-placement="bottom" title="Bildname der Zutat"value="<?php echo $image;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<select id="input-tags-ingredienttype-edit" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Zutatentyp">
+										<select id="input-tags-ingredienttype-edit" name="ingredienttype[]" multiple autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Zutatentyp" required>
 <?php 
 	$stmt_sql_ingredienttypes = mysqli_prepare($link, $sql_ingredienttypes);
 	mysqli_stmt_execute($stmt_sql_ingredienttypes);

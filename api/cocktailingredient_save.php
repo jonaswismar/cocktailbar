@@ -9,7 +9,7 @@
 	require_once "../db/sql_config.php";
 	require_once "../db/sql_statements.php";
 	$cocktailid = 0;
-	$ingredientidlist;
+	$ingredientid;
 	$ingredientquantity = 0;
 	$ingredientunit = 0;
 	$ingredientgarnish = 0;
@@ -19,7 +19,7 @@
 		$cocktailid =  $_POST['cocktailid'];
 	}
 	if(isset($_POST['ingredientid'])){
-		$ingredientidlist =  $_POST['ingredientid'];
+		$ingredientid =  $_POST['ingredientid'];
 	}
 	if(isset($_POST['ingredientquantity'])){
 		$ingredientquantity =  $_POST['ingredientquantity'];
@@ -40,7 +40,7 @@
 		$cocktailid =  $_GET['cocktailid'];
 	}
 	if(isset($_GET['ingredientid'])){
-		$ingredientidlist =  $_GET['ingredientid'];
+		$ingredientid =  $_GET['ingredientid'];
 	}
 	if(isset($_GET['ingredientquantity'])){
 		$ingredientquantity =  $_GET['ingredientquantity'];
@@ -57,20 +57,18 @@
 	if(isset($_GET['cocktailingredientid'])){
 		$cocktailingredientid =  $_GET['cocktailingredientid'];
 	}
-	if($cocktailid != 0 && $ingredientquantity != 0 && $ingredientunit != 0){
-		foreach ($ingredientidlist as $ingredientid){
-			if($cocktailingredientid == 0){
-				$stmt_sql_cocktailingredientlist = mysqli_prepare($link, $sql_create_cocktailingredientlist);
-				mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iidiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish);
-				mysqli_stmt_execute($stmt_sql_cocktailingredientlist);
-				mysqli_stmt_close($stmt_sql_cocktailingredientlist);
-			}
-			else{
-				$stmt_sql_cocktailingredientlist = mysqli_prepare($link, $sql_update_cocktailingredientlist);
-				mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iidiiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish, $cocktailingredientid);
-				mysqli_stmt_execute($stmt_sql_cocktailingredientlist);
-				mysqli_stmt_close($stmt_sql_cocktailingredientlist);
-			}
+	if($cocktailid != 0 && $ingredientid != 0 && $ingredientquantity != 0 && $ingredientunit != 0){
+		if($cocktailingredientid == 0){
+			$stmt_sql_cocktailingredientlist = mysqli_prepare($link, $sql_create_cocktailingredientlist);
+			mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iidiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish);
+			mysqli_stmt_execute($stmt_sql_cocktailingredientlist);
+			mysqli_stmt_close($stmt_sql_cocktailingredientlist);
+		}
+		else{
+			$stmt_sql_cocktailingredientlist = mysqli_prepare($link, $sql_update_cocktailingredientlist);
+			mysqli_stmt_bind_param($stmt_sql_cocktailingredientlist, "iidiiii", $cocktailid, $ingredientid, $ingredientquantity, $ingredientunit, $ingredientoptional, $ingredientgarnish, $cocktailingredientid);
+			mysqli_stmt_execute($stmt_sql_cocktailingredientlist);
+			mysqli_stmt_close($stmt_sql_cocktailingredientlist);
 		}
 	}
 	mysqli_commit($link);

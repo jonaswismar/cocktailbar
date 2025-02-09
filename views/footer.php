@@ -17,6 +17,7 @@
 		<script src="../assets/js/bootstrap-color-modes.js"></script>
 		<script src="../assets/js/tom-select.complete.min.js"></script>
 		<script src="../assets/js/jquery-3.7.1.min.js"></script>
+		<script src="../assets/js/jquery.canvasjs.min.js"></script>
 		<script src="../assets/js/rating.js"></script>
 		<script>
 			window.onload = function() {

@@ -27,7 +27,7 @@
 								<div class="modal-body">
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<input name="cocktailid" class="form-control" type="hidden" value="<?php echo $cocktailid;?>" readonly>
-										<select id="input-tags-ingredient-new" name="ingredientid[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Zutat">
+										<select id="input-tags-ingredient-new" name="ingredientid[]" autocomplete="off" multiple class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Zutat" required>
 <?php 
 	$stmt_sql_allingredients = mysqli_prepare($link, $sql_all_ingredients);
 	mysqli_stmt_bind_param($stmt_sql_allingredients, "i", $_SESSION["bar"]);
@@ -46,10 +46,10 @@
 											</select>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="ingredientquantity" class="form-control form-control-lg" type="number" step="0.1" data-toggle="tooltip" data-placement="bottom" title="Menge der Zutat">
+										<input name="ingredientquantity" class="form-control form-control-lg" type="number" step="0.1" data-toggle="tooltip" data-placement="bottom" title="Menge der Zutat" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<select name="ingredientunit" class="form-select form-select-lg" data-toggle="tooltip" data-placement="bottom" title="Einheit">
+										<select name="ingredientunit" class="form-select form-select-lg" data-toggle="tooltip" data-placement="bottom" title="Einheit" required>
 <?php 
 	$stmt_sql_units = mysqli_prepare($link, $sql_units);
 	mysqli_stmt_execute($stmt_sql_units);
@@ -121,20 +121,29 @@
 ';
 	}
 ?>
-						<img decoding = "async" loading="lazy" src="../img/ingredients/png48/unbekannt.png" alt="<?php echo $ingred_all_rows['ingredientname'];?>" class="text-dark border border-secondary rounded-circle shadow-4-strong bg-white flex-shrink-0" style="text-align: center;">
+							<source srcset="../img/ingredients/png128/unbekannt.png" type="image/png" media="(min-width: 1600px)">
+							<source srcset="../img/ingredients/png64/unbekannt.png" type="image/png" media="(min-width: 960px)">
+							<source srcset="../img/ingredients/png48/unbekannt.png" type="image/png">
+							<img decoding = "async" loading="lazy" src="../img/ingredients/png48/unbekannt.png" alt="<?php echo $ingred_all_rows['ingredientname'];?>" class="text-dark border border-secondary rounded-circle shadow-4-strong bg-white flex-shrink-0" style="text-align: center;">
 					</picture>
 					<p class="mb-0 align-self-center text-size-h6"><?php echo $ingred_all_rows['ingredientname'];?></p>
 					<div class="flex-grow-1 d-flex gap-2 w-25 flex-nowrap"></div>
 					<form class="align-self-center" action="/api/cocktailingredient_save.php">
 						<fieldset class="row">
-							<div class="align-self-center gap-0 col-4">
+							<div class="align-self-center gap-0 col-1">
 								<input name="cocktailid" class="form-control" type="hidden" value="<?php echo $cocktailid;?>" readonly>
 								<input name="cocktailingredientid" class="form-control" type="hidden" value="<?php echo $ingred_all_rows['cocktailingredientlist_ID'];?>" readonly>
 								<input name="ingredientid" class="form-control" type="hidden" value="<?php echo $ingred_all_rows['ingredient_ID'];?>" readonly>
-								<input name="quantity" class="form-control form-control-lg" type="number" step="0.1" placeholder="0" value="<?php echo $ingred_all_rows['quantity'];?>">
+								<input name="ingredientgarnish" class="form-control form-control-lg form-check-input" id="ingredientgarnish" type="checkbox" data-toggle="tooltip" data-placement="bottom" title="Garnierung">
 							</div>
-							<div class="align-self-center gap-0 col-4">
-								<select name="unit" class="align-self-center form-select form-select-lg">
+							<div class="align-self-center gap-0 col-1">
+								<input name="ingredientoptional" class="form-control form-control-lg form-check-input" id="ingredientoptional" type="checkbox" data-toggle="tooltip" data-placement="bottom" title="Optional">
+							</div>
+							<div class="align-self-center gap-0 col-3">
+								<input name="ingredientquantity" class="form-control form-control-lg" type="number" step="0.1" placeholder="0" value="<?php echo $ingred_all_rows['quantity'];?>" data-toggle="tooltip" data-placement="bottom" title="Anzahl">
+							</div>
+							<div class="align-self-center gap-0 col-3">
+								<select name="ingredientunit" class="align-self-center form-select form-select-lg" data-toggle="tooltip" data-placement="bottom" title="Einheit">
 <?php 
 	$stmt_sql_units = mysqli_prepare($link, $sql_units);
 	mysqli_stmt_execute($stmt_sql_units);
@@ -152,7 +161,7 @@
 								<input class="align-self-center btn btn-primary" type="submit" name="save" value="Speichern">
 							</div>
 							<div class="align-self-center gap-0 col-2">
-								<a href="/api/cocktailingredient_delete.php?cocktailid=<?php echo $cocktailid;?>&ingredientid=<?php echo $ingred_all_rows['ingredient_ID'];?>" class="btn btn-danger">Löschen</a>
+								<a href="/api/cocktailingredient_delete.php?cocktailingredientid=<?php echo $ingred_all_rows['cocktailingredientlist_ID'];?>&cocktailid=<?php echo $cocktailid;?>&ingredientid=<?php echo $ingred_all_rows['ingredient_ID'];?>" class="btn btn-danger">Löschen</a>
 							</div>
 						</fieldset>
 					</form>

@@ -62,7 +62,7 @@
 										<input name="tasteicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="tastename" class="form-control form-control-lg" type="text" placeholder="Name der Geschmacksrichtung" data-toggle="tooltip" data-placement="bottom" title="Name der Geschmacksrichtung">
+										<input name="tastename" class="form-control form-control-lg" type="text" placeholder="Name der Geschmacksrichtung" data-toggle="tooltip" data-placement="bottom" title="Name der Geschmacksrichtung" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="tastedescription" class="form-control auto-resize" type="text" placeholder="Beschreibung der Geschmacksrichtung" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung der Geschmacksrichtung"></textarea>
@@ -92,7 +92,7 @@
 										<input name="tasteicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $tasteimage;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="tastename" class="form-control form-control-lg" type="text" placeholder="Name der Geschmacksrichtung" data-toggle="tooltip" data-placement="bottom" title="Name der Geschmacksrichtung" value="<?php echo $tastename;?>">
+										<input name="tastename" class="form-control form-control-lg" type="text" placeholder="Name der Geschmacksrichtung" data-toggle="tooltip" data-placement="bottom" title="Name der Geschmacksrichtung" value="<?php echo $tastename;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="tastedescription" class="form-control auto-resize" type="text" placeholder="Beschreibung der Geschmacksrichtung" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung der Geschmacksrichtung"><?php echo $tastedescription;?></textarea>

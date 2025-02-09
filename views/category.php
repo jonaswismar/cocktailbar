@@ -54,7 +54,7 @@
 										<input name="categoryicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="categoryname" class="form-control form-control-lg" type="text" placeholder="Name der Kategorie" data-toggle="tooltip" data-placement="bottom" title="Name der Kategorie">
+										<input name="categoryname" class="form-control form-control-lg" type="text" placeholder="Name der Kategorie" data-toggle="tooltip" data-placement="bottom" title="Name der Kategorie" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="categorydescription" class="form-control auto-resize" type="text" placeholder="Beschreibung der Kategorie" rows="25" data-toggle="tooltip" data-placement="bottom" title="Beschreibung der Kategorie"></textarea>
@@ -84,7 +84,7 @@
 										<input name="categoryicon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $categoryicon;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="categoryname" class="form-control form-control-lg" type="text" placeholder="Name der Kategorie" data-toggle="tooltip" data-placement="bottom" title="Name der Kategorie" value="<?php echo $categoryname;?>">
+										<input name="categoryname" class="form-control form-control-lg" type="text" placeholder="Name der Kategorie" data-toggle="tooltip" data-placement="bottom" title="Name der Kategorie" value="<?php echo $categoryname;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<textarea name="categorydescription" class="form-control auto-resize" type="text" placeholder="Beschreibung der Kategorie" data-toggle="tooltip" data-placement="bottom" title="Beschreibung der Kategorie" rows="25"><?php echo $categorydescription;?></textarea>

@@ -16,12 +16,12 @@ ToDo:
 Bilder Upload und speichern im Filesystem/Datenbank
 Relation Bilder zu restlichen Objekten
 
-Wiki mit Beiträgen aus Cocktailbuch
-
 Zubereitungsarten als neue Kategorie + Zuordnung zu Cocktails
 
 Barzubehör Zuordnung zu Cocktails & Bar
 
-Rezepte aus Cocktailbuch abtippen
-
 Kommentarfunktion für User
+
+Ähnliche Cocktails anhand Zutatenliste in Cocktail Tabelle
+
+Filter für verschiedene Kategorieren etc. einbauen

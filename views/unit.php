@@ -58,7 +58,7 @@
 										<input name="uniticon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="unitname" class="form-control form-control-lg" type="text" placeholder="Name der Einheit" data-toggle="tooltip" data-placement="bottom" title="Name der Einheit">
+										<input name="unitname" class="form-control form-control-lg" type="text" placeholder="Name der Einheit" data-toggle="tooltip" data-placement="bottom" title="Name der Einheit" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<input name="unitshort" class="form-control form-control-lg" type="text" placeholder="Kürzel (Einzahl)" data-toggle="tooltip" data-placement="bottom" title="Kürzel (Einzahl)">
@@ -92,7 +92,7 @@
 										<input name="uniticon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $unitimage;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="unitname" class="form-control form-control-lg" type="text" placeholder="Name der Einheit" data-toggle="tooltip" data-placement="bottom" title="Name der Einheit" value="<?php echo $unitname;?>">
+										<input name="unitname" class="form-control form-control-lg" type="text" placeholder="Name der Einheit" data-toggle="tooltip" data-placement="bottom" title="Name der Einheit" value="<?php echo $unitname;?>" required>
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<input name="unitshort" class="form-control form-control-lg" type="text" placeholder="Kürzel (Einzahl)" data-toggle="tooltip" data-placement="bottom" title="Kürzel (Einzahl)" value="<?php echo $unitshort;?>">

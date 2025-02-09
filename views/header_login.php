@@ -1,8 +1,12 @@
+<?php
+	require_once "../cfg/config.php";
+?>
 <!DOCTYPE html>
 <html lang="de" data-bs-theme="auto">
 	<head>
 		<title>Cocktailbar Web App</title>
 		<meta charset="utf-8">
+		<meta name="csrf_token" content="<?php echo createToken(); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="Cocktailbar Web App">
 		<meta name="author" content="Jonas Wismar">
@@ -20,20 +24,6 @@
 		<link rel="stylesheet" href="../assets/css/sign-in.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<style>
-			.logo-blurred-edge {
-				background-image: url('../img/logo/logo300.jpg');
-				width: 300px;
-				height: 127px;
-				/* you need to match the shadow color to your background or image border for the desired effect*/
-				box-shadow: 0 0 8px 8px rgb(248, 249, 250) inset;
-			}
-			[data-bs-theme=dark] .logo-blurred-edge {
-				background-image: url('../img/logo/logo300.jpg');
-				width: 300px;
-				height: 127px;
-				/* you need to match the shadow color to your background or image border for the desired effect*/
-				box-shadow: 0 0 8px 8px rgb(43, 48, 53) inset;
-			}
 			.bd-placeholder-img {
 				font-size: 1.125rem;
 				text-anchor: middle;

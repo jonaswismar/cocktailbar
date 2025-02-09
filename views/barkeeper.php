@@ -28,7 +28,7 @@
 									<div class="d-flex p-3 justify-content-around flex-wrap">
 										<input name="barkeeperid" class="form-control" type="hidden" value="0" readonly>
 										<input name="barid" class="form-control" type="hidden" value="<?php echo $barid;?>" readonly>
-										<select name="userid" autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Benutzer">
+										<select name="userid" autocomplete="off" class="form-control w-100" data-toggle="tooltip" data-placement="bottom" title="Benutzer" required>
 <?php 
 	$stmt_sql_barkeepers = mysqli_prepare($link, $sql_users_barkeeper);
 	mysqli_stmt_execute($stmt_sql_barkeepers);

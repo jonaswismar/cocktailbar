@@ -118,7 +118,7 @@
 									<div class="modal-body">
 										<input name="cocktailid" class="form-control" type="hidden" value="0" readonly>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Name des Cocktails">
+											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Name des Cocktails" required>
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
 											<input name="cocktailimage" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" data-toggle="tooltip" data-placement="bottom" title="Bildname des Cocktails">
@@ -230,7 +230,7 @@
 									<div class="modal-body">
 										<input name="cocktailid" class="form-control" type="hidden" value="<?php echo $id;?>" readonly>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
-											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" value="<?php echo $cocktailname;?>">
+											<input name="cocktailname" class="form-control form-control-lg" type="text" placeholder="Name des Cocktails" value="<?php echo $cocktailname;?>" required>
 										</div>
 										<div class="d-flex p-3 justify-content-around flex-wrap">
 											<input name="cocktailimage" class="form-control form-control-lg" type="text" placeholder="Bildname des Cocktails" value="<?php echo $image;?>">

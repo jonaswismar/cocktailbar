@@ -7,17 +7,7 @@
 				</div>
 			</nav>
 			<div class="accordion">
-			
-			
-			
-			
-			
-			
-			
-			
-			
 				<div class="accordion-item">
-					
 <?php
 try {
 	$stmt_sql_cocktails = mysqli_prepare($link, $sql_search_bool_cocktail);
@@ -44,9 +34,6 @@ try {
 					<div id="collapseCocktails" class="accordion-collapse collapse<?php if($expandedCocktails == true){echo " show";}?>">
 						<div class="accordion-body">
 							<div class="list-group flex-fill">
-	
-	
-	
 	<?php
 	while($cocktails_all_rows= mysqli_fetch_array($cocktails_all_res, MYSQLI_ASSOC)){
 		$stmtingred = mysqli_prepare($link, $sql_ingredients_from_cocktail);

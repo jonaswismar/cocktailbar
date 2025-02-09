@@ -50,7 +50,7 @@
 										<input name="baricon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="barname" class="form-control form-control-lg" type="text" placeholder="Name der Bar" data-toggle="tooltip" data-placement="bottom" title="Name der Bar">
+										<input name="barname" class="form-control form-control-lg" type="text" placeholder="Name der Bar" data-toggle="tooltip" data-placement="bottom" title="Name der Bar" required>
 									</div>
 								</div>
 								<div class="modal-footer">
@@ -77,7 +77,7 @@
 										<input name="baricon" class="form-control form-control-lg" type="text" placeholder="Fontawesome 6.6.0 Pro Icon Name" data-toggle="tooltip" data-placement="bottom" title="Fontawesome 6.6.0 Pro Icon Name" value="<?php echo $barimage;?>">
 									</div>
 									<div class="d-flex p-3 justify-content-around flex-wrap">
-										<input name="barname" class="form-control form-control-lg" type="text" placeholder="Name der Bar" data-toggle="tooltip" data-placement="bottom" title="Name der Bar" value="<?php echo $barname;?>">
+										<input name="barname" class="form-control form-control-lg" type="text" placeholder="Name der Bar" data-toggle="tooltip" data-placement="bottom" title="Name der Bar" value="<?php echo $barname;?>" required>
 									</div>
 								</div>
 								<div class="modal-footer">
